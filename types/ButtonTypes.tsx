@@ -2,11 +2,10 @@
 export type ButtonType = {
     label: string;
     id?: string;
-    type: "primary" | 'secondary' | 'tertiary',
+    type: "primary" | 'secondary' | 'tertiary' | 'outline',
     disabled?: boolean;
     clickHandler: () => void;
   };
   
-  // ButtonClasses.ts
 
   

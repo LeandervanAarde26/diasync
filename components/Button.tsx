@@ -22,12 +22,16 @@ export default function ({
         "bg-csblue hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300  hover:bg-csDarkBlue rounded-full ";
       buttonText = "text-cswhite";
       break;
-
     case "secondary":
       buttonClassStyles =
-        "border-4 border-cspurple hover:bg-cspurple hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300 rounded-full";
+        "border-2 border-cspurple hover:bg-cspurple hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300 rounded-full";
       buttonText = "text-cswhite";
       break;
+    case "outline":
+      buttonClassStyles =
+      "border-2 border-cswhite hover:border-4 hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300 rounded-full";
+    buttonText = "text-cswhite";
+    break;
     case "tertiary":
       buttonClassStyles =
         "bg-cspurple hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300  hover:bg-cspurple ";

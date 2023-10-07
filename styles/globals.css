@@ -21,10 +21,20 @@ h1{
     font-size: 36pt;
 }
 
+
 h2{
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 32pt;   
+}
+
+input{
+    outline: none;
+    color: white;
+}
+
+.welcome-message{
+  font-weight: 600 ;
 }
 
 h3{
@@ -44,6 +54,9 @@ h5{
     font-family: 'Inter', sans-serif;
     font-weight: lighter;
     font-size: 22pt;   
+}
+.label{
+  font-size: 14px;  
 }
 
 p{

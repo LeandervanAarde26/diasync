@@ -17,10 +17,10 @@ function NotFound() {
 
       {/* /Insert the button here */}
       <Button
-        label="Primary Button"
+        label="Home"
         disabled={true}
         clickHandler={() => console.log("hey")}
-        type="secondary"
+        type="primary"
       />
     </div>
   );
