@@ -128,14 +128,6 @@ function RegisterStepOne() {
         }
         value={confirmPassword}
       />
-
-      <div className="flex items-center justify-center">
-        <Button
-          label="Continue"
-          type="primary"
-          clickHandler={() => console.log("Hey there")}
-        />
-      </div>
       {/* Container to center the button */}
 
       {/* Inner container for inputs */}
