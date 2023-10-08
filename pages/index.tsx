@@ -6,6 +6,7 @@ import { MdPerson4, MdKey } from "react-icons/md";
 import Button from "@/components/Button";
 import { useState } from "react";
 import { emailPattern, passwordPattern } from "@/Reusables/Variables";
+import Link from "next/link";
 import data from "@/static/Auth.json";
 
 const defaultValues = {
@@ -143,13 +144,15 @@ function index() {
           </div>
 
           <div className="flex items-center justify-center">
-            <Button
-              label="Register a new account"
-              type="outline"
-              clickHandler={() => {
-                console.log("implement this function");
-              }}
-            />
+            <Link href="/Register">
+              <Button
+                label="Register a new account"
+                type="outline"
+                clickHandler={() => {
+                  console.log("implement this function");
+                }}
+              />
+            </Link>
           </div>
         </div>
         {/* Inner container for inputs */}
