@@ -6,6 +6,7 @@ import Button from "../Button";
 function RegisterStepTwo() {
   return (
     <>
+      <h5>Step 2 of 2</h5>
       <div className="flex flex-row flex-wrap gap-x-5 w-full ">
         <Input
           err={false}

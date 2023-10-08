@@ -29,9 +29,6 @@ function index() {
   const toggleInput = () => {
     togglePassword(setType);
   };
-  // () => {
-  //   setType((prevType) => !prevType);
-  // };
 
   const handleBlur =
     (

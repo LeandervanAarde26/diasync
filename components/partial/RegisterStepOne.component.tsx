@@ -13,7 +13,8 @@ function RegisterStepOne() {
   const [lastNameError, setLastNameError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
-  const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false);
+  const [confirmPasswordError, setConfirmPasswordError] =
+    useState<boolean>(false);
 
   const [firstNameLabel, setFirstNameLabel] = useState<string>("First Name");
   const [lastNameLabel, setLastNameLabel] = useState<string>("Last Name");
@@ -22,15 +23,17 @@ function RegisterStepOne() {
   const [confirmPasswordLabel, setConfirmPasswordLabel] =
     useState<string>("Confirm Password");
 
-    const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const togglePasswordInput = () => {
     togglePassword(setType);
   };
 
-  const onChangeHandler = (error: React.Dispatch<React.SetStateAction<boolean>>) =>(e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    captureValues(e, setValues, error);
-  };
+  const onChangeHandler =
+    (error: React.Dispatch<React.SetStateAction<boolean>>) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name } = e.target;
+      captureValues(e, setValues, error);
+    };
 
   return (
     <>
