@@ -12,7 +12,6 @@ import { RegisterContext } from "@/store/Register.Context";
 
 function Register() {
   const { values, setValues } = useContext(RegisterContext);
-  const { firstname, lastName, email, password, confirmPassword } = values;
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

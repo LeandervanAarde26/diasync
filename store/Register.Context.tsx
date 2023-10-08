@@ -21,22 +21,6 @@ interface RegisterContext {
   setValues: (stateUpdater: (prevState: RegisterContextType) => RegisterContextType, action?: any) => void;
 }
 
-export const RegisterContext = createContext<RegisterContext>({
-  values: {
-    firstname: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    weight: 0,
-    height: 0,
-    type: 1, 
-    sex: "male",
-    data: "",
-  },
-  setValues: () => {}
-});
-
 const defaults: RegisterContextType = {
   firstname: "",
   lastName: "",
@@ -49,6 +33,11 @@ const defaults: RegisterContextType = {
   sex: "male",
   data: "",
 }
+
+export const RegisterContext = createContext<RegisterContext>({
+  values: defaults,
+  setValues: () => {}
+});
 
 export const RegisterContextProvider = ({children}: any) => {
   const [values, setVals] = useState<RegisterContextType>(defaults);
