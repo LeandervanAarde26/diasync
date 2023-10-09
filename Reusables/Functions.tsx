@@ -42,6 +42,20 @@ const validateInputs = (
       setState(!result);
       break;
 
+    case "weight":
+     
+      if (+(value) < 2 || +(value) > 635) {
+        setState(true);
+      } else {
+        setState(false);
+      }
+    case "height":
+      if (+(value) < 45 || value > +(280)) {
+        setState(true);
+      } else {
+        setState(false);
+      }
+
     default:
       break;
   }

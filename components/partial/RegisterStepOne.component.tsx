@@ -3,7 +3,7 @@ import { MdPerson4, MdKey } from "react-icons/md";
 import Button from "@/components/Button";
 import { useState, useContext } from "react";
 import { RegisterContext } from "@/store/Register.Context";
-import { captureValues, togglePassword } from "@/Reusables/Functions";
+import { captureValues, togglePassword, updateLabels } from "@/Reusables/Functions";
 
 function RegisterStepOne() {
   const { values, setValues } = useContext(RegisterContext);
@@ -13,8 +13,7 @@ function RegisterStepOne() {
   const [lastNameError, setLastNameError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
-  const [confirmPasswordError, setConfirmPasswordError] =
-    useState<boolean>(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false);
 
   const [firstNameLabel, setFirstNameLabel] = useState<string>("First Name");
   const [lastNameLabel, setLastNameLabel] = useState<string>("Last Name");
@@ -35,15 +34,51 @@ function RegisterStepOne() {
       captureValues(e, setValues, error);
     };
 
+    const handleBlur =
+    (
+      key: string,
+      stateSetter: React.Dispatch<React.SetStateAction<string>>,
+      errorState: boolean,
+      originalLabel: string,
+      errorLabel: string
+    ) =>
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      updateLabels(key, stateSetter, errorState, originalLabel, errorLabel);
+
+      console.log(stateSetter);
+    };
+
+  const handleClick = () => {
+    console.log("Hey");
+  };
+
+  const comparePasswords = () => {
+    if (confirmPassword.valueOf() !== password.valueOf()) {
+      setConfirmPasswordError(true);
+      setConfirmPasswordLabel("Passwords don't match");
+    } else {
+      setConfirmPasswordError(false);
+      setConfirmPasswordLabel("Confirm Password");
+    }
+  };
+  
+
+
   return (
     <>
       <h5>Step 1 of 2</h5>
       <div className="flex flex-row flex-wrap gap-x-5 w-full ">
         <Input
           err={firstNameError}
-          width="fit"
+          width={""}
           label={firstNameLabel}
-          blur={() => {}}
+          blur={handleBlur(
+            "firstname",
+            setFirstNameLabel,
+            firstNameError,
+            "First Name",
+            "Invalid First Name"
+          )}
           name="firstname" // Use "firstname" here
           change={onChangeHandler(setFirstNameError)}
           type="text"
@@ -60,9 +95,15 @@ function RegisterStepOne() {
 
         <Input
           err={lastNameError}
-          width="fit"
+          width={""}
           label={lastNameLabel}
-          blur={() => {}}
+          blur={handleBlur(
+            "lastName",
+            setLastNameLabel,
+            lastNameError,
+            "Last Name",
+            "Invalid Last Name"
+          )}
           name="lastName" // Use "lastName" here
           change={onChangeHandler(setLastNameError)}
           type="text"
@@ -79,29 +120,43 @@ function RegisterStepOne() {
       </div>
 
       <Input
-        err={emailError}
-        width="screen"
-        label={emailLabel}
-        blur={() => {}}
-        name="email"
-        change={onChangeHandler(setEmailError)}
-        type="text"
-        placeholder="eg. John@Doe.com"
-        icon={
-          <MdPerson4
-            key="person-icon"
-            className="text-cspurple"
-            fontSize={22}
-          />
-        }
-        value={email}
-      />
+  err={emailError}
+  width={""}
+  label={emailLabel}
+  blur={handleBlur(
+    "email",
+    setEmailLabel,
+    emailError,
+    "Email",
+    "Invalid Email"
+  )}
+  name="email"
+  change={onChangeHandler(setEmailError)}
+  type="text"
+  placeholder="eg. John@Doe.com"
+  icon={
+    <MdPerson4
+      key="person-icon"
+      className="text-cspurple"
+      fontSize={22}
+    />
+  }
+  value={email}
+/>
+
 
       <Input
         err={passwordError}
-        width="screen"
+        width={""}
         label={passwordLabel}
-        blur={() => {}}
+        blur={handleBlur(
+          "password",
+          setPasswordLabel,
+          passwordError,
+          
+          "Password",
+          "Passwords must contain 8 characters, 1 lowercase, 1 uppercase and a special character"
+        )}
         name="password"
         change={onChangeHandler(setPasswordError)}
         type={type ? "password" : "text"}
@@ -119,9 +174,9 @@ function RegisterStepOne() {
 
       <Input
         err={confirmPasswordError}
-        width="screen"
+        width={""}
         label={confirmPasswordLabel}
-        blur={() => {}}
+        blur={comparePasswords}
         name="confirmPassword"
         change={onChangeHandler(setConfirmPasswordError)}
         type="password"

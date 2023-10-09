@@ -34,7 +34,9 @@ const config: Config = {
         'grad1': '#2D2D2D',
         'grad2': '#212536',
         'grad3': '#191723',
-        'cspurple': "#7B61FF"
+        'cspurple': "#7B61FF",
+        'cslightpurple': '#86ABFF'
+        
     },
     extend: {
       backgroundImage: {

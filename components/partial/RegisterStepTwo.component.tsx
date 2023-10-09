@@ -2,20 +2,60 @@ import { MdPerson4, MdKey } from "react-icons/md";
 import Input from "../Common/Input.component";
 import ToggleButton from "../Common/ToggleButton.component";
 import Button from "../Button";
+import { RegisterContext } from "@/store/Register.Context";
+import { captureValues, togglePassword, updateLabels } from "@/Reusables/Functions";
+import {useState, useContext} from 'react';
 
 function RegisterStepTwo() {
+  const { values, setValues } = useContext(RegisterContext);
+  const { weight, height, type, sex, data} = values;
+  const [weightError, setWeightError] = useState(false);
+  const [ weightLabel, setWeightLabel] = useState<string>("Weight (kg)");
+  const [heightError, setHeightError] = useState(false);
+  const [heightLabel, setHeightLabel] = useState<string>("Height (cm)");
+
+    const onChangeHandler =
+    (error: React.Dispatch<React.SetStateAction<boolean>>) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name } = e.target;
+      captureValues(e, setValues, error);
+
+    };
+
+    
+
+    const handleBlur =
+    (
+      key: string,
+      stateSetter: React.Dispatch<React.SetStateAction<string>>,
+      errorState: boolean,
+      originalLabel: string,
+      errorLabel: string
+    ) =>
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      updateLabels(key, stateSetter, errorState, originalLabel, errorLabel);
+
+      console.log(stateSetter);
+    };
+
   return (
     <>
       <h5>Step 2 of 2</h5>
-      <div className="flex flex-row flex-wrap gap-x-5 w-full ">
+      <div className="flex flex-row flex-wrap gap-5 w-full">
         <Input
-          err={false}
+          err={weightError}
           width="fit"
-          label={"Something"}
-          blur={() => {}}
-          name="firstname" // Use "firstname" here
-          change={() => {}}
-          type="text"
+          label={weightLabel}
+          blur={handleBlur(
+            "weight",
+            setWeightLabel,
+            weightError,
+            "Weight (kg)",
+            "Invalid Weight"
+          )}
+          name="weight" // Use "firstname" here
+          change={onChangeHandler(setWeightError)}
+          type="number"
           placeholder="eg. John"
           icon={
             <MdPerson4
@@ -24,17 +64,23 @@ function RegisterStepTwo() {
               fontSize={22}
             />
           }
-          value={"Table turns"}
+          value={weight}
         />
 
         <Input
-          err={false}
+          err={heightError}
           width="fit"
-          label={"Something"}
-          blur={() => {}}
-          name="lastName" // Use "lastName" here
-          change={() => {}}
-          type="text"
+          label={heightLabel}
+          blur={handleBlur(
+            "height",
+            setHeightLabel,
+            heightError,
+            "Height (cm)",
+            "Invalid Height"
+          )}
+          name="height"
+          change={onChangeHandler(setHeightError)}
+          type="number"
           placeholder="eg. Doe"
           icon={
             <MdPerson4
@@ -43,7 +89,7 @@ function RegisterStepTwo() {
               fontSize={22}
             />
           }
-          value={"Table turns"}
+          value={height}
         />
       </div>
 

@@ -1,6 +1,6 @@
 import { Provider, createContext, useContext, useState } from "react";
 
-type Sex = 'male' | 'female';
+type Sex = 'Male' | 'Female';
 type DiabetesTypes = 1 | 2;
 
 interface RegisterContextType {
@@ -30,7 +30,7 @@ const defaults: RegisterContextType = {
   weight: 0,
   height: 0,
   type: 1, 
-  sex: "male",
+  sex: "Male",
   data: "",
 }
 
