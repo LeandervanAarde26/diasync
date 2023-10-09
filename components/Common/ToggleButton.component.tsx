@@ -25,7 +25,7 @@ function ToggleButton({ value1, value2, label }: Values) {
             <p
               className={`${
                 slide ? "text-cspurple" : "text-cswhite"
-              } relative z-50`}
+              } relative z-50 transition-colors duration-300`}
             >
               {value1}
             </p>
@@ -38,7 +38,7 @@ function ToggleButton({ value1, value2, label }: Values) {
             <p
               className={`${
                 slide ? "text-cswhite" : "text-cspurple"
-              } relative z-50`}
+              } relative z-50 transition-colors duration-300`}
             >
               {value2}
             </p>
@@ -47,7 +47,7 @@ function ToggleButton({ value1, value2, label }: Values) {
           <div
             className={`absolute rounded-full ${
               slide ? "left-0" : "right-0"
-            }  top-0  z-0 flex bg-cswhite h-full w-[52%]`}
+            } top-0 z-0 flex bg-cswhite h-full w-[52%] transition-transform duration-300`}
           ></div>
         </div>
       </div>
