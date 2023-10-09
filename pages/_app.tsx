@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function ({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const showItems = router.pathname === "/" || router.pathname === "/Register" ? false : true;
+  const showItems = router.pathname === "/" || router.pathname === "/Register" ||  router.pathname === "/404" ? false : true; 
   return (
     <RegisterContextProvider>
       <div className="flex flex-row max-w-screen">

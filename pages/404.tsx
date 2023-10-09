@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 
 function NotFound() {
   return (
-    <div className="bg-gradient-to-br from-grad1  via-grad2  to-grad3 flex flex-col justify-center items-center  h-screen gap-y-8">
+    <div className="bg-gradient-to-br from-grad1  via-grad2  to-grad3 flex flex-col justify-center items-center  h-screen gap-y-8 w-screen">
       <div className="flex items-center flex-col justify-center gap-y-2">
 
         <Image src={notFoundImage} alt="Floating Character" />
