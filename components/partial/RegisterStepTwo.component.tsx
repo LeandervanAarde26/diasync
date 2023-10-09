@@ -22,8 +22,16 @@ function RegisterStepTwo() {
 
     };
 
-    
 
+    const handleSelect = (selectedValue: string) => {
+      // Handle the selected value for diabetes type and sex
+      setValues((prevValues) => ({
+        ...prevValues,
+        [selectedValue === "Type 1" || selectedValue === "Type 2" ? "type" : "sex"]: selectedValue,
+      }));
+    };
+
+    
     const handleBlur =
     (
       key: string,
@@ -94,9 +102,8 @@ function RegisterStepTwo() {
       </div>
 
       <div className="flex flex-row flex-wrap gap-x-5 w-full">
-        <ToggleButton value1="Type 1" value2="Type 2" label="Diabetes Type" />
-
-        <ToggleButton value1="Male" value2="Female" label="Sex" />
+      <ToggleButton value1="Type 1" value2="Type 2" label="Diabetes Type" onSelect={handleSelect} />
+      <ToggleButton value1="Male" value2="Female" label="Sex" onSelect={handleSelect} />
       </div>
 
       <div className="flex items-center justify-center">
