@@ -66,7 +66,7 @@ function RegisterStepTwo() {
           type="number"
           placeholder="eg. John"
           icon={
-            <MdFormatAlignRight
+            <MdScale
               key="person-icon"
               className="text-cspurple"
               fontSize={22}
@@ -91,7 +91,7 @@ function RegisterStepTwo() {
           type="number"
           placeholder="eg. Doe"
           icon={
-            <MdScale
+            <MdFormatAlignRight
               key="person-icon"
               className="text-cspurple"
               fontSize={22}
