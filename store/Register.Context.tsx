@@ -1,7 +1,7 @@
 import { Provider, createContext, useContext, useState } from "react";
 
-type Sex = 'Male' | 'Female';
-type DiabetesTypes =  "Type 1" | "Type 2";
+type Sex = "Male" | "Female";
+type DiabetesTypes = "Type 1" | "Type 2";
 
 interface RegisterContextType {
   firstname: string;
@@ -11,14 +11,17 @@ interface RegisterContextType {
   confirmPassword: string;
   weight: number;
   height: number;
-  type: DiabetesTypes; 
+  type: DiabetesTypes;
   sex: Sex;
   data: string;
 }
 
 interface RegisterContext {
-  values: RegisterContextType,
-  setValues: (stateUpdater: (prevState: RegisterContextType) => RegisterContextType, action?: any) => void;
+  values: RegisterContextType;
+  setValues: (
+    stateUpdater: (prevState: RegisterContextType) => RegisterContextType,
+    action?: any
+  ) => void;
 }
 
 const defaults: RegisterContextType = {
@@ -29,33 +32,35 @@ const defaults: RegisterContextType = {
   confirmPassword: "",
   weight: 0,
   height: 0,
-  type: "Type 1", 
+  type: "Type 1",
   sex: "Male",
   data: "",
-}
+};
 
 export const RegisterContext = createContext<RegisterContext>({
   values: defaults,
-  setValues: () => {}
+  setValues: () => {},
 });
 
-export const RegisterContextProvider = ({children}: any) => {
+export const RegisterContextProvider = ({ children }: any) => {
   const [values, setVals] = useState<RegisterContextType>(defaults);
 
-  const setValues = (stateUpdater: (prevState: RegisterContextType) => RegisterContextType, action?: any) => {
+  const setValues = (
+    stateUpdater: (prevState: RegisterContextType) => RegisterContextType,
+    action?: any
+  ) => {
     setVals(stateUpdater);
-    console.log(values)
-  }
+    console.log(values);
+  };
 
   const contextValue: RegisterContext = {
     values: values,
     setValues,
-  }
+  };
 
   return (
     <RegisterContext.Provider value={contextValue}>
       {children}
     </RegisterContext.Provider>
-  )
-
-}
+  );
+};

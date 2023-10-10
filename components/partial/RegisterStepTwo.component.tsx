@@ -1,9 +1,9 @@
-import { MdPerson4, MdKey } from "react-icons/md";
+import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import Input from "../Common/Input.component";
 import ToggleButton from "../Common/ToggleButton.component";
 import Button from "../Button";
 import { RegisterContext } from "@/store/Register.Context";
-import { captureValues, togglePassword, updateLabels } from "@/Reusables/Functions";
+import { captureValues, updateLabels } from "@/Reusables/Functions";
 import {useState, useContext} from 'react';
 
 function RegisterStepTwo() {
@@ -31,7 +31,7 @@ function RegisterStepTwo() {
       }));
     };
 
-    
+
     const handleBlur =
     (
       key: string,
@@ -66,7 +66,7 @@ function RegisterStepTwo() {
           type="number"
           placeholder="eg. John"
           icon={
-            <MdPerson4
+            <MdFormatAlignRight
               key="person-icon"
               className="text-cspurple"
               fontSize={22}
@@ -91,7 +91,7 @@ function RegisterStepTwo() {
           type="number"
           placeholder="eg. Doe"
           icon={
-            <MdPerson4
+            <MdScale
               key="person-icon"
               className="text-cspurple"
               fontSize={22}

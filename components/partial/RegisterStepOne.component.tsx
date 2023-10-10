@@ -1,5 +1,5 @@
 import Input from "@/components/Common/Input.component";
-import { MdPerson4, MdKey } from "react-icons/md";
+import { MdPerson4, MdKey, MdEmail} from "react-icons/md";
 import Button from "@/components/Button";
 import { useState, useContext } from "react";
 import { RegisterContext } from "@/store/Register.Context";
@@ -135,7 +135,7 @@ function RegisterStepOne() {
   type="text"
   placeholder="eg. John@Doe.com"
   icon={
-    <MdPerson4
+    <MdEmail
       key="person-icon"
       className="text-cspurple"
       fontSize={22}

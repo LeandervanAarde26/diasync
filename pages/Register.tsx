@@ -1,18 +1,28 @@
 import AuthContainer from "@/components/partial/AuthContainer";
 import Image from "next/image";
 import logo from "../assets/Diasync_logo.png";
-import data from "@/static/Auth.json";
+import registerData from "@/static/Auth.json";
 import RegisterStepOne from "@/components/partial/RegisterStepOne.component";
 import Button from "@/components/Button";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import RegisterStepTwo from "@/components/partial/RegisterStepTwo.component";
+import { RegisterContext } from "@/store/Register.Context";
 function Register() {
   const [moveOn, setMoveOn] = useState<boolean>(false);
-
+  const { values } = useContext(RegisterContext);
+  const { firstname, lastName, email, password, confirmPassword, weight, height, type, sex, data } = values;
+  
   const goToNextStep = () => {
     setMoveOn((prev: boolean) => !prev);
   };
+
+  const stepOneMissingFields =  firstname == "" || lastName == "" || email == "" || password == "" || confirmPassword == "";
+
+  const stepTwoMissingFields = weight == 0 || height == 0;
+  
+
+  // const isContinueDisabled = 
   return (
     <div className="flex flex-1 h-screen bg-cswhite">
       <AuthContainer />
@@ -20,7 +30,7 @@ function Register() {
       <div className="bg-csblack h-max w-full sm:w-[45%] sm:h-screen flex flex-col items-center justify-center p-6 gap-y-12 sm: gap-y-4">
         <Image src={logo} height={130} alt="Logo" />
         <h3 className="text-[20pt] sm:text-[28pt]">
-          {moveOn ? "" : data.register}
+          {moveOn ? "" : registerData.register}
         </h3>
 
         <div className="flex flex-col gap-y-4 w-full sm:w-[60%]">
@@ -30,7 +40,9 @@ function Register() {
             <Button
               label= {moveOn ? "Register account" : "Continue"}
               type="primary"
-              clickHandler={moveOn ? () => console.log("Account create") : goToNextStep}
+              clickHandler={moveOn ?  stepTwoMissingFields ? () => console.log("Null") : () => console.log(values) : goToNextStep}
+              disabled = {stepOneMissingFields}
+           
             />
           </div>
 
