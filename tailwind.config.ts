@@ -35,7 +35,9 @@ const config: Config = {
         'grad2': '#212536',
         'grad3': '#191723',
         'cspurple': "#7B61FF",
-        'cslightpurple': '#86ABFF'
+        'cslightpurple': '#86ABFF',
+        'csgreen': '#A6E2B8',
+        'csChartBlue': '#45D0EE'
         
     },
     extend: {
