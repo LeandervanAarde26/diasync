@@ -1,9 +1,9 @@
 import Image from "next/image";
 import logo from "../assets/Diasync_logo.png";
-import AuthContainer from "@/components/partial/AuthContainer";
+import AuthContainer from "@/components/Features/AuthContainer";
 import Input from "@/components/Common/Input.component";
 import { MdPerson4, MdKey } from "react-icons/md";
-import Button from "@/components/Button";
+import Button from "@/components/Common/Button";
 import { useState } from "react";
 import Link from "next/link";
 import data from "@/static/Auth.json";

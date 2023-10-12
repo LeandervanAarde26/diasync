@@ -1,12 +1,12 @@
-import AuthContainer from "@/components/partial/AuthContainer";
+import AuthContainer from "@/components/Features/AuthContainer";
 import Image from "next/image";
 import logo from "../assets/Diasync_logo.png";
 import registerData from "@/static/Auth.json";
-import RegisterStepOne from "@/components/partial/RegisterStepOne.component";
-import Button from "@/components/Button";
+import RegisterStepOne from "@/components/Features/RegisterStepOne.component";
+import Button from "@/components/Common/Button";
 import Link from "next/link";
 import { useState, useContext } from "react";
-import RegisterStepTwo from "@/components/partial/RegisterStepTwo.component";
+import RegisterStepTwo from "@/components/Features/RegisterStepTwo.component";
 import { RegisterContext } from "@/store/Register.Context";
 function Register() {
   const [moveOn, setMoveOn] = useState<boolean>(false);

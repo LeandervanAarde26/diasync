@@ -1,6 +1,6 @@
 import Input from "@/components/Common/Input.component";
 import { MdPerson4, MdKey, MdEmail} from "react-icons/md";
-import Button from "@/components/Button";
+import Button from "@/components/Common/Button";
 import { useState, useContext } from "react";
 import { RegisterContext } from "@/store/Register.Context";
 import { captureValues, togglePassword, updateLabels } from "@/Reusables/Functions";

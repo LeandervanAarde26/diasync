@@ -1,8 +1,8 @@
 import { AppProps } from "next/app";
 import "../styles/globals.css";
 import { RegisterContextProvider } from "@/store/Register.Context";
-import NavBar from "@/components/partial/NavBar";
-import RightContainer from "@/components/partial/RightContainer";
+import NavBar from "@/components/Features/NavBar";
+import RightContainer from "@/components/Features/RightContainer";
 import { useRouter } from "next/router";
 
 export default function ({ Component, pageProps }: AppProps) {

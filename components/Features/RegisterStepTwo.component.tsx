@@ -1,7 +1,7 @@
 import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import Input from "../Common/Input.component";
 import ToggleButton from "../Common/ToggleButton.component";
-import Button from "../Button";
+import Button from "../Common/Button";
 import { RegisterContext } from "@/store/Register.Context";
 import { captureValues, updateLabels } from "@/Reusables/Functions";
 import { useState, useContext } from "react";

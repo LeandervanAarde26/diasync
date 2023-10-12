@@ -1,6 +1,6 @@
 import Image from "next/image";
 import notFoundImage from "../assets/floating_character.png";
-import Button from "@/components/Button";
+import Button from "@/components/Common/Button";
 
 function NotFound() {
   return (
