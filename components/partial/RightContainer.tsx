@@ -5,7 +5,7 @@ import image from "../../assets/tester.png";
 
 function RightContainer() {
   return (
-    <div className="w-[18%] static  h-fill flex flex-col items-center p-3 gap-y-5 bg-gradient-to-br from-grad2 to-grad3 flex flex-col justify-center">
+    <div className=" hidden w-[18%] static  h-fill sm:flex flex-col items-center p-3 gap-y-5 bg-gradient-to-br from-grad2 to-grad3 flex flex-col justify-center">
       <div className="bg-cswhite w-[100%] relative  h-[32%] rounded-2xl overflow-hidden flex flex-col items-center ">
         <div className="h-[40%] w-[100%] bg-cslightpurple ">
           <Image

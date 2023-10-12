@@ -62,3 +62,7 @@ h5{
 p{
     color:  'white';
 }
+
+*::-webkit-scrollbar {
+    display: none;
+  }
