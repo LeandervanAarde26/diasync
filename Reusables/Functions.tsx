@@ -3,6 +3,10 @@ import {
   namePattern,
   passwordPattern,
 } from "@/Reusables/Variables";
+import { verifyUserToken } from "@/api/Calls";
+
+
+
 
 export const togglePassword = (
   setState: React.Dispatch<React.SetStateAction<boolean>>
@@ -88,5 +92,10 @@ export const updateLabels = (
     setState(originalLabel);
   }
 };
+
+interface TokenData {
+  userId: string; 
+}
+
 
 

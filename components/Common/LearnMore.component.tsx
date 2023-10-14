@@ -2,8 +2,10 @@ import Image from "next/image";
 import Button from "./Button";
 import data from '../../static/Dash.json';
 import character from "../../assets/floating_character.png";
+import { loginUser } from "@/api/Calls";
 
 function LearnMore() {
+
     return (
         <div className="hidden sm:flex flex-col w-[100%] md:w-[28%] gap-y-[10px] overflow-scroll justify-center  items-center relative ">
           <div className="flex flex-col bg-cswhite w-[80%] h-[60%] rounded-2xl items-center gap-y-2 px-4">

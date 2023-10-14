@@ -12,6 +12,8 @@ import {
   togglePassword,
   updateLabels,
 } from "@/Reusables/Functions";
+import { loginUser, obtainUserToken } from "@/api/Calls";
+import { useRouter } from "next/router";
 
 const defaultValues = {
   email: "",
@@ -25,6 +27,8 @@ function index() {
   const { email, password } = values;
   const [emailLabel, setEmailLabel] = useState<string>("Email");
   const [passwordLabel, setPasswordLabel] = useState<string>("Password");
+  const [unauth, setUnAuth] = useState(false);
+  const router = useRouter();
 
   const toggleInput = () => {
     togglePassword(setType);
@@ -44,8 +48,27 @@ function index() {
       console.log(stateSetter);
     };
 
-  const handleClick = () => {
-    console.log("Hey");
+  const handleClick = async () => {
+    try {
+      const user = await loginUser({ email, password });
+
+      if (user.token !== null && user.user !== null) {
+        const token = await obtainUserToken({
+          username: user.user.username,
+          password,
+        });
+        window.sessionStorage.setItem("token", token.access);
+        router.push("/home");
+        setUnAuth(false);
+      }
+    } catch (error: any) {
+      // Login failed
+      console.log(error);
+      setUnAuth(true);
+      if (error.response && error.response.status === 401) {
+        console.log("UNAUTHORISED");
+      }
+    }
   };
 
   const handleChange =
@@ -62,6 +85,13 @@ function index() {
       <div className="bg-csblack h-screen w-full sm:w-[45%] flex flex-col items-center justify-center p-6 gap-y-12 sm: gap-y-8">
         <Image src={logo} height={150} alt="Logo" />
         <h3 className="text-[20pt] sm:text-[28pt]">{data.login}</h3>
+
+        {unauth ? (
+          <p className={`text-csDanger`}>
+            Invalid Credentials, please log in with your account details or
+            contact support.
+          </p>
+        ) : null}
         <div className="flex flex-col gap-y-4 w-full sm:w-[60%]">
           <Input
             err={emailErr}
