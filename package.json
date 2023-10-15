@@ -11,12 +11,14 @@
   "dependencies": {
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
+    "cuid": "^3.0.0",
     "jsonwebtoken": "^9.0.2",
     "next": "latest",
     "next-cookies": "^2.0.3",
     "react": "latest",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "latest",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.11.0",
     "redux": "^4.2.1"
   },

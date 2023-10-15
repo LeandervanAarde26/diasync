@@ -4,7 +4,8 @@ import ToggleButton from "../Common/ToggleButton.component";
 import Button from "../Common/Button";
 import { RegisterContext } from "@/store/Register.Context";
 import { captureValues, updateLabels } from "@/Reusables/Functions";
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
+import Dropzone from "./Dropzone";
 
 function RegisterStepTwo() {
   const { values, setValues } = useContext(RegisterContext);
@@ -13,6 +14,8 @@ function RegisterStepTwo() {
   const [weightLabel, setWeightLabel] = useState<string>("Weight (kg)");
   const [heightError, setHeightError] = useState(false);
   const [heightLabel, setHeightLabel] = useState<string>("Height (cm)");
+
+  const [files, setFiles] = useState<Array<any>>([]);
 
   const onChangeHandler =
     (error: React.Dispatch<React.SetStateAction<boolean>>) =>
@@ -31,20 +34,24 @@ function RegisterStepTwo() {
     }));
   };
 
-  const importData = () => {
-    let input = document.createElement("input");
-    input.type = "file";
-    input.onchange = (_) => {
-      // you can use this method to get file and perform respective operations
-      let files = input.files;
-      console.log(files);
-      setValues((prevValues) => ({
-        ...prevValues,
-        data: files,
-      }));
-    };
-    input.click();
-  };
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        const dataUrl = e.target.result; 
+        setValues((prevValues) => ({
+          ...prevValues,
+          data: dataUrl, 
+        }));
+      };
+  
+      reader.readAsDataURL(file); 
+    }
+  }, [setValues]);
+  
 
   const handleBlur =
     (
@@ -129,16 +136,21 @@ function RegisterStepTwo() {
           onSelect={handleSelect}
         />
       </div>
-
-      <div className="flex items-center justify-center">
+          <Dropzone onDrop={onDrop} accept="csv/*"/>
+      
+      {/* <div className="flex items-center justify-center">
         <Button
           label="Upload CSV Data"
           type="secondary"
           clickHandler={importData}
         />
-      </div>
+      </div> */}
     </>
   );
 }
 
 export default RegisterStepTwo;
+function cuid(): never {
+  throw new Error("Function not implemented.");
+}
+

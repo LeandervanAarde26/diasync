@@ -13,7 +13,7 @@ interface RegisterContextType {
   height: number;
   type: DiabetesTypes;
   sex: Sex;
-  data?:  FileList | null ;
+  data?:  File | null ;
 }
 
 interface RegisterContext {
@@ -64,3 +64,6 @@ export const RegisterContextProvider = ({ children }: any) => {
     </RegisterContext.Provider>
   );
 };
+
+
+// L@v3nd3r

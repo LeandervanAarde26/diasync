@@ -4,7 +4,7 @@ import AuthContainer from "@/components/Features/AuthContainer";
 import Input from "@/components/Common/Input.component";
 import { MdPerson4, MdKey } from "react-icons/md";
 import Button from "@/components/Common/Button";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import data from "@/static/Auth.json";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/Reusables/Functions";
 import { loginUser, obtainUserToken } from "@/api/Calls";
 import { useRouter } from "next/router";
-
+import { UserContext } from "@/store/userContext.Context";
 const defaultValues = {
   email: "",
   password: "",
@@ -23,13 +23,13 @@ function index() {
   const [type, setType] = useState<boolean>(true);
   const [emailErr, setEmailErr] = useState<boolean>(false);
   const [passwordErr, setPasswordErr] = useState<boolean>(false);
-  const [values, setValues] = useState(defaultValues);
-  const { email, password } = values;
+  const [vals, setVals] = useState(defaultValues);
+  const { email, password } = vals;
   const [emailLabel, setEmailLabel] = useState<string>("Email");
   const [passwordLabel, setPasswordLabel] = useState<string>("Password");
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
-
+  const { values, setValues } = useContext(UserContext);
   const toggleInput = () => {
     togglePassword(setType);
   };
@@ -57,6 +57,17 @@ function index() {
           username: user.user.username,
           password,
         });
+
+        const { id, firstname, email } = user.user;
+        setValues((prevValues: any) => ({
+          id: id,
+          name: firstname,
+          email: email,
+          weight: 0,
+          height: 0,
+          type: "Type 1",
+          sex: "Male",
+        }));
         window.sessionStorage.setItem("token", token.access);
         router.push("/home");
         setUnAuth(false);
@@ -75,8 +86,8 @@ function index() {
     (error: React.Dispatch<React.SetStateAction<boolean>>) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name } = e.target;
-      captureValues(e, setValues, error);
-      console.log(values);
+      captureValues(e, setVals, error);
+      console.log(vals);
     };
 
   return (

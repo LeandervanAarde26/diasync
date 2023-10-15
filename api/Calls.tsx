@@ -4,9 +4,12 @@ import {
   tokenFields,
 } from "@/types/AuthTypes";
 import axios from "axios";
-import cookies from "next/headers";
+import { UserContext } from "@/store/userContext.Context";
+import { useState, useContext } from "react";
+
 
 const url = process.env.NEXT_PUBLIC_DJANGO_URL;
+
 
 export const obtainUserToken = async ({ username, password }: tokenFields) => {
   let loginReq = `${url}token/`;
@@ -42,6 +45,9 @@ export const loginUser = async ({ email, password }: authenticationFields) => {
 
   if (requestData.status === 200) {
     // Login successful
+
+    console.log(requestData.data)
+
     return requestData.data;
   } else if (requestData.status === 401) {
     // Incorrect username or password

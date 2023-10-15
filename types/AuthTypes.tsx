@@ -27,5 +27,5 @@ export type RegisterType = {
   height: number;
   type: DiabetesTypes;
   sex: Sex;
-  data?:  FileList | null ;
+  data?:  File | null ;
 }
