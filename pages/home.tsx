@@ -8,31 +8,33 @@ import HomeChart from "@/components/Features/HomeChart.component";
 import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
 import LearnMore from "@/components/Common/LearnMore.component";
 import { useEffect } from "react";
-import { loginUser, token, verifyUserToken } from "@/api/Calls";
-
+import { loginUser, verifyUserToken } from "@/api/Calls";
 
 export default function Home() {
-
-const router = useRouter();
+  const router = useRouter();
 
   const validateToken = async (token: string) => {
-    const toaks = await verifyUserToken(token);
-    console.log("TOAKS", toaks)
+    try {
+      const toaks = await verifyUserToken(token);
+      console.log("TOAKS", toaks);
 
-    if(!toaks){
-      router.push('/');
+      if (!toaks) {
+        router.push("/");
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        router.push("/");
+      }
     }
   };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       let tk = window.sessionStorage.getItem("token");
-    
       if (tk) {
-       const tokenState = validateToken(tk);
-      } else{
-        console.log("okay")
-        router.push('/');
+        const tokenState = validateToken(tk);
+      } else {
+        router.push("/");
       }
     }
   }, []);

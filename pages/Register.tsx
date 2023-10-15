@@ -8,21 +8,55 @@ import Link from "next/link";
 import { useState, useContext } from "react";
 import RegisterStepTwo from "@/components/Features/RegisterStepTwo.component";
 import { RegisterContext } from "@/store/Register.Context";
+import { registerNewUser } from "@/api/Calls";
 function Register() {
   const [moveOn, setMoveOn] = useState<boolean>(false);
   const { values } = useContext(RegisterContext);
-  const { firstname, lastName, email, password, confirmPassword, weight, height, type, sex, data } = values;
-  
+  const {
+    firstname,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    weight,
+    height,
+    type,
+    sex,
+    data,
+  } = values;
+
   const goToNextStep = () => {
     setMoveOn((prev: boolean) => !prev);
   };
 
-  const stepOneMissingFields =  firstname == "" || lastName == "" || email == "" || password == "" || confirmPassword == "";
+  const stepOneMissingFields =
+    firstname == "" ||
+    lastName == "" ||
+    email == "" ||
+    password == "" ||
+    confirmPassword == "";
 
   const stepTwoMissingFields = weight == 0 || height == 0;
-  
 
-  // const isContinueDisabled = 
+  const reigsterNewAccount = async () => {
+      try {
+        const parsedData = {
+          first_name: firstname,
+          last_name: lastName,
+          ...values,
+        };
+        const newUser = await registerNewUser(parsedData);
+        if (newUser) {
+          console.log(newUser);
+          console.log("---------------");
+          console.log("success!");
+        }
+      } catch (error) {
+          console.log("There was an error that occured", error)
+      }
+  };
+
+  // const isContinueDisabled =
   return (
     <div className="flex flex-1 h-screen bg-cswhite">
       <AuthContainer />
@@ -38,11 +72,16 @@ function Register() {
 
           <div className="flex items-center justify-center">
             <Button
-              label= {moveOn ? "Register account" : "Continue"}
+              label={moveOn ? "Register account" : "Continue"}
               type="primary"
-              clickHandler={moveOn ?  stepTwoMissingFields ? () => console.log("Null") : () => console.log(values) : goToNextStep}
-              disabled = {stepOneMissingFields}
-           
+              clickHandler={
+                moveOn
+                  ? stepTwoMissingFields
+                    ? () => console.log("Null")
+                    : reigsterNewAccount
+                  : goToNextStep
+              }
+              disabled={stepOneMissingFields}
             />
           </div>
 
@@ -70,5 +109,4 @@ function Register() {
     // Outer div
   );
 }
-
 export default Register;

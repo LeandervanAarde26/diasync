@@ -1,21 +1,13 @@
+import {
+  RegisterType,
+  authenticationFields,
+  tokenFields,
+} from "@/types/AuthTypes";
 import axios from "axios";
 import cookies from "next/headers";
 
 const url = process.env.NEXT_PUBLIC_DJANGO_URL;
 
-type authenticationFields = {
-  email: string;
-  password: string;
-};
-
-type tokenFields = {
-  username: any;
-  password: string;
-};
-
-export type token = {
-  token: string;
-};
 export const obtainUserToken = async ({ username, password }: tokenFields) => {
   let loginReq = `${url}token/`;
   const requestData = await axios.post(loginReq, { username, password });
@@ -36,6 +28,8 @@ export const verifyUserToken = async (token: string) => {
 
   if (requestData.status === 200) {
     return true;
+  } else if (requestData.status === 401) {
+    return false;
   } else {
     // Handle other error statuses, if needed
     throw new Error("Failed to verify user token");
@@ -43,7 +37,6 @@ export const verifyUserToken = async (token: string) => {
 };
 
 export const loginUser = async ({ email, password }: authenticationFields) => {
-  console.log(url);
   let loginReq = `${url}login/`;
   const requestData = await axios.post(loginReq, { email, password });
 
@@ -58,3 +51,32 @@ export const loginUser = async ({ email, password }: authenticationFields) => {
     throw new Error("Login failed with an unexpected error");
   }
 };
+
+export const registerNewUser = async (reqData: RegisterType) => {
+  try {
+    let regReq = `${url}register/`;
+    const request = await axios.post(
+      regReq,
+      JSON.stringify({
+        ...reqData,
+        diabetes_type: reqData.type,
+        data: reqData.data,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (request.status === 201) {
+      console.log("User registered success");
+      return reqData;
+    } else {
+      console.log("registration failed..");
+    }
+  } catch (error) {
+    throw new Error("Registration of new user failed, try again later");
+  }
+};
+
+// Re1nH@rdt
