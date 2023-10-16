@@ -2,8 +2,13 @@ import Image from "next/image";
 import shapes from "../../assets/Login&registerShapes.png";
 import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import image from "../../assets/tester.png";
+import { UserContext } from "@/store/userContext.Context";
+import { useContext, useEffect } from "react";
 
 function RightContainer() {
+  const { values, setValues } = useContext(UserContext);
+
+
   return (
     <div className=" hidden w-[18%] static  h-fill sm:flex flex-col items-center p-3 gap-y-5 bg-gradient-to-br from-grad2 to-grad3 flex flex-col justify-center">
       <div className="bg-cswhite w-[100%] relative  h-[32%] rounded-2xl overflow-hidden flex flex-col items-center ">
@@ -25,7 +30,10 @@ function RightContainer() {
           />
         </div>
 
-        <p className="relative top-20  z-10">Leander van Aarde</p>
+        <p className="relative top-20  z-10">{values.name}</p>
+        <p className="relative top-20  z-10">{values.sex}</p>
+        <p className="relative top-20  z-10">{values.type}</p>
+        <p className="relative top-20  z-10">{values.email}</p>
       </div>
 
       <div className="bg-cswhite w-[100%] h-[65%] rounded-2xl overflow-hidden p-5">
@@ -41,7 +49,7 @@ function RightContainer() {
               <span className="text-csblack text-lg">Height</span>
             </div>
             <span className="text-csblue text-2xl">
-              <b>150cm</b>
+              <b>{values.height}cm</b>
             </span>
           </div>
 
@@ -55,7 +63,7 @@ function RightContainer() {
               <span className="text-csblack text-lg">Weight</span>
             </div>
             <span className="text-csblue text-2xl">
-              <b>150cm</b>
+              <b>{values.weight}Kg</b>
             </span>
           </div>
 

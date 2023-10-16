@@ -7,17 +7,19 @@ import data from "../static/Dash.json";
 import HomeChart from "@/components/Features/HomeChart.component";
 import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
 import LearnMore from "@/components/Common/LearnMore.component";
-import { useEffect } from "react";
-import { loginUser, verifyUserToken } from "@/api/Calls";
+import { useContext, useEffect } from "react";
+import { getUserInformation, loginUser, verifyUserToken } from "@/api/Calls";
+import { UserContext } from "@/store/userContext.Context";
 
 export default function Home() {
   const router = useRouter();
-
+  const { values, setValues } = useContext(UserContext);
   const validateToken = async (token: string) => {
     try {
       const toaks = await verifyUserToken(token);
-      console.log("TOAKS", toaks);
 
+      console.log("TOAKS", values);
+      console.log(values);
       if (!toaks) {
         router.push("/");
       }
@@ -28,11 +30,24 @@ export default function Home() {
     }
   };
 
+  const fetchUserData = async () => {
+    const userData = await getUserInformation(values.id);
+
+    setValues((prevValues: any) => ({
+      ...prevValues,
+      weight: userData.weight,
+      height: userData.height,
+      type: userData.diabetes_type,
+      sex: userData.sex,
+    }));
+  }
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       let tk = window.sessionStorage.getItem("token");
       if (tk) {
         const tokenState = validateToken(tk);
+        fetchUserData()
       } else {
         router.push("/");
       }

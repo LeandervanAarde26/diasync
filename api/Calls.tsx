@@ -4,12 +4,7 @@ import {
   tokenFields,
 } from "@/types/AuthTypes";
 import axios from "axios";
-import { UserContext } from "@/store/userContext.Context";
-import { useState, useContext } from "react";
-
-
 const url = process.env.NEXT_PUBLIC_DJANGO_URL;
-
 
 export const obtainUserToken = async ({ username, password }: tokenFields) => {
   let loginReq = `${url}token/`;
@@ -46,7 +41,7 @@ export const loginUser = async ({ email, password }: authenticationFields) => {
   if (requestData.status === 200) {
     // Login successful
 
-    console.log(requestData.data)
+    console.log(requestData.data);
 
     return requestData.data;
   } else if (requestData.status === 401) {
@@ -85,4 +80,25 @@ export const registerNewUser = async (reqData: RegisterType) => {
   }
 };
 
+export const getUserInformation = async (id: number) => {
+  let requestURL = `${url}users/${id}/`;
+  console.log(requestURL);
+  const request: any = await axios
+    .get(requestURL)
+    .then((res) => {
+      console.log(res);
+      console.log("User fetched");
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(`Error: ${err}`);
+    });
+
+    return request;
+};
+
+// export const getUserReadings =  (id: number) => {
+
+// }
 // Re1nH@rdt
+//R1a@n432
