@@ -18,13 +18,13 @@ ChartJS.register(
   );
 
   export type BloodsugarType = {
-    time: string;
+    date: string;
     blood_sugar_level: string;
   }
   
 
   const MyLineChart = (props: { data: BloodsugarType[] }) => {
-    const labels = props.data.map((item) => item.time);
+    const labels = props.data.map((item) => item.date);
     const data = props.data.map((item) => item.blood_sugar_level);
     return (
       <div>
@@ -34,7 +34,7 @@ ChartJS.register(
             datasets: [
                 
               {
-                label: "This month",
+                label: "This Month",
                 data: data,
                 backgroundColor: "#A6E2B8",
                 tension: 0.4,

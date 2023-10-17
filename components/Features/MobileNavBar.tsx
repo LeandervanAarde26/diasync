@@ -12,7 +12,7 @@ function MobileNavBar() {
   };
 
   return (
-    <div className="fixed md:hidden bottom-0 left-1/2 transform -translate-x-1/2 w-[80%] h-[10vh] bg-cswhite rounded-full flex justify-between items-center overflow-hidden">
+    <div className="fixed md:hidden bottom-0 left-1/2 transform -translate-x-1/2 w-[82%] h-[10vh] bg-cswhite rounded-full flex justify-between items-center overflow-hidden ">
       <div className="flex flex-row gap-x-6 justify-center items-center w-[100%]">
         <Link href="/home">
           <div
