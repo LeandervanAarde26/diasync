@@ -12,9 +12,11 @@ import {
   togglePassword,
   updateLabels,
 } from "@/Reusables/Functions";
-import { loginUser, obtainUserToken } from "@/api/Calls";
+import { getUserReadings, loginUser, obtainUserToken } from "@/api/Calls";
 import { useRouter } from "next/router";
 import { UserContext } from "@/store/userContext.Context";
+import { ReadingsContext } from "@/store/Readings.Context";
+import { DataType } from "@/types/DataTypes";
 const defaultValues = {
   email: "",
   password: "",
@@ -30,6 +32,7 @@ function index() {
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
+  const {dat, setDat} = useContext(ReadingsContext);
   const toggleInput = () => {
     togglePassword(setType);
   };
@@ -68,6 +71,28 @@ function index() {
           type: "Type 1",
           sex: "Male",
         }));
+
+       const userData = await getUserReadings(id); 
+
+      if (userData && userData.status === 200) {
+        try {
+          setDat((prevValues) => (
+            [
+              ...prevValues,
+              {
+                date: userData.date,
+                time: userData.time,
+                blood_sugar_level: userData.blood_sugar_level,
+              }
+            ]
+          ));
+          console.log(dat)
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
         window.sessionStorage.setItem("token", token.access);
         router.push("/home");
         setUnAuth(false);

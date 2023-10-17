@@ -3,12 +3,15 @@ import data from "../../static/Dash.json";
 import ChartKey from "../Common/ChartKey";
 import MyLineChart, { BloodsugarType } from "../Common/Test";
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "@/store/userContext.Context";
 import { getUserReadings } from "@/api/Calls";
-
+import { ReadingsContext } from "@/store/Readings.Context";
 function HomeChart() {
-  const { values, setValues } = useContext(UserContext);
+  const {dat, setDat} = useContext(ReadingsContext);
   const [show, setShow] = useState<boolean>(true);
+
+  useEffect(() => {
+    console.log(dat)
+  },[])
 
   // useEffect(() => {
   //   const fetchUserReadings = async () => {
@@ -77,11 +80,7 @@ function HomeChart() {
           />
         </div>
       </div>
-      {show ? (
-      <MyLineChart data={props} />
-    ) : (
-      <div>Loading...</div>
-    )}
+      <MyLineChart data={dat} />
     </div>
   );
 }
