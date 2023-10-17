@@ -26,7 +26,7 @@ export const ReadingsContext = createContext<ReadingsContext>({
 });
 
 export const ReadingsContextProvider = ({ children }: any) => {
-  const [dat, setData] = useState<DataContextType[]>([]); // Initialize with an array containing the default object
+  const [dat, setData] = useState<DataContextType[]>([]); 
 
   const setDat = (
     stateUpdater: (prevState: DataContextType[]) => DataContextType[],
