@@ -5,49 +5,45 @@ import MyLineChart, { BloodsugarType } from "../Common/Test";
 import { useState, useEffect, useContext } from "react";
 import { getUserReadings } from "@/api/Calls";
 import { ReadingsContext } from "@/store/Readings.Context";
+import { UserContext } from "@/store/userContext.Context";
 function HomeChart() {
-  const {dat, setDat} = useContext(ReadingsContext);
-  const [show, setShow] = useState<boolean>(true);
+  const { dat, setDat } = useContext(ReadingsContext);
+  const [show, setShow] = useState<boolean>(false);
+  const [readings, setReadings] = useState([]);
+  const { values } = useContext(UserContext);
+
+  const fetchUserReadings = async () => {
+    try {
+      const userData = await getUserReadings(values.id);
+      setReadings(userData); 
+      setShow(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    console.log(dat)
-  },[])
+    console.log(dat);
+  }, []);
 
-  // useEffect(() => {
-  //   const fetchUserReadings = async () => {
-  //     const userData = await getUserReadings(values.id);
+  useEffect(() => {
+    fetchUserReadings();
 
-  //     if (userData && userData.status === 200) {
-  //       try {
-  //         console.log("HEYY", userData);
-  //         setShow(true);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //   }
+    const intervalId = setInterval(() => {
+      fetchUserReadings();
+    }, 1200000);
 
-  //   fetchUserReadings();
-  // }, [values.id]);
-
-  const props: BloodsugarType[] = [
-    {
-      time: "2023-10-15",
-      blood_sugar_level: "17.6",
-    },
-    {
-      time: "2023-10-15",
-      blood_sugar_level: "17.6",
-    },
-    {
-      time: "2023-10-15",
-      blood_sugar_level: "17.6",
-    },
-  ];
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [values.id]);
 
   return (
     <div className="flex flex-col h-[55vh] bg-cswhite rounded-2xl p-5 gap-y-[10px]">
-      <div className="flex flex-row gap-x-[5px] items-center">
+      {
+        show ?
+        <>
+              <div className="flex flex-row gap-x-[5px] items-center">
         <div className="w-[4px] h-[70%] bg-cspurple "></div>
         <h4 className="text-csblack">{data.chartHeading}</h4>
       </div>
@@ -80,7 +76,13 @@ function HomeChart() {
           />
         </div>
       </div>
-      <MyLineChart data={dat} />
+      <MyLineChart data={readings} />
+        </>
+
+        : 
+
+        <p>Loading...</p>
+      }
     </div>
   );
 }

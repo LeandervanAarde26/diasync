@@ -44,7 +44,7 @@ export const UserContextProvider = ({ children }: any) => {
     action?: any
   ) => {
     setVals(stateUpdater);
-    console.log(values);
+    // console.log(values);
   };
 
   const contextValue: UserContext = {

@@ -1,4 +1,4 @@
-import { Provider, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface DataContextType {
   date: string;
@@ -7,10 +7,9 @@ interface DataContextType {
 }
 
 interface ReadingsContext {
-  dat: DataContextType[]; // Change this to an array
+  dat: DataContextType[];
   setDat: (
-    stateUpdater: (prevState: DataContextType[]) => DataContextType[], // Change this as well
-    action?: any
+    stateUpdater: (prevState: DataContextType[]) => DataContextType[]
   ) => void;
 }
 
@@ -25,15 +24,19 @@ export const ReadingsContext = createContext<ReadingsContext>({
   setDat: () => {},
 });
 
-export const ReadingsContextProvider = ({ children }: any) => {
-  const [dat, setData] = useState<DataContextType[]>([]); 
+interface ReadingsContextProviderProps {
+  children: ReactNode;
+}
+
+export const ReadingsContextProvider = ({
+  children,
+}: ReadingsContextProviderProps) => {
+  const [dat, setData] = useState<DataContextType[]>([defaults]);
 
   const setDat = (
-    stateUpdater: (prevState: DataContextType[]) => DataContextType[],
-    action?: any
+    stateUpdater: (prevState: DataContextType[]) => DataContextType[]
   ) => {
-    setData(stateUpdater);
-    console.log(dat);
+    setData((prevData) => stateUpdater(prevData));
   };
 
   const contextValue: ReadingsContext = {

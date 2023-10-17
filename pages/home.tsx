@@ -17,9 +17,8 @@ export default function Home() {
   const validateToken = async (token: string) => {
     try {
       const toaks = await verifyUserToken(token);
-
-      console.log("TOAKS", values);
-      console.log(values);
+      // console.log("TOAKS", values);
+      // console.log(values);
       if (!toaks) {
         router.push("/");
       }
