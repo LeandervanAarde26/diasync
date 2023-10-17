@@ -97,8 +97,21 @@ export const getUserInformation = async (id: number) => {
     return request;
 };
 
-// export const getUserReadings =  (id: number) => {
+export const getUserReadings = async (id: number) => {
+  let requestURL = `${url}data/?userid=${id}`;
+  const request: any = await axios
+    .get(requestURL)
+    .then((res) => {
+      console.log(res);
+      console.log("User data fetched");
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(`Error: ${err}`);
+    });
 
-// }
+ 
+    return request;
+}
 // Re1nH@rdt
 //R1a@n432

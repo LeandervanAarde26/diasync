@@ -17,46 +17,25 @@ ChartJS.register(
     Tooltip
   );
 
-  const MyLineChart = () => {
+  export type BloodsugarType = {
+    time: string;
+    blood_sugar_level: string;
+  }
+  
+
+  const MyLineChart = (props: { data: BloodsugarType[] }) => {
+    const labels = props.data.map((item) => item.time);
+    const data = props.data.map((item) => item.blood_sugar_level);
     return (
       <div>
         <Line
           data={{
-            labels: [
-              "2023-01",
-              "2023-02",
-              "2023-03",
-              "2023-04",
-              "2023-05",
-              "2023-06",
-              "2023-07",
-              "2023-01",
-              "2023-02",
-              "2023-03",
-              "2023-04",
-              "2023-05",
-              "2023-06",
-              "2023-07",
-              "2023-01",
-              "2023-02",
-              "2023-03",
-              "2023-04",
-              "2023-05",
-              "2023-06",
-              "2023-07",
-              "2023-01",
-              "2023-02",
-              "2023-03",
-              "2023-04",
-              "2023-05",
-              "2023-06",
-              "2023-07",
-            ],
+            labels: labels,
             datasets: [
                 
               {
-                label: "online tutorial subjects",
-                data: [100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200,100, 120, 115, 134, 168, 132, 200, 100, 120, 115, 134, 168, 132, 200,100, 120, 115, 134, 168, 132, 200],
+                label: "This month",
+                data: data,
                 backgroundColor: "#A6E2B8",
                 tension: 0.4,
                 borderJoinStyle: 'round',
@@ -64,18 +43,18 @@ ChartJS.register(
                 fill: true
               },
 
-              {
-                label: "online tutorial subjects",
-                data: [100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 
-                    100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200],
+              // {
+              //   label: "online tutorial subjects",
+              //   data: [100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 
+              //       100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200, 100, 120, 70, 174, 68, 132, 200],
       
-                backgroundColor: "purple",
-                pointBackgroundColor: '#A6E2B8',
-                tension: 0.4,
-                borderJoinStyle: 'round',
-                borderColor:'#A6E2B8',
+              //   backgroundColor: "purple",
+              //   pointBackgroundColor: '#A6E2B8',
+              //   tension: 0.4,
+              //   borderJoinStyle: 'round',
+              //   borderColor:'#A6E2B8',
            
-              },
+              // },
             
             ],
             

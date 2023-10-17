@@ -11,7 +11,7 @@ function NavBar() {
   };
 
   return (
-    <div className="h-screen border-r-[1px] border-cswhite w-[0vw] sm:w-[7vw] flex flex-col items-center p-5 justify-between gap-y-10 bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col justify-center">
+    <div className="hidden h-screen border-r-[1px] border-cswhite w-[0vw] sm:w-[7vw] sm:flex flex-col items-center p-5 justify-between gap-y-10 bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col justify-center">
       <div>
         <Image src={logo} height={80} alt="Logo" />
       </div>

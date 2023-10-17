@@ -31,31 +31,56 @@ export default function Home() {
   };
 
   const fetchUserData = async () => {
-    const userData = await getUserInformation(values.id);
+    try {
+      const userData = await getUserInformation(values.id);
 
-    setValues((prevValues: any) => ({
-      ...prevValues,
-      weight: userData.weight,
-      height: userData.height,
-      type: userData.diabetes_type,
-      sex: userData.sex,
-    }));
-  }
+      if (userData) {
+        setValues((prevValues: any) => ({
+          ...prevValues,
+          weight: userData.weight,
+          height: userData.height,
+          type: userData.diabetes_type,
+          sex: userData.sex,
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       let tk = window.sessionStorage.getItem("token");
       if (tk) {
         const tokenState = validateToken(tk);
-        fetchUserData()
+        try {
+          fetchUserData();
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         router.push("/");
       }
     }
   }, []);
 
+  const props = [
+    {
+      time: "2023-10-15",
+      blood_sugar_level: "17.6",
+    },
+    {
+      time: "2023-10-15",
+      blood_sugar_level: "17.6",
+    },
+    {
+      time: "2023-10-15",
+      blood_sugar_level: "17.6",
+    },
+  ];
+
   return (
-    <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-screen w-[100%] sm:w-[80%] p-5">
+    <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
 
       <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
