@@ -26,10 +26,7 @@ export const ReadingsContext = createContext<ReadingsContext>({
   setDat: () => {},
 });
 
-
-export const ReadingsContextProvider = ({
-  children,
-}: any) => {
+export const ReadingsContextProvider = ({ children }: any) => {
   const [dat, setData] = useState<DataContextType[]>([]);
 
   const setDat = (

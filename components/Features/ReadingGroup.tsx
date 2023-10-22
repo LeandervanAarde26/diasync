@@ -4,10 +4,10 @@ export type ReadingGroupType = {
   date: any;
   average: any;
   testAmount: number;
-  tests: EntryType [];
+  tests: EntryType[];
 };
 
-function ReadingGroup({ date, average, testAmount, tests}: ReadingGroupType) {
+function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
   return (
     <>
       <div className="cardscontainer flex flex-row justify-between px-5 mb-3 mt-3">
@@ -24,16 +24,13 @@ function ReadingGroup({ date, average, testAmount, tests}: ReadingGroupType) {
         </div>
       </div>
 
-      {
-        tests.map((i) => (
-            <BloodsugarEntry
-                target={'7'}
-                blood_sugar_level={i.blood_sugar_level}
-                time={i.time}
-            />
-        ))
-      }
-
+      {tests.map((i) => (
+        <BloodsugarEntry
+          target={"7"}
+          blood_sugar_level={i.blood_sugar_level}
+          time={i.time}
+        />
+      ))}
     </>
   );
 }

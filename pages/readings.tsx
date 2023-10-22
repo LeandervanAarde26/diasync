@@ -19,14 +19,6 @@ import { EntryType } from "perf_hooks";
 function Readings() {
   const { dat, setDat } = useContext(ReadingsContext);
   const [groupedReadings, setGroupedReadings] = useState<[ReadingGroupType]>();
-  // const groupedDataObj: [ReadingGroupType] = [];?
-
-  //   const groupBy = (arr: any, prop: any) => {
-  //     const map: any= new Map(Array.from(arr, obj => [obj[prop], []]));
-  //     arr.forEach((obj:any)=> map.get(obj[prop]).push(obj));
-  //     return Array.from(map.values());
-  // }
-  //   console.log(groupBy(dat, "date"));
 
   const groupedData = () => {
     const map2: any = dat.map((obj: any, i) => {
@@ -53,33 +45,8 @@ function Readings() {
   };
 
   useEffect(() => {
-    // groupedData('date');
-    console.log(groupedReadings);
-  }, [groupedReadings]);
-
-  useEffect(() => {
     groupedData();
-    // console.log(groupedReadings)
   }, []);
-
-  const Entries: any[] = [
-    {
-      blood_sugar_level: "10.0",
-      time: "10:00",
-      target: "7.0",
-    },
-    {
-      blood_sugar_level: "10.0",
-      time: "10:00",
-      target: "7.0",
-    },
-    {
-      blood_sugar_level: "10.0",
-      time: "10:00",
-      target: "7.0",
-    },
-  ];
-
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <div className="flex flex-row w-[100%] h-full">
