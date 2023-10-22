@@ -38,7 +38,8 @@ const config: Config = {
         'cslightpurple': '#86ABFF',
         'csgreen': '#A6E2B8',
         'csChartBlue': '#45D0EE',
-        'csMint': '#87DDDE'
+        'csMint': '#87DDDE',
+        'csyellow': '#F0BB00'
         
     },
     extend: {

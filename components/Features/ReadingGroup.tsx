@@ -1,6 +1,6 @@
 import BloodsugarEntry, { EntryType } from "../Common/BloodsugarEntry";
 
-type ReadingGroupType = {
+export type ReadingGroupType = {
   date: any;
   average: any;
   testAmount: number;
@@ -33,6 +33,7 @@ function ReadingGroup({ date, average, testAmount, tests}: ReadingGroupType) {
             />
         ))
       }
+
     </>
   );
 }
