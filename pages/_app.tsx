@@ -18,17 +18,17 @@ export default function ({ Component, pageProps }: AppProps) {
       : true;
 
   return (
-    <UserContextProvider>
-      <RegisterContextProvider>
-        <ReadingsContextProvider>
+    <ReadingsContextProvider>
+      <UserContextProvider>
+        <RegisterContextProvider>
           <div className="flex flex-row max-w-screen">
             {showItems && <NavBar />}
             {showItems && <MobileNavBar />}
             <Component {...pageProps} />
             {showItems && <RightContainer />}
           </div>
-        </ReadingsContextProvider>
-      </RegisterContextProvider>
-    </UserContextProvider>
+        </RegisterContextProvider>
+      </UserContextProvider>
+    </ReadingsContextProvider>
   );
 }

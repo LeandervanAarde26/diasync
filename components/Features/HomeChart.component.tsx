@@ -12,36 +12,9 @@ function HomeChart() {
   const [readings, setReadings] = useState([]);
   const { values } = useContext(UserContext);
 
-  const fetchUserReadings = async () => {
-    try {
-      const userData = await getUserReadings(values.id);
-      setReadings(userData);
-      setShow(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    console.log(dat);
-  }, []);
-
-  useEffect(() => {
-    fetchUserReadings();
-
-    const intervalId = setInterval(() => {
-      fetchUserReadings();
-    }, 1200000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [values.id]);
-
-
   return (
     <div className="hidden sm:flex flex-col h-[55vh] bg-cswhite rounded-2xl p-5 gap-y-[10px]">
-      {show ? (
+      {dat.length > 0 ? (
         <>
           <div className="flex flex-row gap-x-[5px] items-center">
             <div className="w-[4px] h-[70%] bg-cspurple "></div>
@@ -80,7 +53,7 @@ function HomeChart() {
               />
             </div>
           </div>
-          <MyLineChart data={readings} />
+          <MyLineChart data={dat} />
         </>
       ) : (
         <p>Loading...</p>

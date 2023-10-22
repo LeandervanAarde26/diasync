@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface DataContextType {
+  id: number;
   date: string;
   time: string;
   blood_sugar_level: string;
@@ -14,27 +15,26 @@ interface ReadingsContext {
 }
 
 const defaults: DataContextType = {
+  id: 0,
   date: "",
   time: "",
   blood_sugar_level: "",
 };
 
 export const ReadingsContext = createContext<ReadingsContext>({
-  dat: [defaults],
+  dat: [],
   setDat: () => {},
 });
 
-interface ReadingsContextProviderProps {
-  children: ReactNode;
-}
 
 export const ReadingsContextProvider = ({
   children,
-}: ReadingsContextProviderProps) => {
-  const [dat, setData] = useState<DataContextType[]>([defaults]);
+}: any) => {
+  const [dat, setData] = useState<DataContextType[]>([]);
 
   const setDat = (
-    stateUpdater: (prevState: DataContextType[]) => DataContextType[]
+    stateUpdater: (prevState: DataContextType[]) => DataContextType[],
+    action?: any
   ) => {
     setData((prevData) => stateUpdater(prevData));
   };

@@ -102,9 +102,8 @@ export const getUserReadings = async (id: number) => {
   const request: any = await axios
     .get(requestURL)
     .then((res) => {
-      console.log(res);
       console.log("User data fetched");
-      return res.data;
+      return res;
     })
     .catch((err) => {
       console.log(`Error: ${err}`);

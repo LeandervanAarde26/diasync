@@ -4,9 +4,10 @@ import AuthContainer from "@/components/Features/AuthContainer";
 import Input from "@/components/Common/Input.component";
 import { MdPerson4, MdKey } from "react-icons/md";
 import Button from "@/components/Common/Button";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import data from "@/static/Auth.json";
+
 import {
   captureValues,
   togglePassword,
@@ -32,6 +33,9 @@ function index() {
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
+  const { dat, setDat } = useContext(ReadingsContext);
+  const [isDataReady, setDataReady] = useState<boolean>(false);
+
   // const {dat, setData} = useContext(ReadingsContext);
   const toggleInput = () => {
     togglePassword(setType);
@@ -53,50 +57,38 @@ function index() {
 
   const handleClick = async () => {
     try {
+      //Login and token authentication
       const user = await loginUser({ email, password });
+      const {firstname,username, id} = user.user;
+      const token =  user.user !== null ? await obtainUserToken({username: username, password: password}): null;
+      setValues((prevValues: any) => ({
+        id: id,
+        name: firstname,
+        email: email,
+        weight: 0,
+        height: 0,
+        type: "Type 1",
+        sex: "Male",
+      }));
 
-      if (user.token !== null && user.user !== null) {
-        const token = await obtainUserToken({
-          username: user.user.username,
-          password,
-        });
+      const userD = await getUserReadings(id)
+      console.log(userD)
+      const {status, data} = userD;
+      if(status == 200){
+          console.log('data has been fetched')
+          const useableData = await data.map((i: any) => ({
+             id: i.user.id,
+             blood_sugar_level: i.blood_sugar_level,
+             date: i.date,
+             time: i.time,
+           }));
+            setDat((prevValues: any) => [...prevValues, ...useableData]);
+           console.log(dat, '\n', useableData);
 
-        const { id, firstname, email } = user.user;
-        setValues((prevValues: any) => ({
-          id: id,
-          name: firstname,
-          email: email,
-          weight: 0,
-          height: 0,
-          type: "Type 1",
-          sex: "Male",
-        }));
-
-      //  const userData = await getUserReadings(id); 
-
-      // if (userData && userData.status === 200) {
-      //   try {
-      //     setDat((prevValues) => (
-      //       [
-      //         ...prevValues,
-      //         {
-      //           date: userData.date,
-      //           time: userData.time,
-      //           blood_sugar_level: userData.blood_sugar_level,
-      //         }
-      //       ]
-      //     ));
-      //     console.log(dat)
-    
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // }
-
-        window.sessionStorage.setItem("token", token.access);
-        router.push("/home");
-        setUnAuth(false);
-      }
+           window.sessionStorage.setItem("token", token.access);
+           router.push("/home");
+           setUnAuth(false);
+      };
     } catch (error: any) {
       // Login failed
       console.log(error);
@@ -106,6 +98,12 @@ function index() {
       }
     }
   };
+
+  useEffect(() => {
+    if (isDataReady) {
+      router.push("/home");
+    }
+  }, [isDataReady, router]);
 
   const handleChange =
     (error: React.Dispatch<React.SetStateAction<boolean>>) =>

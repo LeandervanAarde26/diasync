@@ -13,8 +13,11 @@ import {
   getUserInformation,
   loginUser,
   verifyUserToken,
+  getUserReadings
 } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
+import { ReadingsContext } from "@/store/Readings.Context";
+import LoadingIndicator from "@/components/Common/LoadingIndicator";
 
 type complication = {
   heading: string;
@@ -31,6 +34,7 @@ type homePageDataType = {
 export default function Home() {
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
+  const { dat, setDat } = useContext(ReadingsContext);
   const [ai, setAi] = useState<homePageDataType>({});
   const validateToken = async (token: string) => {
     try {
@@ -48,14 +52,20 @@ export default function Home() {
   };
 
   const fetchComplications = async () => {
-    const AiIntegration = await getComplications(values.id);
-    const parsedData = JSON.parse(AiIntegration.Response);
-    setAi(parsedData);
-    console.log(parsedData, "HOME");
+    try {
+      const AiIntegration = await getComplications(values.id);
+      const jsonStart = AiIntegration.Response.indexOf('{');
+      const jsonEnd = AiIntegration.Response.lastIndexOf('}');
+      const jsonResponse = AiIntegration.Response.substring(jsonStart, jsonEnd + 1);
+  
 
-    // if (AiIntegration) {
-    //   // Use AiIntegration data here
-    // }
+      const parsedData = JSON.parse(jsonResponse);
+
+      setAi(parsedData);
+      console.log(parsedData, "HOME");
+    } catch (error) {
+      console.error('Error fetching or parsing complications:', error);
+    }
   };
 
   const fetchUserData = async () => {
@@ -94,6 +104,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchComplications();
+    console.log("CHECK", dat)
   }, [values.id]);
 
   return (
@@ -126,7 +137,9 @@ export default function Home() {
               />
             ))
           ) : (
-            <p>No complications data available</p> // Provide a fallback in case complications data is undefined
+            <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
+                   <LoadingIndicator/>
+            </div>
           )}
 
           {/* <ComplicationsCard
