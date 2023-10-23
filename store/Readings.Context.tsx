@@ -12,22 +12,26 @@ interface ReadingsContext {
   setDat: (
     stateUpdater: (prevState: DataContextType[]) => DataContextType[]
   ) => void;
+  clearDat: (
+  ) => void;
 }
 
-const defaults: DataContextType = {
-  id: 0,
-  date: "",
-  time: "",
-  blood_sugar_level: "",
-};
+
 
 export const ReadingsContext = createContext<ReadingsContext>({
   dat: [],
   setDat: () => {},
+  clearDat: () => {},
 });
 
 export const ReadingsContextProvider = ({ children }: any) => {
   const [dat, setData] = useState<DataContextType[]>([]);
+  const defaults: DataContextType = {
+    id: 0,
+    date: "",
+    time: "",
+    blood_sugar_level: "",
+  };
 
   const setDat = (
     stateUpdater: (prevState: DataContextType[]) => DataContextType[],
@@ -36,9 +40,12 @@ export const ReadingsContextProvider = ({ children }: any) => {
     setData((prevData) => stateUpdater(prevData));
   };
 
+  const clearDat =(() => {setData([])});
+
   const contextValue: ReadingsContext = {
     dat,
     setDat,
+    clearDat
   };
 
   return (

@@ -57,7 +57,7 @@ function BloodsugarEntry({ blood_sugar_level, time, target }: EntryType) {
           className="text-cswhite"
           fontSize={22}
         />
-        <p className='text-cswhite'>Target: {target} mmol/L</p>
+        <p className='text-cswhite'> {target} mmol/L</p>
       </div>
     </div>
   );

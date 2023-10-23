@@ -4,10 +4,19 @@ import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import image from "../../assets/tester.png";
 import { UserContext } from "@/store/userContext.Context";
 import { useContext, useEffect } from "react";
+import { ReadingsContext } from "@/store/Readings.Context";
 
 function RightContainer() {
-  const { values, setValues } = useContext(UserContext);
-
+  const { values } = useContext(UserContext);
+  const { dat, clearDat } = useContext(ReadingsContext);
+  const averageBloodSugar = dat.reduce((accumulator, curr) => {
+    const bloodSugarLevel = parseInt(curr.blood_sugar_level);
+    return accumulator + bloodSugarLevel / dat.length;
+  }, 0);
+  const estimatedHBA1c = () => {
+    const estimated = (averageBloodSugar + 2.59) / 1.59;
+    return estimated.toFixed(1);
+  };
 
   return (
     <div className=" hidden w-[18%] static  h-fill sm:flex flex-col items-center p-3 gap-y-5 bg-gradient-to-br from-grad2 to-grad3 flex flex-col justify-center">
@@ -71,7 +80,7 @@ function RightContainer() {
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Predicted HBA1C</span>
               <span className="text-csblue text-xl">
-                <b>150cm</b>
+                <b>{estimatedHBA1c() + "%"}</b>
               </span>
             </div>
           </div>
@@ -80,7 +89,7 @@ function RightContainer() {
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Glucose tests </span>
               <span className="text-csblue text-xl">
-                <b>150cm</b>
+                <b>{dat.length}</b>
               </span>
             </div>
           </div>
@@ -89,7 +98,7 @@ function RightContainer() {
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Average Glucose</span>
               <span className="text-csblue text-xl">
-                <b>150cm</b>
+                <b>{averageBloodSugar.toFixed(1)}</b>
               </span>
             </div>
           </div>

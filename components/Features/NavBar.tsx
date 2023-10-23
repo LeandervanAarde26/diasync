@@ -3,11 +3,17 @@ import logo from "../../assets/icon.png";
 import { MdHouse, MdReadMore, MdOutlinePoll, MdLogout } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { ReadingsContext } from "@/store/Readings.Context";
+import {useContext} from 'react';
+
 function NavBar() {
   const router = useRouter();
+  const {clearDat} = useContext(ReadingsContext)
 
   const logout = () => {
+    clearDat();
     router.push("/");
+
   };
 
   return (

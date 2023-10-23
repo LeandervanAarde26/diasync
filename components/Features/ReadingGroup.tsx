@@ -7,7 +7,9 @@ export type ReadingGroupType = {
   tests: EntryType[];
 };
 
+
 function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
+
   return (
     <>
       <div className="cardscontainer flex flex-row justify-between px-5 mb-3 mt-3">
