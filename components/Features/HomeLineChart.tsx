@@ -1,4 +1,5 @@
 "use client";
+import { BloodsugarType } from "@/types/BloodSugarType";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,13 +18,7 @@ ChartJS.register(
     Tooltip
   );
 
-  export type BloodsugarType = {
-    date: string;
-    blood_sugar_level: string;
-  }
-  
-
-  const MyLineChart = (props: { data: BloodsugarType[] }) => {
+  const LineChart = (props: { data: BloodsugarType[] }) => {
     const labels = props.data.map((item) => item.date);
     const data = props.data.map((item) => item.blood_sugar_level);
     return (
@@ -81,4 +76,4 @@ ChartJS.register(
       </div>
     );
   };
-  export default MyLineChart;
+  export default LineChart;

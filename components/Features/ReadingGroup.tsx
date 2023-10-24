@@ -1,15 +1,9 @@
-import BloodsugarEntry, { EntryType } from "../Common/BloodsugarEntry";
-
-export type ReadingGroupType = {
-  date: any;
-  average: any;
-  testAmount: number;
-  tests: EntryType[];
-};
+import { bloodSugarEntryType } from "@/types/BloodSugarEntryType";
+import BloodsugarEntry from "../Common/BloodsugarEntry";
+import { ReadingGroupType } from "@/types/ReadingGroupType";
 
 
 function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
-
   return (
     <>
       <div className="cardscontainer flex flex-row justify-between px-5 mb-3 mt-3">

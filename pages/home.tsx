@@ -1,8 +1,5 @@
 import { useRouter } from "next/router";
 import ComplicationsCard from "@/components/Common/ComplicationsCard.component";
-import Image from "next/image";
-
-import Button from "@/components/Common/Button";
 import data from "../static/Dash.json";
 import HomeChart from "@/components/Features/HomeChart.component";
 import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
@@ -11,9 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import {
   getComplications,
   getUserInformation,
-  loginUser,
   verifyUserToken,
-  getUserReadings
 } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
@@ -34,14 +29,12 @@ type homePageDataType = {
 export default function Home() {
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
-  const { dat, setDat } = useContext(ReadingsContext);
+  const { dat } = useContext(ReadingsContext);
   const [ai, setAi] = useState<homePageDataType>({});
   const validateToken = async (token: string) => {
     try {
-      const toaks = await verifyUserToken(token);
-      // console.log("TOAKS", values);
-      // console.log(values);
-      if (!toaks) {
+      const verifiedToken = await verifyUserToken(token);
+      if (!verifiedToken) {
         router.push("/");
       }
     } catch (error: any) {
@@ -54,24 +47,21 @@ export default function Home() {
   const fetchComplications = async () => {
     try {
       const AiIntegration = await getComplications(values.id);
+      //Ai sometimes returns incosistent data, by removing all the strings that are not in the object, we can get a consistent object that can be converted to JSON data.
       const jsonStart = AiIntegration.Response.indexOf('{');
       const jsonEnd = AiIntegration.Response.lastIndexOf('}');
       const jsonResponse = AiIntegration.Response.substring(jsonStart, jsonEnd + 1);
-  
-
       const parsedData = JSON.parse(jsonResponse);
-
       setAi(parsedData);
-      console.log(parsedData, "HOME");
     } catch (error) {
       console.error('Error fetching or parsing complications:', error);
     }
   };
 
+  // Replace this , this could possibly happen on the login or in the context.
   const fetchUserData = async () => {
     try {
       const userData = await getUserInformation(values.id);
-
       if (userData) {
         setValues((prevValues: any) => ({
           ...prevValues,
@@ -88,9 +78,9 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      let tk = window.sessionStorage.getItem("token");
-      if (tk) {
-        const tokenState = validateToken(tk);
+      let userToken = window.sessionStorage.getItem("token");
+      if (userToken) {
+        const tokenState = validateToken(userToken);
         try {
           fetchUserData();
         } catch (error) {
@@ -104,7 +94,10 @@ export default function Home() {
 
   useEffect(() => {
     fetchComplications();
-    console.log("CHECK", dat)
+
+    console.log('====================================');
+    console.log('User Readings: \n:', dat);
+    console.log('====================================');
   }, [values.id]);
 
   return (
@@ -141,25 +134,7 @@ export default function Home() {
                    <LoadingIndicator/>
             </div>
           )}
-
-          {/* <ComplicationsCard
-            heading="Heart Disease"
-            body="Some sort of content is going to go here from the Ai that it will generate based on your blood sugar and your blood sugar levels, it's going to be awesome dude."
-            url="http://localhost:3000/home"
-          />
-
-          <ComplicationsCard
-            heading="Heart Disease"
-            body="Some sort of content is going to go here from the Ai that it will generate based on your blood sugar and your blood sugar levels, it's going to be awesome dude."
-            url="http://localhost:3000/home"
-          />
-          <ComplicationsCard
-            heading="Heart Disease"
-            body="Some sort of content is going to go here from the Ai that it will generate based on your blood sugar and your blood sugar levels, it's going to be awesome dude."
-            url="http://localhost:3000/home"
-          /> */}
         </div>
-
         <LearnMore />
       </div>
     </div>

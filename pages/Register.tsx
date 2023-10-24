@@ -20,9 +20,6 @@ function Register() {
     confirmPassword,
     weight,
     height,
-    type,
-    sex,
-    data,
   } = values;
 
   const goToNextStep = () => {

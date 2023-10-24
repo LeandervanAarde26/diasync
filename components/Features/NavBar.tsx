@@ -4,16 +4,15 @@ import { MdHouse, MdReadMore, MdOutlinePoll, MdLogout } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ReadingsContext } from "@/store/Readings.Context";
-import {useContext} from 'react';
+import { useContext } from "react";
 
 function NavBar() {
   const router = useRouter();
-  const {clearDat} = useContext(ReadingsContext)
+  const { clearDat } = useContext(ReadingsContext);
 
   const logout = () => {
     clearDat();
     router.push("/");
-
   };
 
   return (
@@ -23,46 +22,51 @@ function NavBar() {
       </div>
 
       <div className="flex flex-col gap-y-10 h-screen">
-      <div
-  className={`${
-    router.pathname === "/home" || router.pathname === "/"
-      ? "bg-csblue"
-      : null
-  } p-3 rounded-full`}
->
-  <Link href="/home"> {/* Update the href */}
-    <MdHouse key="person-icon" className="text-cswhite" fontSize={35} />
-  </Link>
-</div>
+        <div
+          className={`${
+            router.pathname === "/home" || router.pathname === "/"
+              ? "bg-csblue"
+              : null
+          } p-3 rounded-full`}
+        >
+          <Link href="/home">
+            {" "}
+            {/* Update the href */}
+            <MdHouse key="person-icon" className="text-cswhite" fontSize={35} />
+          </Link>
+        </div>
 
-<div
-  className={`${
-    router.pathname === "/readings" ? "bg-csblue" : null
-  } p-3 rounded-full`}
->
-  <Link href="/readings"> {/* Update the href */}
-    <MdReadMore
-      key="person-icon"
-      className="text-cswhite"
-      fontSize={35}
-    />
-  </Link>
-</div>
+        <div
+          className={`${
+            router.pathname === "/readings" ? "bg-csblue" : null
+          } p-3 rounded-full`}
+        >
+          <Link href="/readings">
+            {" "}
+            {/* Update the href */}
+            <MdReadMore
+              key="person-icon"
+              className="text-cswhite"
+              fontSize={35}
+            />
+          </Link>
+        </div>
 
-<div
-  className={`${
-    router.pathname === "/analyse" ? "bg-csblue" : null
-  } p-3 rounded-full`}
->
-  <Link href="/analyse"> {/* Update the href */}
-    <MdOutlinePoll
-      key="person-icon"
-      className="text-cswhite"
-      fontSize={35}
-    />
-  </Link>
-</div>
-
+        <div
+          className={`${
+            router.pathname === "/analyse" ? "bg-csblue" : null
+          } p-3 rounded-full`}
+        >
+          <Link href="/analyse">
+            {" "}
+            {/* Update the href */}
+            <MdOutlinePoll
+              key="person-icon"
+              className="text-cswhite"
+              fontSize={35}
+            />
+          </Link>
+        </div>
       </div>
 
       <div className="" onClick={logout}>

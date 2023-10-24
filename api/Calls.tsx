@@ -94,7 +94,7 @@ export const getUserInformation = async (id: number) => {
       console.log(`Error: ${err}`);
     });
 
-    return request;
+  return request;
 };
 
 export const getUserReadings = async (id: number) => {
@@ -109,27 +109,23 @@ export const getUserReadings = async (id: number) => {
       console.log(`Error: ${err}`);
     });
 
- 
-    return request;
-}
+  return request;
+};
 
 export const getComplications = async (id: number) => {
-
   let requestURL = `${url}complications/?userid=${id}`;
   let request: any = await axios
-  .get(requestURL)
-  .then((res) => {
-    console.log(res.data)
-    return res.data
-  })
-  .catch((err) => {
-    console.log(err)
-    return null
-  })
+    .get(requestURL)
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 
-
-
-  return request
-}
+  return request;
+};
 // Re1nH@rdt
 //R1a@n432

@@ -17,7 +17,6 @@ import { getUserReadings, loginUser, obtainUserToken } from "@/api/Calls";
 import { useRouter } from "next/router";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
-import { DataType } from "@/types/DataTypes";
 const defaultValues = {
   email: "",
   password: "",
@@ -32,7 +31,7 @@ function index() {
   const [passwordLabel, setPasswordLabel] = useState<string>("Password");
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
-  const { values, setValues } = useContext(UserContext);
+  const { setValues } = useContext(UserContext);
   const { dat, setDat } = useContext(ReadingsContext);
   const [isDataReady, setDataReady] = useState<boolean>(false);
 
@@ -59,9 +58,12 @@ function index() {
     try {
       //Login and token authentication
       const user = await loginUser({ email, password });
-      const {firstname,username, id} = user.user;
-      const token =  user.user !== null ? await obtainUserToken({username: username, password: password}): null;
-      setValues((prevValues: any) => ({
+      const { firstname, username, id } = user.user;
+      const token =
+        user.user !== null
+          ? await obtainUserToken({ username: username, password: password })
+          : null;
+      setValues(() => ({
         id: id,
         name: firstname,
         email: email,
@@ -71,24 +73,24 @@ function index() {
         sex: "Male",
       }));
 
-      const userD = await getUserReadings(id)
-      console.log(userD)
-      const {status, data} = userD;
-      if(status == 200){
-          console.log('data has been fetched')
-          const useableData = await data.map((i: any) => ({
-             id: i.user.id,
-             blood_sugar_level: i.blood_sugar_level,
-             date: i.date,
-             time: i.time,
-           }));
-            setDat((prevValues: any) => [...prevValues, ...useableData]);
-           console.log(dat, '\n', useableData);
+      const userD = await getUserReadings(id);
+      console.log(userD);
+      const { status, data } = userD;
+      if (status == 200) {
+        console.log("data has been fetched");
+        const useableData = await data.map((i: any) => ({
+          id: i.user.id,
+          blood_sugar_level: i.blood_sugar_level,
+          date: i.date,
+          time: i.time,
+        }));
+        setDat((prevValues: any) => [...prevValues, ...useableData]);
+        console.log(dat, "\n", useableData);
 
-           window.sessionStorage.setItem("token", token.access);
-           router.push("/home");
-           setUnAuth(false);
-      };
+        window.sessionStorage.setItem("token", token.access);
+        router.push("/home");
+        setUnAuth(false);
+      }
     } catch (error: any) {
       // Login failed
       console.log(error);

@@ -1,9 +1,8 @@
 import FilterButtons from "@/components/Common/FilterButtons.component";
 import { useContext, useEffect, useState, useCallback } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
-import ReadingGroup, {
-  ReadingGroupType,
-} from "@/components/Features/ReadingGroup";
+import ReadingGroup from "@/components/Features/ReadingGroup";
+import { ReadingGroupType } from "@/types/ReadingGroupType";
 import Dropzone from "@/components/Features/Dropzone";
 import Button from "@/components/Common/Button";
 import ChartKey from "@/components/Common/ChartKey";
@@ -15,10 +14,7 @@ function Readings() {
   const [csv, setCsv] = useState(undefined);
   const highBloodSugars = dat.filter((item) => +item.blood_sugar_level > 12);
   const lowBloodSugars = dat.filter((item) => +item.blood_sugar_level < 4);
-
-  const stableBloodSugars = dat.filter(
-    (item) => +item.blood_sugar_level >= 4 && +item.blood_sugar_level <= 12
-  );
+  const stableBloodSugars = dat.filter((item) => +item.blood_sugar_level >= 4 && +item.blood_sugar_level <= 12);
 
   const [chart, setChart] = useState({
     high:
@@ -146,7 +142,7 @@ function Readings() {
             {filter &&
               Object.entries(filter).map(([date, data]) => (
                 <ReadingGroup
-                  key={date}
+                  key={data.testAmount}
                   date={data.date}
                   average={data.average}
                   testAmount={data.testAmount}

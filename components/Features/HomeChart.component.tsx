@@ -1,16 +1,14 @@
 import FilterButtons from "../Common/FilterButtons.component";
 import data from "../../static/Dash.json";
 import ChartKey from "../Common/ChartKey";
-import MyLineChart, { BloodsugarType } from "../Common/Test";
-import { useState, useEffect, useContext } from "react";
-import { getUserReadings } from "@/api/Calls";
+import LineChart from "./HomeLineChart";
+import { useContext } from "react";
+
 import { ReadingsContext } from "@/store/Readings.Context";
-import { UserContext } from "@/store/userContext.Context";
+import LoadingIndicator from "../Common/LoadingIndicator";
+
 function HomeChart() {
-  const { dat, setDat } = useContext(ReadingsContext);
-  const [show, setShow] = useState<boolean>(false);
-  const [readings, setReadings] = useState([]);
-  const { values } = useContext(UserContext);
+  const { dat } = useContext(ReadingsContext);
 
   return (
     <div className="hidden sm:flex flex-col h-[55vh] bg-cswhite rounded-2xl p-5 gap-y-[10px]">
@@ -53,10 +51,12 @@ function HomeChart() {
               />
             </div>
           </div>
-          <MyLineChart data={dat} />
+          <LineChart data={dat} />
         </>
       ) : (
-        <p>Loading...</p>
+        <div className="flex flex-row gap-x-[5px] items-center">
+            <LoadingIndicator/>
+        </div>
       )}
     </div>
   );

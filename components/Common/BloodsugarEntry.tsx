@@ -7,14 +7,9 @@ import {
 } from "react-icons/md";
 import Image from "next/image";
 import bloodDrop from "../../assets/blood_drop.png";
+import { bloodSugarEntryType } from "@/types/BloodSugarEntryType";
 
-export type EntryType = {
-  blood_sugar_level: any;
-  time: any;
-  target: any;
-};
-
-function BloodsugarEntry({ blood_sugar_level, time, target }: EntryType) {
+function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryType) {
   return (
     <div className="cardContainer flex flex-row w-[100%] bg-csblack h-[8vh] p-5 items-center rounded-3xl justify-between">
       <Image src={bloodDrop} alt="Blood Drop" height={30} width={30} />

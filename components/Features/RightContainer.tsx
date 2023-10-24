@@ -3,12 +3,12 @@ import shapes from "../../assets/Login&registerShapes.png";
 import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import image from "../../assets/tester.png";
 import { UserContext } from "@/store/userContext.Context";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
 
 function RightContainer() {
   const { values } = useContext(UserContext);
-  const { dat, clearDat } = useContext(ReadingsContext);
+  const { dat } = useContext(ReadingsContext);
   const averageBloodSugar = dat.reduce((accumulator, curr) => {
     const bloodSugarLevel = parseInt(curr.blood_sugar_level);
     return accumulator + bloodSugarLevel / dat.length;
