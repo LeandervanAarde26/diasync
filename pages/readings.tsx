@@ -6,9 +6,13 @@ import { ReadingGroupType } from "@/types/ReadingGroupType";
 import Dropzone from "@/components/Features/Dropzone";
 import Button from "@/components/Common/Button";
 import ChartKey from "@/components/Common/ChartKey";
+import { timeToSecondsConversion } from "@/Reusables/Functions";
+import { getUserReadings, uploadNewData } from "@/api/Calls";
+import { UserContext } from "@/store/userContext.Context";
 
 function Readings() {
-  const { dat, setDat } = useContext(ReadingsContext);
+  const { dat, setDat, clearDat } = useContext(ReadingsContext);
+  const {values} = useContext(UserContext)
   const [groupedReadings, setGroupedReadings] = useState< Record<string, ReadingGroupType>>({});
   const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
   const [csv, setCsv] = useState(undefined);
@@ -25,9 +29,20 @@ function Readings() {
     low:
       Math.round((lowBloodSugars.length / dat.length) * 100).toString() + "%",
   });
+
   const groupedData = () => {
+
+    dat.sort((a: any, b:any) => {
+      let keyA = new Date(a.date);
+      let keyB = new Date(b.date)
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    })
+
     const map2: any = dat.map((obj: any, i) => {
       console.log(obj.date);
+      
       const tests = dat
         .filter((item) => item.date === obj.date && item.blood_sugar_level)
         .map((item) => ({
@@ -35,7 +50,8 @@ function Readings() {
           date: item.date,
           time: item.time,
           blood_sugar_level: item.blood_sugar_level,
-        }));
+        }))
+        .sort((a,b) => a.time.localeCompare(b.time));
 
       const dailyAverage = tests.reduce((accumulator, curr) => {
         const bloodSugarLevel = parseInt(curr.blood_sugar_level);
@@ -86,6 +102,8 @@ function Readings() {
     groupedData();
   }, [dat]);
 
+
+
   const filterData = async (amount: number) => {
     setFilter(groupedReadings);
     const d = new Date();
@@ -103,9 +121,36 @@ function Readings() {
       filteredData.forEach(([date, data]) => {
         updatedData[date] = data;
       });
+
+
+
+      console.log("HERE",updatedData)
       setFilter(updatedData);
     }
   };
+  
+  const onClickHandler = async () => {
+    console.log(csv)
+    const dataUpload = await uploadNewData(values.id, csv)
+    if(dataUpload !== null){
+      console.log("user data has been uploaded")
+      const newData = await getUserReadings(values.id);
+      const {status, data} = newData;
+
+      if(status == 200){
+        console.log('new data has been fetched. Applying..')
+        const useableData = await data.map((i: any) => ({
+          id: i.user.id,
+          blood_sugar_level: i.blood_sugar_level,
+          date: i.date,
+          time: i.time,
+        }));
+        clearDat();
+        setDat((prevValues: any) => [...prevValues, ...useableData]);
+        console.log(dat, "\n", useableData);
+      }
+    }
+    }
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
@@ -134,7 +179,7 @@ function Readings() {
               title={"24 Hours"}
               roundedRight="xl"
               active={false}
-              clickHandler={() => filterData(1)}
+              clickHandler={() => filterData(2)}
             />
           </div>
 
@@ -142,7 +187,7 @@ function Readings() {
             {filter &&
               Object.entries(filter).map(([date, data]) => (
                 <ReadingGroup
-                  key={data.testAmount}
+                  key={date}
                   date={data.date}
                   average={data.average}
                   testAmount={data.testAmount}
@@ -194,7 +239,7 @@ function Readings() {
             <Button
               label="Upload and replace data"
               type="primary"
-              clickHandler={() => console.log("upload")}
+              clickHandler={onClickHandler}
             />
           </div>
         </div>

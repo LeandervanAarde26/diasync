@@ -17,6 +17,8 @@ import { getUserReadings, loginUser, obtainUserToken } from "@/api/Calls";
 import { useRouter } from "next/router";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
+import LoadingIndicator from "@/components/Common/LoadingIndicator";
+import Loader from "@/components/Common/Loader";
 const defaultValues = {
   email: "",
   password: "",
@@ -31,10 +33,10 @@ function index() {
   const [passwordLabel, setPasswordLabel] = useState<string>("Password");
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
-  const { setValues } = useContext(UserContext);
+  const { values, setValues } = useContext(UserContext);
   const { dat, setDat } = useContext(ReadingsContext);
   const [isDataReady, setDataReady] = useState<boolean>(false);
-
+  const [loading, setLoading] = useState<boolean>(false);
   // const {dat, setData} = useContext(ReadingsContext);
   const toggleInput = () => {
     togglePassword(setType);
@@ -57,6 +59,7 @@ function index() {
   const handleClick = async () => {
     try {
       //Login and token authentication
+      setLoading(prev => !prev)
       const user = await loginUser({ email, password });
       const { firstname, username, id } = user.user;
       const token =
@@ -90,8 +93,10 @@ function index() {
         window.sessionStorage.setItem("token", token.access);
         router.push("/home");
         setUnAuth(false);
+        setLoading(prev => !prev)
       }
     } catch (error: any) {
+      setLoading(false)
       // Login failed
       console.log(error);
       setUnAuth(true);
@@ -120,95 +125,100 @@ function index() {
       {/* Right Container */}
       <div className="bg-csblack h-screen w-full sm:w-[45%] flex flex-col items-center justify-center p-6 gap-y-12 sm: gap-y-8">
         <Image src={logo} height={150} alt="Logo" />
-        <h3 className="text-[20pt] sm:text-[28pt]">{data.login}</h3>
-
-        {unauth ? (
-          <p className={`text-csDanger`}>
-            Invalid Credentials, please log in with your account details or
-            contact support.
-          </p>
-        ) : null}
-        <div className="flex flex-col gap-y-4 w-full sm:w-[60%]">
-          <Input
-            err={emailErr}
-            width="100%"
-            label={emailLabel}
-            blur={handleBlur(
-              "email",
-              setEmailLabel,
-              emailErr,
-              "Email",
-              "Invalid email"
-            )}
-            name="email"
-            change={handleChange(setEmailErr)}
-            type="text"
-            placeholder="eg. John@Doe.com"
-            icon={
-              <MdPerson4
-                key="person-icon"
-                className="text-cspurple"
-                fontSize={22}
+        {loading ? null  : <h3 className="text-[20pt] sm:text-[28pt]">{data.login}</h3>}
+        {loading ? (
+          <Loader msg={`Loading ${values.name}'s data...`} />
+        ) : (
+          <>
+            {unauth ? (
+              <p className={`text-csDanger`}>
+                Invalid Credentials, please log in with your account details or
+                contact support.
+              </p>
+            ) : null}
+            <div className="flex flex-col gap-y-4 w-full sm:w-[60%]">
+              <Input
+                err={emailErr}
+                width="100%"
+                label={emailLabel}
+                blur={handleBlur(
+                  "email",
+                  setEmailLabel,
+                  emailErr,
+                  "Email",
+                  "Invalid email"
+                )}
+                name="email"
+                change={handleChange(setEmailErr)}
+                type="text"
+                placeholder="eg. John@Doe.com"
+                icon={
+                  <MdPerson4
+                    key="person-icon"
+                    className="text-cspurple"
+                    fontSize={22}
+                  />
+                }
+                value={email}
               />
-            }
-            value={email}
-          />
 
-          <Input
-            err={passwordErr}
-            change={handleChange(setPasswordErr)}
-            label={passwordLabel}
-            blur={handleBlur(
-              "password",
-              setPasswordLabel,
-              passwordErr,
-              "Password",
-              "Passwords must contain 8 characters, 1 lowercase, 1 uppercase and a special character"
-            )}
-            width="100%"
-            name="password"
-            type={type ? "password" : "text"}
-            placeholder="eg. P@$$W0Rd54"
-            value={password}
-            icon={
-              <MdKey
-                key="password-icon"
-                className="text-cspurple"
-                fontSize={22}
-                onClick={toggleInput}
+              <Input
+                err={passwordErr}
+                change={handleChange(setPasswordErr)}
+                label={passwordLabel}
+                blur={handleBlur(
+                  "password",
+                  setPasswordLabel,
+                  passwordErr,
+                  "Password",
+                  "Passwords must contain 8 characters, 1 lowercase, 1 uppercase and a special character"
+                )}
+                width="100%"
+                name="password"
+                type={type ? "password" : "text"}
+                placeholder="eg. P@$$W0Rd54"
+                value={password}
+                icon={
+                  <MdKey
+                    key="password-icon"
+                    className="text-cspurple"
+                    fontSize={22}
+                    onClick={toggleInput}
+                  />
+                }
               />
-            }
-          />
 
-          <div className="flex items-center justify-center">
-            <Button
-              label="Log into my account"
-              type="primary"
-              clickHandler={handleClick}
-            />
-          </div>
-          {/* Container to center the button */}
-          <span className="text-cswhite text-center ">
-            Forgot your password?
-          </span>
-          <div className="flex items-center">
-            <hr className="flex-grow bg-cswhite h-0.5" />
-            <span className="text-cswhite mx-2">Or</span>
-            <hr className="flex-grow bg-cswhite h-0.5" />
-          </div>
+              <div className="flex items-center justify-center">
+                <Button
+                  label="Log into my account"
+                  type="primary"
+                  clickHandler={handleClick}
+                />
+              </div>
+              {/* Container to center the button */}
+              <span className="text-cswhite text-center ">
+                Forgot your password?
+              </span>
+              <div className="flex items-center">
+                <hr className="flex-grow bg-cswhite h-0.5" />
+                <span className="text-cswhite mx-2">Or</span>
+                <hr className="flex-grow bg-cswhite h-0.5" />
+              </div>
 
-          <div className="flex items-center justify-center">
-            <Link href="/Register">
-              <Button
-                label="Register a new account"
-                type="outline"
-                clickHandler={() => {
-                  console.log("implement this function");
-                }}
-              />
-            </Link>
-          </div>
-        </div>
+              <div className="flex items-center justify-center">
+                <Link href="/Register">
+                  <Button
+                    label="Register a new account"
+                    type="outline"
+                    clickHandler={() => {
+                      console.log("implement this function");
+                    }}
+                  />
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
         {/* Inner container for inputs */}
       </div>
       {/* Left container */}

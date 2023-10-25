@@ -127,5 +127,34 @@ export const getComplications = async (id: number) => {
 
   return request;
 };
+
+export const uploadNewData = async (id: number, data: any) => {
+  let requestURL = `${url}uploadData/?userid=${id}`;
+  // console.log(request);
+  console.log(requestURL);
+  let request = await axios.post(
+    requestURL,
+    JSON.stringify({  
+     data
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+   .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log("failed err " + err);
+      return null;
+    });
+
+
+
+  return request;
+};
 // Re1nH@rdt
 //R1a@n432

@@ -39,6 +39,8 @@ const config: Config = {
       csgreen: "#A6E2B8",
       csChartBlue: "#45D0EE",
       csMint: "#87DDDE",
+      csGray: '#DEDEE0',
+      darkGray: '#646464'
     },
     extend: {
       backgroundImage: {

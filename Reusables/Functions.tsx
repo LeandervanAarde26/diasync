@@ -96,3 +96,15 @@ export const updateLabels = (
 interface TokenData {
   userId: string; 
 }
+
+export const timeToSecondsConversion = (time: string) => {
+  const [hours, minutes, seconds] = time.split(':');
+  const totalSeconds  = (+hours) * 60 * 60 + (+minutes) *60 + (+seconds)
+  console.log(totalSeconds)
+  return totalSeconds;
+}
+
+export const getMonthName = (date: any) => {
+  return date.toLocaleString('default', { month: 'long' });
+}
+

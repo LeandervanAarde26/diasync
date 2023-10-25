@@ -12,8 +12,7 @@ function Input({
   name,
   value,
   change,
-  blur
-  
+  blur,
 }: // Capture any additional props
 InputType) {
   return (
