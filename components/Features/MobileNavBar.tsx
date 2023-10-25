@@ -1,17 +1,17 @@
-
 import { MdHouse, MdReadMore, MdOutlinePoll, MdLogout } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ReadingsContext } from "@/store/Readings.Context";
-import {useContext} from 'react';
+import { useContext } from "react";
+import { UserContext } from "@/store/userContext.Context";
 function MobileNavBar() {
   const router = useRouter();
-  const {clearDat} = useContext(ReadingsContext)
-
+  const { clearDat } = useContext(ReadingsContext);
+  const { clearValues } = useContext(UserContext);
   const logout = () => {
     clearDat();
+    clearValues();
     router.push("/");
-
   };
 
   return (

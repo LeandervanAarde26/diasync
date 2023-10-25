@@ -19,6 +19,7 @@ interface UserContext {
     stateUpdater: (prevState: UserContextType) => UserContextType,
     action?: any
   ) => void;
+  clearValues: () => void;
 }
 
 const defaults: UserContextType = {
@@ -34,6 +35,7 @@ const defaults: UserContextType = {
 export const UserContext = createContext<UserContext>({
   values: defaults,
   setValues: () => {},
+  clearValues: () => {}
 });
 
 export const UserContextProvider = ({ children }: any) => {
@@ -47,9 +49,12 @@ export const UserContextProvider = ({ children }: any) => {
     // console.log(values);
   };
 
+  const clearValues = (() => {setVals(defaults)});
+
   const contextValue: UserContext = {
     values: values,
     setValues,
+    clearValues
   };
 
   return (
