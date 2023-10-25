@@ -18,7 +18,7 @@ const Doughnuts = ({low, stable, high}: BloodSugarDoughnutType) => {
         ],
         labels: ["Low", "Stable", "High"],
       }}
-      height={100} 
+    
     />
   );
 };

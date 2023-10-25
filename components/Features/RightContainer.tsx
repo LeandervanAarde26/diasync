@@ -2,6 +2,8 @@ import Image from "next/image";
 import shapes from "../../assets/Login&registerShapes.png";
 import { MdFormatAlignRight, MdScale } from "react-icons/md";
 import image from "../../assets/tester.png";
+import male from '../../assets/male.jpg';
+import woman from '../../assets/woman.png';
 import { UserContext } from "@/store/userContext.Context";
 import { useContext } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
@@ -32,15 +34,14 @@ function RightContainer() {
 
         <div className="w-[120px] h-[120px] bg-cspurple rounded-full absolute top-[20%] overflow-hidden flex object-center object-contain ">
           <Image
-            src={image}
+            src={values.sex == 'Male' ? male : woman}
             alt="Shapes"
             style={{ width: "100%" }}
             className="object-cover"
           />
         </div>
 
-        <p className="relative top-20  z-10">{values.name}</p>
-        <p className="relative top-20  z-10">{values.sex}</p>
+        <p className="relative top-20  z-10"><b>{values.name}</b></p>
         <p className="relative top-20  z-10">{values.type}</p>
         <p className="relative top-20  z-10">{values.email}</p>
       </div>

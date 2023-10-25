@@ -55,7 +55,7 @@ function HomeChart() {
         </>
       ) : (
         <div className="flex flex-row gap-x-[5px] items-center">
-            <Loader msg="Trying to fetch data..."/>
+          <Loader msg="Trying to fetch data..." />
         </div>
       )}
     </div>

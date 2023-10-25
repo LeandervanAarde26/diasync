@@ -1,4 +1,4 @@
-import { BloodSugarDoughnutType } from "@/components/Common/Doughnut";
+import Doughnuts, { BloodSugarDoughnutType } from "@/components/Common/Doughnut";
 import Scatters from "@/components/Common/Scatter";
 import { BloodsugarType } from "@/types/BloodSugarType";
 import { ReadingGroupType } from "@/types/ReadingGroupType";
@@ -13,6 +13,7 @@ import SuggestionCard from "@/components/Common/SuggestionCard";
 import { MdSend, MdChatBubble } from "react-icons/md";
 import BotResponse from "@/components/Common/BotResponse";
 import HumanMessage from "@/components/Common/HumanMessage";
+import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
 
 function Analyse() {
   const [groupedReadings, setGroupedReadings] = useState<
@@ -25,6 +26,8 @@ function Analyse() {
   const prevMonth = getMonthName(
     new Date(now.getFullYear(), now.getMonth() - 1)
   );
+  const currYear = now.getFullYear();
+  console.log(currYear)
 
   const fakeFoodContent = [
     {
@@ -67,73 +70,42 @@ function Analyse() {
           <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4">
             <div className=" h-[100%] w-[50%] rounded-2xl bg-csGray overflow-hidden flex flex-row">
               <div className="h-[100%] w-[45%] p-3">
-                <h4 className="text-csblack">{prevMonth}: </h4>
+                <h4 className="text-csblack"><b>{prevMonth + ' ' + currYear}</b> </h4>
                 <div className="flex flex-col items-center justify-center h-full gap-y-3">
                   <h5 className="text-csblack">7%</h5>
                   <p>unstable BloodSugar</p>
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"High"}
-                    color={"csDanger"}
-                  />
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"Stable"}
-                    color={"csgreen"}
-                  />
-
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"Low"}
-                    color={"csyellow"}
-                  />
                 </div>
+              </div>
+
+              <div className="h-[100%] w-[55%] p-3 flex flex-col justify-center items-center p-14">
+                  <Doughnuts
+                    low = {7}
+                    stable={50}
+                    high={47}
+                  />
               </div>
             </div>
 
             <div className=" h-[100%] w-[50%] rounded-2xl bg-csGray overflow-hidden flex flex-row">
               <div className="h-[100%] w-[45%]  p-3">
-                <h4 className="text-csblack">{currMonth}: </h4>
+                <h4 className="text-csblack"><b>{currMonth + ' ' + currYear }</b> </h4>
                 <div className="flex flex-col items-center justify-center h-full gap-y-3">
                   <h5 className="text-csblack">7%</h5>
                   <p>unstable BloodSugar</p>
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"High"}
-                    color={"csDanger"}
-                  />
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"Stable"}
-                    color={"csgreen"}
-                  />
-
-                  <ChartKey
-                    borderColor="csGray"
-                    paddingH="px-3"
-                    paddingV=""
-                    texColor="csblack"
-                    title={"Low"}
-                    color={"csyellow"}
-                  />
+      
                 </div>
               </div>
+
+              <div className="h-[100%] w-[55%] p-3 flex flex-col justify-center items-center  p-14">
+                  <Doughnuts
+                    low = {7}
+                    stable={50}
+                    high={47}
+                  />
+              </div>
             </div>
+
+            
           </div>
 
           <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4 ">

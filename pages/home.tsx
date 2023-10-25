@@ -48,13 +48,16 @@ export default function Home() {
     try {
       const AiIntegration = await getComplications(values.id);
       //Ai sometimes returns incosistent data, by removing all the strings that are not in the object, we can get a consistent object that can be converted to JSON data.
-      const jsonStart = AiIntegration.Response.indexOf('{');
-      const jsonEnd = AiIntegration.Response.lastIndexOf('}');
-      const jsonResponse = AiIntegration.Response.substring(jsonStart, jsonEnd + 1);
+      const jsonStart = AiIntegration.Response.indexOf("{");
+      const jsonEnd = AiIntegration.Response.lastIndexOf("}");
+      const jsonResponse = AiIntegration.Response.substring(
+        jsonStart,
+        jsonEnd + 1
+      );
       const parsedData = JSON.parse(jsonResponse);
       setAi(parsedData);
     } catch (error) {
-      console.error('Error fetching or parsing complications:', error);
+      console.error("Error fetching or parsing complications:", error);
     }
   };
 
@@ -95,9 +98,9 @@ export default function Home() {
   useEffect(() => {
     fetchComplications();
 
-    console.log('====================================');
-    console.log('User Readings: \n:', dat);
-    console.log('====================================');
+    console.log("====================================");
+    console.log("User Readings: \n:", dat);
+    console.log("====================================");
   }, [values.id]);
 
   return (
@@ -131,7 +134,7 @@ export default function Home() {
             ))
           ) : (
             <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
-                  <Loader msg={`Analysing ${values.name}'s data`}/>
+              <Loader msg={`Analysing ${values.name}'s data`} />
             </div>
           )}
         </div>
