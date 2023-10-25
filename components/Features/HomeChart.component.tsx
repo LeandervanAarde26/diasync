@@ -5,7 +5,7 @@ import LineChart from "./HomeLineChart";
 import { useContext } from "react";
 
 import { ReadingsContext } from "@/store/Readings.Context";
-import LoadingIndicator from "../Common/LoadingIndicator";
+import Loader from "../Common/Loader";
 
 function HomeChart() {
   const { dat } = useContext(ReadingsContext);
@@ -55,7 +55,7 @@ function HomeChart() {
         </>
       ) : (
         <div className="flex flex-row gap-x-[5px] items-center">
-            <LoadingIndicator/>
+            <Loader msg="Trying to fetch data..."/>
         </div>
       )}
     </div>

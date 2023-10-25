@@ -12,7 +12,7 @@ import {
 } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
-import LoadingIndicator from "@/components/Common/LoadingIndicator";
+import Loader from "@/components/Common/Loader";
 
 type complication = {
   heading: string;
@@ -131,7 +131,7 @@ export default function Home() {
             ))
           ) : (
             <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
-                   <LoadingIndicator/>
+                  <Loader msg={`Analysing ${values.name}'s data`}/>
             </div>
           )}
         </div>

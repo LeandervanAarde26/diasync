@@ -17,7 +17,6 @@ import { getUserReadings, loginUser, obtainUserToken } from "@/api/Calls";
 import { useRouter } from "next/router";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
-import LoadingIndicator from "@/components/Common/LoadingIndicator";
 import Loader from "@/components/Common/Loader";
 const defaultValues = {
   email: "",
