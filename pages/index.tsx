@@ -114,7 +114,7 @@ const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
           }
       })
 
-        setComplications((prevValues: any) => []);
+        setComplications((prevValues: any) => [...prevValues, AiComplications]);
         window.sessionStorage.setItem("token", token.access);
         router.push("/home");
 

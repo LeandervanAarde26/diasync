@@ -1,5 +1,5 @@
 export type ComplicationsCardType = {
     heading: string;
-    body: string;
-    url: string;
+    description: string;
+    link: string;
 }

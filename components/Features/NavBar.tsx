@@ -6,15 +6,20 @@ import Link from "next/link";
 import { ReadingsContext } from "@/store/Readings.Context";
 import { useContext } from "react";
 import { UserContext } from "@/store/userContext.Context";
-
+import { AnalysisContext } from "@/store/Analyse.Context";
+import { ComplicationsContext } from "@/store/ComplicationsContext";
 function NavBar() {
   const router = useRouter();
   const { clearDat } = useContext(ReadingsContext);
   const {clearValues} = useContext(UserContext);
+  const {clearAnalysis} = useContext(AnalysisContext)
+  const {clearComplications} = useContext(ComplicationsContext)
 
   const logout = () => {
     clearDat();
     clearValues();
+    clearAnalysis();
+    clearComplications();
     router.push("/");
   };
 

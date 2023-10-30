@@ -1,9 +1,22 @@
 import { Provider, createContext, useContext, useState } from "react";
 
-interface ComplicationsContextType {
+type ComplicationType = {
   heading: string;
   body: string;
   url: string;
+}
+
+type DistrbutionType = {
+  stable: number;
+  high: number;
+  low: number;
+}
+
+
+interface ComplicationsContextType{
+  complications: ComplicationType[];
+  blood_sugar_distribution: DistrbutionType
+  blood_sugar_status: string;
 }
 
 interface ComplicationsContext {

@@ -14,7 +14,7 @@ import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
 import Loader from "@/components/Common/Loader";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
-
+import { AnalysisContext } from "@/store/Analyse.Context";
 type complication = {
   heading: string;
   description: string;
@@ -29,18 +29,29 @@ type homePageDataType = {
 
 export default function Home() {
   const router = useRouter();
-  const { values, setValues } = useContext(UserContext);
-  const { dat , clearDat} = useContext(ReadingsContext);
-  const {complications, setComplications} = useContext(ComplicationsContext)
+  const { values, setValues, clearValues } = useContext(UserContext);
+  const { dat, clearDat } = useContext(ReadingsContext);
+  const { complications, clearComplications } =
+    useContext(ComplicationsContext);
+  const { clearAnalysis } = useContext(AnalysisContext);
+
   const [ai, setAi] = useState<homePageDataType>({});
   const validateToken = async (token: string) => {
     try {
       const verifiedToken = await verifyUserToken(token);
       if (!verifiedToken) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
         router.push("/");
       }
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
         router.push("/");
       }
     }
@@ -92,15 +103,18 @@ export default function Home() {
           console.log(error);
         }
       } else {
-        router.push("/");
+        clearAnalysis();
         clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
       }
     }
   }, []);
 
   useEffect(() => {
     // fetchComplications();
-      console.log("comps", complications)
+    console.log("comps", complications);
     console.log("====================================");
     console.log("User Readings: \n:", dat);
     console.log("====================================");
@@ -110,30 +124,27 @@ export default function Home() {
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
       <HomeDoughnutChart
-        low={ai.blood_sugar_distribution?.low || 0}
-        stable={ai.blood_sugar_distribution?.stable || 0}
-        high={ai.blood_sugar_distribution?.high || 0}
+        low={complications[0].blood_sugar_distribution?.low || 0}
+        stable={complications[0].blood_sugar_distribution?.stable || 0}
+        high={complications[0].blood_sugar_distribution?.high || 0}
         show={false}
       />
 
       <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
         <HomeDoughnutChart
-          low={ai.blood_sugar_distribution?.low || 0}
-          stable={ai.blood_sugar_distribution?.stable || 0}
-          high={ai.blood_sugar_distribution?.high || 0}
+          low={complications[0].blood_sugar_distribution?.low || 0}
+          stable={complications[0].blood_sugar_distribution?.stable || 0}
+          high={complications[0].blood_sugar_distribution?.high || 0}
           show={true}
         />
 
         <div className="flex flex-col w-[100%] md:w-[35%] gap-y-[10px] overflow-scroll">
           <h5 className="text-m">{data.unstableHeading}</h5>
 
-          {ai.complications ? (
-            ai.complications.map((complication) => (
-              <ComplicationsCard
-                heading={complication.heading}
-                body={complication.description}
-                url={complication.link}
-              />
+          {complications ? (
+          
+            complications[0].complications.map((complication) => (
+              <ComplicationsCard {...complication} />
             ))
           ) : (
             <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
