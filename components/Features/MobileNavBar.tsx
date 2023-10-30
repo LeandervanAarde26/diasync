@@ -12,12 +12,13 @@ function MobileNavBar() {
   const { clearValues } = useContext(UserContext);
   const {clearAnalysis} = useContext(AnalysisContext)
   const {clearComplications} = useContext(ComplicationsContext)
-  const logout = () => {
+
+  const logout = async () => {
+    await router.push("/");
     clearDat();
     clearValues();
     clearAnalysis();
     clearComplications();
-    router.push("/");
   };
 
   return (

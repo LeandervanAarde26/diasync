@@ -123,26 +123,29 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
-      <HomeDoughnutChart
-        low={complications[0].blood_sugar_distribution?.low || 0}
-        stable={complications[0].blood_sugar_distribution?.stable || 0}
-        high={complications[0].blood_sugar_distribution?.high || 0}
-        show={false}
-      />
-
-      <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
+      {complications[0].blood_sugar_distribution?.low ? (
         <HomeDoughnutChart
           low={complications[0].blood_sugar_distribution?.low || 0}
           stable={complications[0].blood_sugar_distribution?.stable || 0}
           high={complications[0].blood_sugar_distribution?.high || 0}
-          show={true}
+          show={false}
         />
+      ) : null}
+
+      <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
+        {complications[0].blood_sugar_distribution?.low ? (
+          <HomeDoughnutChart
+            low={complications[0].blood_sugar_distribution?.low || 0}
+            stable={complications[0].blood_sugar_distribution?.stable || 0}
+            high={complications[0].blood_sugar_distribution?.high || 0}
+            show={true}
+          />
+        ) : null}
 
         <div className="flex flex-col w-[100%] md:w-[35%] gap-y-[10px] overflow-scroll">
           <h5 className="text-m">{data.unstableHeading}</h5>
 
           {complications ? (
-          
             complications[0].complications.map((complication) => (
               <ComplicationsCard {...complication} />
             ))
