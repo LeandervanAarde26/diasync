@@ -13,6 +13,7 @@ import {
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
 import Loader from "@/components/Common/Loader";
+import { ComplicationsContext } from "@/store/ComplicationsContext";
 
 type complication = {
   heading: string;
@@ -29,7 +30,8 @@ type homePageDataType = {
 export default function Home() {
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
-  const { dat } = useContext(ReadingsContext);
+  const { dat , clearDat} = useContext(ReadingsContext);
+  const {complications, setComplications} = useContext(ComplicationsContext)
   const [ai, setAi] = useState<homePageDataType>({});
   const validateToken = async (token: string) => {
     try {
@@ -44,22 +46,22 @@ export default function Home() {
     }
   };
 
-  const fetchComplications = async () => {
-    try {
-      const AiIntegration = await getComplications(values.id);
-      //Ai sometimes returns incosistent data, by removing all the strings that are not in the object, we can get a consistent object that can be converted to JSON data.
-      const jsonStart = AiIntegration.Response.indexOf("{");
-      const jsonEnd = AiIntegration.Response.lastIndexOf("}");
-      const jsonResponse = AiIntegration.Response.substring(
-        jsonStart,
-        jsonEnd + 1
-      );
-      const parsedData = JSON.parse(jsonResponse);
-      setAi(parsedData);
-    } catch (error) {
-      console.error("Error fetching or parsing complications:", error);
-    }
-  };
+  // const fetchComplications = async () => {
+  //   try {
+  //     const AiIntegration = await getComplications(values.id);
+  //     //Ai sometimes returns incosistent data, by removing all the strings that are not in the object, we can get a consistent object that can be converted to JSON data.
+  //     const jsonStart = AiIntegration.Response.indexOf("{");
+  //     const jsonEnd = AiIntegration.Response.lastIndexOf("}");
+  //     const jsonResponse = AiIntegration.Response.substring(
+  //       jsonStart,
+  //       jsonEnd + 1
+  //     );
+  //     const parsedData = JSON.parse(jsonResponse);
+  //     setAi(parsedData);
+  //   } catch (error) {
+  //     console.error("Error fetching or parsing complications:", error);
+  //   }
+  // };
 
   // Replace this , this could possibly happen on the login or in the context.
   const fetchUserData = async () => {
@@ -91,13 +93,14 @@ export default function Home() {
         }
       } else {
         router.push("/");
+        clearDat();
       }
     }
   }, []);
 
   useEffect(() => {
-    fetchComplications();
-
+    // fetchComplications();
+      console.log("comps", complications)
     console.log("====================================");
     console.log("User Readings: \n:", dat);
     console.log("====================================");

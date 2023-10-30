@@ -10,13 +10,23 @@ import data from "@/static/Auth.json";
 
 import {
   captureValues,
+  getDataAndParseJson,
+  getMonthName,
   togglePassword,
   updateLabels,
 } from "@/Reusables/Functions";
-import { getUserReadings, loginUser, obtainUserToken } from "@/api/Calls";
+import {
+  getComplications,
+  getDataAnalysed,
+  getUserReadings,
+  loginUser,
+  obtainUserToken,
+} from "@/api/Calls";
 import { useRouter } from "next/router";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
+import { ComplicationsContext } from "@/store/ComplicationsContext";
+import { AnalysisContext } from "@/store/Analyse.Context";
 import Loader from "@/components/Common/Loader";
 const defaultValues = {
   email: "",
@@ -33,13 +43,18 @@ function index() {
   const [unauth, setUnAuth] = useState(false);
   const router = useRouter();
   const { values, setValues } = useContext(UserContext);
-  const { dat, setDat } = useContext(ReadingsContext);
+  const { setComplications } = useContext(ComplicationsContext);
+  const { setAnalysis } = useContext(AnalysisContext);
+  const { setDat } = useContext(ReadingsContext);
   const [isDataReady, setDataReady] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  // const {dat, setData} = useContext(ReadingsContext);
   const toggleInput = () => {
     togglePassword(setType);
   };
+
+  const now = new Date();
+const currMonth = getMonthName(now);
+const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
 
   const handleBlur =
     (
@@ -58,7 +73,7 @@ function index() {
   const handleClick = async () => {
     try {
       //Login and token authentication
-      setLoading(prev => !prev)
+      setLoading((prev) => !prev);
       const user = await loginUser({ email, password });
       const { firstname, username, id } = user.user;
       const token =
@@ -74,7 +89,6 @@ function index() {
         type: "Type 1",
         sex: "Male",
       }));
-
       const userD = await getUserReadings(id);
       console.log(userD);
       const { status, data } = userD;
@@ -87,15 +101,28 @@ function index() {
           time: i.time,
         }));
         setDat((prevValues: any) => [...prevValues, ...useableData]);
-        console.log(dat, "\n", useableData);
+        const AiComplications = await getDataAndParseJson(() =>
+          getComplications(values.id)
+        );
+        const AiAnalysis = await getDataAndParseJson(() =>
+          getDataAnalysed(values.id)
+        );
+        setAnalysis(prevValues => {
+          return {
+            ...prevValues,
+            ...AiAnalysis
+          }
+      })
 
+        setComplications((prevValues: any) => []);
         window.sessionStorage.setItem("token", token.access);
         router.push("/home");
+
         setUnAuth(false);
-        setLoading(prev => !prev)
+        setLoading((prev) => !prev);
       }
     } catch (error: any) {
-      setLoading(false)
+      setLoading(false);
       // Login failed
       console.log(error);
       setUnAuth(true);
@@ -124,7 +151,9 @@ function index() {
       {/* Right Container */}
       <div className="bg-csblack h-screen w-full sm:w-[45%] flex flex-col items-center justify-center p-6 gap-y-12 sm: gap-y-8">
         <Image src={logo} height={150} alt="Logo" />
-        {loading ? null  : <h3 className="text-[20pt] sm:text-[28pt]">{data.login}</h3>}
+        {loading ? null : (
+          <h3 className="text-[20pt] sm:text-[28pt]">{data.login}</h3>
+        )}
         {loading ? (
           <Loader msg={`Loading ${values.name}'s data...`} />
         ) : (

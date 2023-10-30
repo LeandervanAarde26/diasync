@@ -1,32 +1,31 @@
 import Button from "./Button";
 import Image, { StaticImageData } from "next/image";
+import placeHolder from "../../assets/tester.png";
 
 type SuggestionCardType = {
-  image: StaticImageData;
-  url: string;
-  content: string;
-  foodName: string;
+  link: string;
+  description: string;
+  heading: string;
 };
 
-function SuggestionCard({ image, url, content, foodName }: SuggestionCardType) {
+function SuggestionCard({  link, description, heading }: SuggestionCardType) {
   return (
     <div className="w-[45%] h-[84%] bg-grad3 rounded-2xl p-4 flex flex-col justify-center gap-y-4">
       <div className="w-full h-[60px] flex flex-row items-center gap-x-4">
         <div className="w-[60px] h-[60px] bg-cspurple rounded-full  overflow-hidden flex object-center object-contain">
           <Image
-            src={image}
+            src={placeHolder}
             alt="Shapes"
             style={{ width: "100%" }}
             className="object-cover"
           />
         </div>
-
-        <p id="foodName">{foodName}</p>
+        <p id="foodName">{heading}</p>
       </div>
 
-      <p className="text-cswhite">{content}</p>
+      <p className="text-cswhite break-all line-clamp-4">{description}</p>
       <div className="flex flex-row w-1/1 h-fit justify-end">
-        <a href={url} target="_blank">
+        <a href={link} target="_blank">
           <Button
             label="Read more"
             type="secondary"

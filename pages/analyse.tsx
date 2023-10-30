@@ -1,176 +1,130 @@
-import Doughnuts, { BloodSugarDoughnutType } from "@/components/Common/Doughnut";
-import Scatters from "@/components/Common/Scatter";
-import { BloodsugarType } from "@/types/BloodSugarType";
 import { ReadingGroupType } from "@/types/ReadingGroupType";
 import { useState, useEffect, useContext } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
 import { getMonthName } from "@/Reusables/Functions";
-import ChartKey from "@/components/Common/ChartKey";
-import Image from "next/image";
 import placeHolder from "../assets/tester.png";
-import logo from "../assets/icon.png";
 import SuggestionCard from "@/components/Common/SuggestionCard";
-import { MdSend, MdChatBubble } from "react-icons/md";
-import BotResponse from "@/components/Common/BotResponse";
-import HumanMessage from "@/components/Common/HumanMessage";
-import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
+import Chat from "@/components/Features/Chat";
+import MonthlyComparrison from "@/components/Features/MonthlyComparrison";
+import { UserContext } from "@/store/userContext.Context";
+import { getDataAnalysed } from "@/api/Calls";
+import Loader from "@/components/Common/Loader";
+import { AnalysisContext } from "@/store/Analyse.Context";
+import { MonthName } from "@/types/MonthNames";
 
 function Analyse() {
   const [groupedReadings, setGroupedReadings] = useState<
     Record<string, ReadingGroupType>
   >({});
   const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
+  const [ready, setReady] = useState<boolean>(false);
+  const [data, setData] = useState<any>();
+  const { analysis } = useContext(AnalysisContext);
   const { dat } = useContext(ReadingsContext);
+  const { values } = useContext(UserContext);
   const now = new Date();
   const currMonth = getMonthName(now);
   const prevMonth = getMonthName(
     new Date(now.getFullYear(), now.getMonth() - 1)
   );
   const currYear = now.getFullYear();
-  console.log(currYear)
+  console.log(currYear);
 
-  const fakeFoodContent = [
-    {
-      image: placeHolder,
-      url: "http://localhost:3000",
-      content:
-        "This is content just to check the length of the article and so that I can do something here and so that thisd is readable and stuff so much fun",
-      foodName: "Chicken Breasts",
-    },
-    {
-      image: placeHolder,
-      url: "http://localhost:3000",
-      content:
-        "This is content just to check the length of the article and so that I can do something here and so that thisd is readable and stuff so much fun",
-      foodName: "Chicken Breasts",
-    },
-  ];
+  const DataAnalysation = async () => {
+    try {
+      // const AIIntegration = await getDataAnalysed(values.id);
+      // const jsonStart = AIIntegration.Response.indexOf("{");
+      // const jsonEnd = AIIntegration.Response.lastIndexOf("}");
+      // const jsonResponse = AIIntegration.Response.substring(
+      //   jsonStart,
+      //   jsonEnd + 1
+      // );
+      // const parsedData = JSON.parse(jsonResponse);
+      // setData(parsedData);
+      // console.log(parsedData);
+      // console.log(AIIntegration.Response);
+      // // setReady(true);
+    } catch (error) {
+      console.log("Error analysing data", error);
+    }
+  };
 
-  const fakeArticles = [
-    {
-      image: placeHolder,
-      url: "http://localhost:3000",
-      content:
-        "This is content just to check the length of the article and so that I can do something here and so that thisd is readable and stuff so much fun",
-      title: "Chicken Breasts",
-    },
-    {
-      image: placeHolder,
-      url: "http://localhost:3000",
-      content:
-        "This is content just to check the length of the article and so that I can do something here and so that thisd is readable and stuff so much fun",
-      title: "Chicken Breasts",
-    },
-  ];
+  useEffect(() => {
+    console.log("yea buddy");
+    DataAnalysation();
+    console.log(analysis);
+    console.log(analysis.analysisData[currMonth]);
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%]  ">
-      <div className="w-fill h-[100vh] p-5 overflow-scroll">
-        <div className="w-[100%]">
-          <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4">
-            <div className=" h-[100%] w-[50%] rounded-2xl bg-csGray overflow-hidden flex flex-row">
-              <div className="h-[100%] w-[45%] p-3">
-                <h4 className="text-csblack"><b>{prevMonth + ' ' + currYear}</b> </h4>
-                <div className="flex flex-col items-center justify-center h-full gap-y-3">
-                  <h5 className="text-csblack">7%</h5>
-                  <p>unstable BloodSugar</p>
-                </div>
-              </div>
-
-              <div className="h-[100%] w-[55%] p-3 flex flex-col justify-center items-center p-14">
-                  <Doughnuts
-                    low = {7}
-                    stable={50}
-                    high={47}
-                  />
-              </div>
-            </div>
-
-            <div className=" h-[100%] w-[50%] rounded-2xl bg-csGray overflow-hidden flex flex-row">
-              <div className="h-[100%] w-[45%]  p-3">
-                <h4 className="text-csblack"><b>{currMonth + ' ' + currYear }</b> </h4>
-                <div className="flex flex-col items-center justify-center h-full gap-y-3">
-                  <h5 className="text-csblack">7%</h5>
-                  <p>unstable BloodSugar</p>
-      
-                </div>
-              </div>
-
-              <div className="h-[100%] w-[55%] p-3 flex flex-col justify-center items-center  p-14">
-                  <Doughnuts
-                    low = {7}
-                    stable={50}
-                    high={47}
-                  />
-              </div>
-            </div>
-
-            
-          </div>
-
-          <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4 ">
-            <div className=" h-[100%] w-[50%] overflow-hidden flex flex-col">
-              <h5 id="adjustments" className="mb-3">
-                Dietary adjustments based on your glucose trends
-              </h5>
-              <div className="w-[100%] h-[100%] flex flex-row gap-x-5">
-                {fakeArticles.map((i) => (
-                  <SuggestionCard {...i} foodName={i.title} />
-                ))}
-              </div>
-            </div>
-
-            <div className=" h-[100%] w-[50%] overflow-hidden flex flex-col">
-              <h5 id="adjustments" className="mb-3 md:ml-[50px]">
-                Dietary adjustments based on your glucose trends
-              </h5>
-              <div className="w-[100%] h-[100%] flex flex-row gap-x-5 justify-end">
-                {fakeFoodContent.map((i) => (
-                  <SuggestionCard {...i} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className=" w-[100%] h-[60vh] flex flex-col p-3 gap-x-4 bg-grad3 rounded-2xl p-4">
-            <div className="flex flex-col w-[40%] mb-3">
-              <h5>Chat and Observations</h5>
-              <hr className="text-cswhite" />
-            </div>
-
-            <div className="flex flex-col w-[100%] h-[80%] p-3 overflow-scroll gap-y-5">
-              {Array(5)
-                .fill(null)
-                .map((_, index) =>
-                  index % 2 == 0 ? <BotResponse /> : <HumanMessage />
-                )}
-            </div>
-            <div className="w-[100%] flex flex-row  h-[60px] border-cswhite border-2 rounded-full overflow-hidden items-center justify-center">
-              <div className="w-[5%] h-[100%] flex justify-center items-center">
-                <MdChatBubble
-                  key="Send icon"
-                  className="text-cswhite"
-                  fontSize={26}
+      {!analysis ? (
+        <div className="h-screen flex flex-col justify-center items-center">
+          <Loader
+            msg={`Hang tight ${values.name}, we're analysing your data!`}
+          />
+        </div>
+      ) : (
+        <div className="w-fill h-[100vh] p-5 overflow-scroll">
+          <div className="w-[100%]">
+            <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4">
+              {analysis.analysisData[prevMonth as MonthName] == null ? null : (
+                <MonthlyComparrison
+                  low={analysis.analysisData[prevMonth as MonthName]?.low | 0}
+                  stable={
+                    analysis.analysisData[prevMonth as MonthName]?.stable | 0
+                  }
+                  high={analysis.analysisData[prevMonth as MonthName]?.high | 0}
+                  unstable={
+                    (analysis.analysisData[prevMonth as MonthName]?.low +
+                      analysis.analysisData[prevMonth]?.high) |
+                    0
+                  }
+                  month={prevMonth}
+                  year={currYear}
                 />
-              </div>
+              )}
 
-              <input
-                type="text"
-                className="w-[90%] h-[100%]  bg-grad3  p-3 text-cswhite"
-                placeholder="Type your message..."
+              <MonthlyComparrison
+                low={analysis.analysisData[currMonth as MonthName].low}
+                stable={analysis.analysisData[currMonth as MonthName].stable}
+                high={analysis.analysisData[currMonth as MonthName].high}
+                unstable={
+                  analysis.analysisData[currMonth as MonthName].low +
+                  analysis.analysisData[currMonth].high
+                }
+                month={currMonth}
+                year={currYear}
               />
+            </div>
 
-              <div className="w-[5%] h-[100%] bg-csblue flex justify-center items-center  hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300">
-                <MdSend
-                  key="Send icon"
-                  className="text-cswhite"
-                  fontSize={26}
-                />
+            <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4 ">
+              <div className=" h-[100%] w-[50%] overflow-hidden flex flex-col">
+                <h5 id="adjustments" className="mb-3">
+                  Articles based on your glucose trends
+                </h5>
+                <div className="w-[100%] h-[100%] flex flex-row gap-x-5">
+                  {analysis.AnalysisSuggestions.map((i: any) => (
+                    <SuggestionCard {...i} />
+                  ))}
+                </div>
+              </div>
+
+              <div className=" h-[100%] w-[50%] overflow-hidden flex flex-col">
+                <h5 id="adjustments" className="mb-3 md:ml-[50px]">
+                  Dietary adjustments based on your glucose trends
+                </h5>
+                <div className="w-[100%] h-[100%] flex flex-row gap-x-5 justify-end">
+                  {analysis.DietarySuggestions.map((i: any) => (
+                    <SuggestionCard {...i} />
+                  ))}
+                </div>
               </div>
             </div>
+            <Chat observation={analysis.Observation} />
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

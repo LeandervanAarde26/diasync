@@ -4,6 +4,7 @@ import {
   passwordPattern,
 } from "@/Reusables/Variables";
 import { verifyUserToken } from "@/api/Calls";
+import { MonthName } from "@/types/MonthNames";
 
 
 
@@ -105,6 +106,23 @@ export const timeToSecondsConversion = (time: string) => {
 }
 
 export const getMonthName = (date: any) => {
-  return date.toLocaleString('default', { month: 'long' });
+  return date.toLocaleString('default', { month: 'long' }) as MonthName;
+}
+
+export const getDataAndParseJson = async (get: () => Promise<any>) => {
+  const data = await get();
+  const jsonStart = data.Response.indexOf("{");
+  const jsonEnd = data.Response.lastIndexOf("}");
+  const jsonResponse = data.Response.substring(
+    jsonStart,
+    jsonEnd + 1
+  );
+  console.log('====================================');
+  console.log(jsonResponse);
+  console.log(data.Response);
+  console.log('====================================');
+  const parsedData = JSON.parse(jsonResponse);
+
+  return parsedData;
 }
 
