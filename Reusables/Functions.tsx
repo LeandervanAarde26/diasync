@@ -6,9 +6,6 @@ import {
 import { verifyUserToken } from "@/api/Calls";
 import { MonthName } from "@/types/MonthNames";
 
-
-
-
 export const togglePassword = (
   setState: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -48,14 +45,13 @@ const validateInputs = (
       break;
 
     case "weight":
-     
-      if (+(value) < 2 || +(value) > 635) {
+      if (+value < 2 || +value > 635) {
         setState(true);
       } else {
         setState(false);
       }
     case "height":
-      if (+(value) < 45 || value > +(280)) {
+      if (+value < 45 || value > +280) {
         setState(true);
       } else {
         setState(false);
@@ -95,34 +91,30 @@ export const updateLabels = (
 };
 
 interface TokenData {
-  userId: string; 
+  userId: string;
 }
 
 export const timeToSecondsConversion = (time: string) => {
-  const [hours, minutes, seconds] = time.split(':');
-  const totalSeconds  = (+hours) * 60 * 60 + (+minutes) *60 + (+seconds)
-  console.log(totalSeconds)
+  const [hours, minutes, seconds] = time.split(":");
+  const totalSeconds = +hours * 60 * 60 + +minutes * 60 + +seconds;
+  console.log(totalSeconds);
   return totalSeconds;
-}
+};
 
 export const getMonthName = (date: any) => {
-  return date.toLocaleString('default', { month: 'long' }) as MonthName;
-}
+  return date.toLocaleString("default", { month: "long" }) as MonthName;
+};
 
 export const getDataAndParseJson = async (get: () => Promise<any>) => {
   const data = await get();
   const jsonStart = data.Response.indexOf("{");
   const jsonEnd = data.Response.lastIndexOf("}");
-  const jsonResponse = data.Response.substring(
-    jsonStart,
-    jsonEnd + 1
-  );
-  console.log('====================================');
+  const jsonResponse = data.Response.substring(jsonStart, jsonEnd + 1);
+  console.log("====================================");
   console.log(jsonResponse);
   console.log(data.Response);
-  console.log('====================================');
+  console.log("====================================");
   const parsedData = JSON.parse(jsonResponse);
 
   return parsedData;
-}
-
+};

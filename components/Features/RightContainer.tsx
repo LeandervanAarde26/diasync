@@ -47,18 +47,18 @@ function RightContainer() {
       </div>
 
       <div className="bg-cswhite w-[100%] h-[65%] rounded-2xl overflow-hidden p-5">
-        <h5 className="text-csblack">This Month</h5>
+        <h5 className="text-csblack text-xl text-center">This Month</h5>
         <div className="w-full flex flex-col items-center">
           <div className="p-5">
             <div className="flex flex-row items-center justify-center ">
               <MdFormatAlignRight
                 key="person-icon"
                 className="text-cspurple"
-                fontSize={27}
+                fontSize={20}
               />
               <span className="text-csblack text-lg">Height</span>
             </div>
-            <span className="text-csblue text-2xl">
+            <span className="text-csblue text-lg">
               <b>{values.height}cm</b>
             </span>
           </div>
@@ -68,11 +68,11 @@ function RightContainer() {
               <MdScale
                 key="person-icon"
                 className="text-cspurple"
-                fontSize={27}
+                fontSize={20}
               />
               <span className="text-csblack text-lg">Weight</span>
             </div>
-            <span className="text-csblue text-2xl">
+            <span className="text-csblue text-lg">
               <b>{values.weight}Kg</b>
             </span>
           </div>
@@ -80,7 +80,7 @@ function RightContainer() {
           <div className="p-5">
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Predicted HBA1C</span>
-              <span className="text-csblue text-xl">
+              <span className="text-csblue text-lg">
                 <b>{estimatedHBA1c() + "%"}</b>
               </span>
             </div>
@@ -89,7 +89,7 @@ function RightContainer() {
           <div className="p-5">
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Glucose tests </span>
-              <span className="text-csblue text-xl">
+              <span className="text-csblue text-lg">
                 <b>{dat.length}</b>
               </span>
             </div>
@@ -98,7 +98,7 @@ function RightContainer() {
           <div className="p-5">
             <div className="flex flex-col items-center justify-center">
               <span className="text-csblack text-lg">Average Glucose</span>
-              <span className="text-csblue text-xl">
+              <span className="text-csblue text-lg">
                 <b>{averageBloodSugar.toFixed(1)}</b>
               </span>
             </div>

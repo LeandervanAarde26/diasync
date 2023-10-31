@@ -7,11 +7,18 @@ import Dropzone from "@/components/Features/Dropzone";
 import Button from "@/components/Common/Button";
 import ChartKey from "@/components/Common/ChartKey";
 import { timeToSecondsConversion } from "@/Reusables/Functions";
-import { getUserReadings, uploadNewData } from "@/api/Calls";
+import { getUserReadings, uploadNewData, verifyUserToken } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
+import { ComplicationsContext } from "@/store/ComplicationsContext";
+import { AnalysisContext } from "@/store/Analyse.Context";
+import { useRouter } from "next/router";
 
 function Readings() {
   const { dat, setDat, clearDat } = useContext(ReadingsContext);
+  const router = useRouter();
+  const {clearComplications} = useContext(ComplicationsContext)
+  const {clearValues} = useContext(UserContext);
+  const {clearAnalysis} = useContext(AnalysisContext);
   const {values} = useContext(UserContext)
   const [groupedReadings, setGroupedReadings] = useState< Record<string, ReadingGroupType>>({});
   const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
@@ -29,6 +36,7 @@ function Readings() {
     low:
       Math.round((lowBloodSugars.length / dat.length) * 100).toString() + "%",
   });
+  
 
   const groupedData = () => {
 
@@ -101,6 +109,43 @@ function Readings() {
   useEffect(() => {
     groupedData();
   }, [dat]);
+
+  const validateToken = async (token: string) => {
+    try {
+      const verifiedToken = await verifyUserToken(token);
+      if (!verifiedToken) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let userToken = window.sessionStorage.getItem("token");
+      if (userToken) {
+        const tokenState = validateToken(userToken);
+      } else {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
+    }
+  }, []);
+
 
 
 
@@ -199,7 +244,7 @@ function Readings() {
 
         <div className="hidden md:flex flex-col w-[30%] h-full p-3  gap-y-4">
           <div className="flex flex-col bg-csblack h-full w-full rounded-2xl justify-center items-center justify-between pt-10 pb-5">
-            <h5>Based on your readings:</h5>
+            <h5 className="text-lg">Based on your readings:</h5>
             <div className="w-[80px] h-[80%] flex flex-col  bg-csblue rounded-2xl overflow-hidden">
               <div className={`w-[100%] h-[${chart.high}] bg-csDanger`}></div>
               <div className={`w-[100%] h-[${chart.stable}] bg-csgreen`}></div>

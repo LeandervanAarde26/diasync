@@ -3,7 +3,7 @@ import HumanMessage from "@/components/Common/HumanMessage";
 import { initialResponses } from "@/static/InitialResponses";
 import { ChatType } from "@/types/ChatType";
 import { MdSend, MdChatBubble } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Chat(props: { observation: string }) {
   const randomNumber = Math.floor(Math.random() * 8);
@@ -21,33 +21,47 @@ function Chat(props: { observation: string }) {
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       const {value} = e.target;
-      setUserMessage({
-        from: 'USER',
-        response: value
-      });
+      if(value !== '' || value !== null){
+        setUserMessage({
+          from: 'USER',
+          response: value
+        });
+      }
   }
 
   const handleClick = () => {
-      setMessages((prev: any) => [...prev, userMessage])
+      setMessages((prev: any) => [...prev, userMessage]);
+      setUserMessage({
+        from: 'USER',
+        response: ''
+      });
   }
+
+
+  useEffect(() => {
+      console.log(messages)
+  }, [])
 
   return (
     <div className=" w-[100%] h-[60vh] flex flex-col p-3 gap-x-4 bg-grad3 rounded-2xl p-4">
       <div className="flex flex-col w-[40%] mb-3">
-        <h5>Chat and Observations</h5>
+      <h5>Chat and Observations</h5>
         <hr className="text-cswhite" />
       </div>
 
       <div className="flex flex-col w-[100%] h-[80%] p-3 overflow-scroll gap-y-5">
-        {messages.map((i) => [
-          i.from == "BOT" ? (
-            <BotResponse response={i.response} />
-          ) : (
-            <HumanMessage response={i.response} />
-          ),
-        ])}
+        {/* HIERSO */}
+        {messages.map((i) => 
+        i.from == "BOT"
+        ?
+        (
+          <BotResponse response={i.response} />
+        ) : (
+          <HumanMessage response={i.response} />
+        )
+        )}
       </div>
-      <div className="w-[100%] flex flex-row  h-[60px] border-cswhite border-2 rounded-full overflow-hidden items-center justify-center" onClick={handleClick}>
+      <div className="w-[100%] flex flex-row  h-[60px] border-cswhite border-2 rounded-full overflow-hidden items-center justify-center">
         <div className="w-[5%] h-[100%] flex justify-center items-center" >
           <MdChatBubble
             key="Send icon"
@@ -64,7 +78,7 @@ function Chat(props: { observation: string }) {
         
         />
 
-        <div className="w-[5%] h-[100%] bg-csblue flex justify-center items-center  hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300">
+        <div className="w-[5%] h-[100%] bg-csblue flex justify-center items-center  hover:scale-110 cursor-pointer transition ease-in-out delay-150 duration-300" onClick={handleClick}>
           <MdSend key="Send icon" className="text-cswhite" fontSize={26} />
         </div>
       </div>

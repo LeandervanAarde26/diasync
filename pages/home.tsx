@@ -35,7 +35,6 @@ export default function Home() {
     useContext(ComplicationsContext);
   const { clearAnalysis } = useContext(AnalysisContext);
 
-  const [ai, setAi] = useState<homePageDataType>({});
   const validateToken = async (token: string) => {
     try {
       const verifiedToken = await verifyUserToken(token);
@@ -57,24 +56,6 @@ export default function Home() {
     }
   };
 
-  // const fetchComplications = async () => {
-  //   try {
-  //     const AiIntegration = await getComplications(values.id);
-  //     //Ai sometimes returns incosistent data, by removing all the strings that are not in the object, we can get a consistent object that can be converted to JSON data.
-  //     const jsonStart = AiIntegration.Response.indexOf("{");
-  //     const jsonEnd = AiIntegration.Response.lastIndexOf("}");
-  //     const jsonResponse = AiIntegration.Response.substring(
-  //       jsonStart,
-  //       jsonEnd + 1
-  //     );
-  //     const parsedData = JSON.parse(jsonResponse);
-  //     setAi(parsedData);
-  //   } catch (error) {
-  //     console.error("Error fetching or parsing complications:", error);
-  //   }
-  // };
-
-  // Replace this , this could possibly happen on the login or in the context.
   const fetchUserData = async () => {
     try {
       const userData = await getUserInformation(values.id);
@@ -112,18 +93,10 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    // fetchComplications();
-    console.log("comps", complications);
-    console.log("====================================");
-    console.log("User Readings: \n:", dat);
-    console.log("====================================");
-  }, [values.id]);
-
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
-      {complications[0].blood_sugar_distribution?.low ? (
+      {complications.length > 0? (
         <HomeDoughnutChart
           low={complications[0].blood_sugar_distribution?.low || 0}
           stable={complications[0].blood_sugar_distribution?.stable || 0}
@@ -133,7 +106,7 @@ export default function Home() {
       ) : null}
 
       <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
-        {complications[0].blood_sugar_distribution?.low ? (
+        {complications.length > 0?  (
           <HomeDoughnutChart
             low={complications[0].blood_sugar_distribution?.low || 0}
             stable={complications[0].blood_sugar_distribution?.stable || 0}
@@ -145,7 +118,7 @@ export default function Home() {
         <div className="flex flex-col w-[100%] md:w-[35%] gap-y-[10px] overflow-scroll">
           <h5 className="text-m">{data.unstableHeading}</h5>
 
-          {complications ? (
+          {complications.length > 0 ? (
             complications[0].complications.map((complication) => (
               <ComplicationsCard {...complication} />
             ))

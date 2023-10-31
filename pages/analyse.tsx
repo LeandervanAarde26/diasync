@@ -7,21 +7,25 @@ import SuggestionCard from "@/components/Common/SuggestionCard";
 import Chat from "@/components/Features/Chat";
 import MonthlyComparrison from "@/components/Features/MonthlyComparrison";
 import { UserContext } from "@/store/userContext.Context";
-import { getDataAnalysed } from "@/api/Calls";
+import { getDataAnalysed, verifyUserToken } from "@/api/Calls";
 import Loader from "@/components/Common/Loader";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import { MonthName } from "@/types/MonthNames";
+import { ComplicationsContext } from "@/store/ComplicationsContext";
+import { useRouter } from "next/router";
 
 function Analyse() {
   const [groupedReadings, setGroupedReadings] = useState<
     Record<string, ReadingGroupType>
   >({});
+  const router = useRouter();
   const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
   const [ready, setReady] = useState<boolean>(false);
   const [data, setData] = useState<any>();
-  const { analysis } = useContext(AnalysisContext);
-  const { dat } = useContext(ReadingsContext);
-  const { values } = useContext(UserContext);
+  const { analysis, clearAnalysis } = useContext(AnalysisContext);
+  const { dat, clearDat } = useContext(ReadingsContext);
+  const { values, clearValues } = useContext(UserContext);
+  const { clearComplications } = useContext(ComplicationsContext);
   const now = new Date();
   const currMonth = getMonthName(now);
   const prevMonth = getMonthName(
@@ -30,30 +34,47 @@ function Analyse() {
   const currYear = now.getFullYear();
   console.log(currYear);
 
-  const DataAnalysation = async () => {
+  const validateToken = async (token: string) => {
     try {
-      // const AIIntegration = await getDataAnalysed(values.id);
-      // const jsonStart = AIIntegration.Response.indexOf("{");
-      // const jsonEnd = AIIntegration.Response.lastIndexOf("}");
-      // const jsonResponse = AIIntegration.Response.substring(
-      //   jsonStart,
-      //   jsonEnd + 1
-      // );
-      // const parsedData = JSON.parse(jsonResponse);
-      // setData(parsedData);
-      // console.log(parsedData);
-      // console.log(AIIntegration.Response);
-      // // setReady(true);
-    } catch (error) {
-      console.log("Error analysing data", error);
+      const verifiedToken = await verifyUserToken(token);
+      if (!verifiedToken) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
     }
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      let userToken = window.sessionStorage.getItem("token");
+      if (userToken) {
+        const tokenState = validateToken(userToken);
+      } else {
+        clearAnalysis();
+        clearDat();
+        clearValues();
+        clearComplications();
+        router.push("/");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     console.log("yea buddy");
-    DataAnalysation();
     console.log(analysis);
     console.log(analysis.analysisData[currMonth]);
+    console.log(analysis.analysisData[prevMonth as MonthName])
   }, []);
 
   return (
@@ -68,7 +89,9 @@ function Analyse() {
         <div className="w-fill h-[100vh] p-5 overflow-scroll">
           <div className="w-[100%]">
             <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4">
-              {analysis.analysisData[prevMonth as MonthName] == null ? null : (
+              {analysis.analysisData[prevMonth as MonthName] == null ||
+              analysis.analysisData[prevMonth as MonthName] ==
+                undefined ? null : (
                 <MonthlyComparrison
                   low={analysis.analysisData[prevMonth as MonthName]?.low | 0}
                   stable={
@@ -85,17 +108,24 @@ function Analyse() {
                 />
               )}
 
-              <MonthlyComparrison
-                low={analysis.analysisData[currMonth as MonthName].low}
-                stable={analysis.analysisData[currMonth as MonthName].stable}
-                high={analysis.analysisData[currMonth as MonthName].high}
-                unstable={
-                  analysis.analysisData[currMonth as MonthName].low +
-                  analysis.analysisData[currMonth].high
-                }
-                month={currMonth}
-                year={currYear}
-              />
+              {analysis.analysisData[currMonth as MonthName] == null ||
+              analysis.analysisData[currMonth as MonthName] ==
+                undefined ? null : (
+                <MonthlyComparrison
+                  low={analysis.analysisData[currMonth as MonthName].low | 0}
+                  stable={
+                    analysis.analysisData[currMonth as MonthName].stable | 0
+                  }
+                  high={analysis.analysisData[currMonth as MonthName].high | 0}
+                  unstable={
+                    analysis.analysisData[currMonth as MonthName].low |
+                    (0 + analysis.analysisData[currMonth].high) |
+                    0
+                  }
+                  month={currMonth}
+                  year={currYear}
+                />
+              )}
             </div>
 
             <div className=" w-[100%] h-[43vh] flex flex-row p-3 gap-x-4 ">
