@@ -66,7 +66,7 @@ function RegisterStepOne() {
   return (
     <>
       <h5>Step 1 of 2</h5>
-      <div className="flex flex-row flex-wrap gap-x-5 w-full ">
+      <div className="flex flex-row flex-wrap gap-x-3  w-full ">
         <Input
           err={firstNameError}
           width={""}

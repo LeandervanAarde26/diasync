@@ -112,7 +112,7 @@ function Analyse() {
 
               <div className=" h-[100%] w-[50%] overflow-hidden flex flex-col">
                 <h5 id="adjustments" className="mb-3 md:ml-[50px]">
-                  Dietary adjustments based on your glucose trends
+                  Dietary adjustments based on your glucose
                 </h5>
                 <div className="w-[100%] h-[100%] flex flex-row gap-x-5 justify-end">
                   {analysis.DietarySuggestions.map((i: any) => (

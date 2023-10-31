@@ -21,7 +21,7 @@ InputType) {
         {label}
       </p>
       <div
-        className={`flex flex-row p-2 border-[1.5px] ${
+        className={`flex flex-row p-1 px-2 border-[1.5px] ${
           err ? `border-csDanger` : `border-cswhite`
         } rounded-full gap-x-3 w-${width}`}
       >

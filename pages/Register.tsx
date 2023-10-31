@@ -58,13 +58,13 @@ function Register() {
     <div className="flex flex-1 h-screen bg-cswhite">
       <AuthContainer />
       {/* Right Container */}
-      <div className="bg-csblack h-max w-full sm:w-[45%] sm:h-screen flex flex-col items-center justify-center p-6 gap-y-12 sm: gap-y-4">
-        <Image src={logo} height={130} alt="Logo" />
-        <h3 className="text-[20pt] sm:text-[28pt]">
+      <div className="bg-csblack h-max w-full sm:w-[45%] sm:h-screen flex flex-col items-center justify-center p-6 gap-y-10 sm: gap-y-4 ">
+        <Image src={logo} height={100} alt="Logo" />
+        <h3 className="text-[18pt] sm:text-[20pt]">
           {moveOn ? "" : registerData.register}
         </h3>
 
-        <div className="flex flex-col gap-y-4 w-full sm:w-[60%]">
+        <div className="flex flex-col gap-y-4 w-full sm:w-[60%] overflow-scroll">
           {moveOn ? <RegisterStepTwo /> : <RegisterStepOne />}
 
           <div className="flex items-center justify-center">

@@ -32,7 +32,7 @@ function RightContainer() {
           />
         </div>
 
-        <div className="w-[120px] h-[120px] bg-cspurple rounded-full absolute top-[20%] overflow-hidden flex object-center object-contain ">
+        <div className="w-[100px] h-[100px] bg-cspurple rounded-full absolute top-[20%] overflow-hidden flex object-center object-contain ">
           <Image
             src={values.sex == 'Male' ? male : woman}
             alt="Shapes"
@@ -41,9 +41,9 @@ function RightContainer() {
           />
         </div>
 
-        <p className="relative top-20  z-10"><b>{values.name}</b></p>
-        <p className="relative top-20  z-10">{values.type}</p>
-        <p className="relative top-20  z-10">{values.email}</p>
+        <p className="relative top-12  z-10"><b>{values.name}</b></p>
+        <p className="relative top-11  z-10">{values.type}</p>
+        <p className="relative top-11  z-10">{values.email}</p>
       </div>
 
       <div className="bg-cswhite w-[100%] h-[65%] rounded-2xl overflow-hidden p-5">
