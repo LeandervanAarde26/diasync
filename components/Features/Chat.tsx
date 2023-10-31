@@ -3,11 +3,13 @@ import HumanMessage from "@/components/Common/HumanMessage";
 import { initialResponses } from "@/static/InitialResponses";
 import { ChatType } from "@/types/ChatType";
 import { MdSend, MdChatBubble } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { getRobotResponse } from "@/api/Calls";
 
 function Chat(props: { observation: string }) {
   const randomNumber = Math.floor(Math.random() * 8);
   const [userMessage, setUserMessage] = useState<ChatType>();
+  const messagesEndRef = useRef(null)
   const [messages, setMessages] = useState<ChatType[]>([
     {
       from: "BOT",
@@ -29,12 +31,26 @@ function Chat(props: { observation: string }) {
       }
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
       setMessages((prev: any) => [...prev, userMessage]);
       setUserMessage({
         from: 'USER',
         response: ''
       });
+
+    const getResponse = await getRobotResponse(userMessage?.response);
+
+    if(getResponse?.status == 200){
+      try {
+        const newMessage : ChatType= {
+          from: "BOT",
+          response: getResponse.data,
+        }
+        setMessages((prev: any) => [...prev, newMessage]);
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
 
@@ -49,7 +65,7 @@ function Chat(props: { observation: string }) {
         <hr className="text-cswhite" />
       </div>
 
-      <div className="flex flex-col w-[100%] h-[80%] p-3 overflow-scroll gap-y-5">
+      <div className="flex flex-col w-[100%] h-[80%] p-3 overflow-scroll gap-y-5" ref={messagesEndRef}>
         {/* HIERSO */}
         {messages.map((i) => 
         i.from == "BOT"

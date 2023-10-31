@@ -171,5 +171,28 @@ export const uploadNewData = async (id: number, data: any) => {
 
   return request;
 };
+
+export const getRobotResponse = async (body: string) => {
+  let requestURL = `${url}chat/`;
+  let request = await axios
+  .post(requestURL, JSON.stringify({
+    message: body,
+  }),
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(res => {
+      console.log(res)
+      return res;
+  })
+  .catch(err => {
+    console.log(err);
+    return null
+  });
+
+  return request
+}
 // Re1nH@rdt
 //R1a@n432
