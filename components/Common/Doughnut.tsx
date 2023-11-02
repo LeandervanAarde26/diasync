@@ -13,7 +13,7 @@ const Doughnuts = ({low, stable, high}: BloodSugarDoughnutType) => {
         datasets: [
           {
             data: [low, stable, high],
-            backgroundColor: ["#215FBD", "#A6E2B8", "#B1C399"],
+            backgroundColor: ["#F0BB00", "#407BFF", "#301F7F"],
           },
         ],
         labels: ["Low", "Stable", "High"],

@@ -94,7 +94,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
+    <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[120vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
       {complications.length > 0? (
         <HomeDoughnutChart
@@ -105,7 +105,7 @@ export default function Home() {
         />
       ) : null}
 
-      <div className="flex flex-row gap-x-[15px] h-[43vh] pt-3">
+      <div className="flex flex-row gap-x-[30px] h-[38vh] pt-3">
         {complications.length > 0?  (
           <HomeDoughnutChart
             low={complications[0].blood_sugar_distribution?.low || 0}
@@ -115,9 +115,10 @@ export default function Home() {
           />
         ) : null}
 
-        <div className="flex flex-col w-[100%] md:w-[35%] gap-y-[10px] overflow-scroll">
+        <div className="flex flex-col w-[100%]  overflow-scroll  md:w-[40%] gap-y-[10px] justify-center">
           <h5 className="text-m">{data.unstableHeading}</h5>
 
+          <div className="flex flex-col w-[100%]  gap-y-[10px] overflow-scroll justify-center">
           {complications.length > 0 ? (
             complications[0].complications.map((complication) => (
               <ComplicationsCard {...complication} />
@@ -127,8 +128,9 @@ export default function Home() {
               <Loader msg={`Analysing ${values.name}'s data`} />
             </div>
           )}
+          </div>
         </div>
-        <LearnMore />
+        {/* <LearnMore /> */}
       </div>
     </div>
   );

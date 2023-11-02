@@ -29,12 +29,12 @@ ChartJS.register(
             datasets: [
                 
               {
-                label: "This Month",
+                label: "All time",
                 data: data,
-                backgroundColor: "#A6E2B8",
+                backgroundColor: "#77A1FF",
                 tension: 0.4,
                 borderJoinStyle: 'round',
-                borderColor: '#45D0EE',
+                borderColor: '#407BFF',
                 fill: true
               },
 

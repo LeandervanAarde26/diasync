@@ -28,6 +28,7 @@ const config: Config = {
       csblack: "#1B1B1B",
       cswhite: "#F3F3F3",
       csblue: "#215FBD",
+      cslighBlue: "#48A2DE",
       csDarkBlue: "#0A4193",
       csLightGreen: "#A6E2B8",
       csDanger: "#AE0023",

@@ -183,7 +183,7 @@ const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
                 icon={
                   <MdPerson4
                     key="person-icon"
-                    className="text-cspurple"
+                    className="text-cslighBlue"
                     fontSize={22}
                   />
                 }
@@ -209,7 +209,7 @@ const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
                 icon={
                   <MdKey
                     key="password-icon"
-                    className="text-cspurple"
+                    className="text-cslighBlue"
                     fontSize={22}
                     onClick={toggleInput}
                   />

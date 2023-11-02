@@ -3,36 +3,31 @@ import Doughnuts from "../Common/Doughnut";
 
 type ChartProps = {
   show: boolean;
-  low: number, 
-  stable: number,
-  high: number
-}
+  low: number;
+  stable: number;
+  high: number;
+};
 
-function HomeDoughnutChart({show, low, stable, high}: ChartProps) {
+function HomeDoughnutChart({ show, low, stable, high }: ChartProps) {
   return (
-    <div className= 
-    {
-      show?
-      " hidden md:flex flex-col w-[35%] bg-gradient-to-t from-[#252525] via-[#0B0B0B] to-[#000000] rounded-3xl"
-      :
-      " flex md:hidden flex-col w-[100%] h-[50vh] bg-gradient-to-t from-[#252525] via-[#0B0B0B] to-[#000000] rounded-3xl"
-    }
-
+    <div
+      className={
+        show
+          ? " hidden md:flex flex-row w-[55%] bg-cswhite rounded-3xl"
+          : " flex md:hidden flex-col  w-[100%] h-[78vh] bg-cswhite rounded-3xl"
+      }
     >
-      <div className="flex flex-row w-[100%] p-5 justify-between pl-7 items-center">
-        <h5 className="text-cswhite">{data.bloodSugars}</h5>
+      <div className="flex flex-col w-[100%] p-5 justify-center pl-7 items-center">
+        <h5 className="text-csblack">{data.bloodSugars}</h5>
 
         <div className="flex flex-col items-center">
-          <h3>{low + high}%</h3>
-          <p className="text-cswhite text-xs w-100%">Unstable bloodusgar</p>
+          <h3 className="text-csblack">{low + high}%</h3>
+          <p className="text-csblack text-xs w-100%">Unstable bloodusgar</p>
         </div>
       </div>
-      <div className="flex flex-col  h-[65%] items-center w-[100%]">
-        <Doughnuts
-          low = {low}
-          stable=  {stable}
-          high = {high}
-        />
+
+      <div className="flex flex-col justify-center   h-[100%] p-8 items-center w-[100%]">
+        <Doughnuts low={low} stable={stable} high={high} />
       </div>
     </div>
   );

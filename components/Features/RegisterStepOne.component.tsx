@@ -85,7 +85,7 @@ function RegisterStepOne() {
           icon={
             <MdPerson4
               key="person-icon"
-              className="text-cspurple"
+              className="text-cslighBlue"
               fontSize={22}
             />
           }
@@ -110,7 +110,7 @@ function RegisterStepOne() {
           icon={
             <MdPerson4
               key="person-icon"
-              className="text-cspurple"
+              className="text-cslighBlue"
               fontSize={22}
             />
           }
@@ -136,7 +136,7 @@ function RegisterStepOne() {
   icon={
     <MdEmail
       key="person-icon"
-      className="text-cspurple"
+      className="text-cslighBlue"
       fontSize={22}
     />
   }
@@ -163,7 +163,7 @@ function RegisterStepOne() {
         icon={
           <MdKey
             key="password-icon"
-            className="text-cspurple"
+            className="text-cslighBlue"
             fontSize={22}
             onClick={togglePasswordInput}
           />
@@ -181,7 +181,7 @@ function RegisterStepOne() {
         type="password"
         placeholder="eg. P@$$W0Rd54"
         icon={
-          <MdKey key="password-icon" className="text-cspurple" fontSize={22} />
+          <MdKey key="password-icon"  className="text-cslighBlue" fontSize={22} />
         }
         value={confirmPassword}
       />

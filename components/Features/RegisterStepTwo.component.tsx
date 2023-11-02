@@ -89,7 +89,7 @@ function RegisterStepTwo() {
           icon={
             <MdScale
               key="person-icon"
-              className="text-cspurple"
+              className="text-cslighBlue"
               fontSize={22}
             />
           }
@@ -114,7 +114,7 @@ function RegisterStepTwo() {
           icon={
             <MdFormatAlignRight
               key="person-icon"
-              className="text-cspurple"
+              className="text-cslighBlue"
               fontSize={22}
             />
           }
