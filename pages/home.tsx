@@ -20,7 +20,8 @@ export default function Home() {
   const router = useRouter();
   const { values, setValues, clearValues } = useContext(UserContext);
   const { clearDat } = useContext(ReadingsContext);
-  const { complications, clearComplications } = useContext(ComplicationsContext);
+  const { complications, clearComplications } =
+    useContext(ComplicationsContext);
   const { clearAnalysis } = useContext(AnalysisContext);
 
   const validateToken = async (token: string) => {
@@ -108,8 +109,8 @@ export default function Home() {
 
           <div className="flex flex-col w-[100%]  gap-y-[10px] overflow-scroll justify-center">
             {complications.length > 0 ? (
-              complications[0].complications.map((complication) => (
-                <ComplicationsCard {...complication} />
+              complications[0].complications.map((complication, index) => (
+                <ComplicationsCard {...complication} key={index} />
               ))
             ) : (
               <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">

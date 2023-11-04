@@ -49,7 +49,6 @@ function Register() {
       };
       const newUser = await registerNewUser(parsedData);
       if (newUser) {
-        console.log(newUser);
         console.log("---------------");
         console.log("success!");
         setLoading(prev => !prev);

@@ -49,12 +49,11 @@ function Readings() {
       return 0;
     });
 
-    const map2: any = dat.map((obj: any, i) => {
-      console.log(obj.date);
-
+    const map2: any = dat.map((obj: any, i, index) => {
       const tests = dat
         .filter((item) => item.date === obj.date && item.blood_sugar_level)
-        .map((item) => ({
+        .map((item, indx) => ({
+          key: indx,
           id: item.id,
           date: item.date,
           time: item.time.split(':').slice(0, 2).join(':'),
@@ -98,7 +97,7 @@ function Readings() {
         reader.onload = (e: any) => {
           const dataUrl = e.target.result;
           setCsv(dataUrl);
-          console.log(dataUrl);
+      
         };
 
         reader.readAsDataURL(file);
@@ -164,14 +163,12 @@ function Readings() {
       filteredData.forEach(([date, data]) => {
         updatedData[date] = data;
       });
-
-      console.log("HERE", updatedData);
       setFilter(updatedData);
     }
   };
 
   const onClickHandler = async () => {
-    console.log(csv);
+
     const dataUpload = await uploadNewData(values.id, csv);
     if (dataUpload !== null) {
       console.log("user data has been uploaded");
@@ -180,7 +177,8 @@ function Readings() {
 
       if (status == 200) {
         console.log("new data has been fetched. Applying..");
-        const useableData = await data.map((i: any) => ({
+        const useableData = await data.map((i: any, index: number) => ({
+          key: index,
           id: i.user.id,
           blood_sugar_level: i.blood_sugar_level,
           date: i.date,
@@ -188,7 +186,6 @@ function Readings() {
         }));
         clearDat();
         setDat((prevValues: any) => [...prevValues, ...useableData]);
-        console.log(dat, "\n", useableData);
       }
     }
   };
@@ -226,9 +223,9 @@ function Readings() {
 
           <div className="flex flex-col h-full w-[100%] overflow-scroll gap-y-4 ">
             {filter &&
-              Object.entries(filter).map(([date, data]) => (
+              Object.entries(filter).map(([index, data] ) => (
                 <ReadingGroup
-                  key={date}
+                  key={index}
                   date={data.date}
                   average={data.average}
                   testAmount={data.testAmount}

@@ -118,8 +118,9 @@ function Analyse() {
                   Articles based on your glucose trends
                 </h5>
                 <div className="w-[100%] h-[100%] flex flex-row gap-x-5">
-                  {analysis.AnalysisSuggestions.map((i: any) => (
-                    <SuggestionCard {...i} />
+                  {analysis.AnalysisSuggestions.map((i: any, index) => (
+                    
+                    <SuggestionCard {...i} key={index} />
                   ))}
                 </div>
               </div>

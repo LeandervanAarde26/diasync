@@ -90,11 +90,12 @@ function index() {
       const { status, data } = userD;
       if (status == 200) {
         console.log("data has been fetched");
-        const useableData = await data.map((i: any) => ({
+        const useableData = await data.map((i: any, index: number) => ({
           id: i.user.id,
           blood_sugar_level: i.blood_sugar_level,
           date: i.date,
           time: i.time,
+          key: index,
         }));
         setDat((prevValues: any) => [...prevValues, ...useableData]);
         const AiComplications = await getDataAndParseJson(() =>
