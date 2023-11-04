@@ -4,7 +4,7 @@ import AuthContainer from "@/components/Features/AuthContainer";
 import Input from "@/components/Common/Input.component";
 import { MdPerson4, MdKey } from "react-icons/md";
 import Button from "@/components/Common/Button";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import data from "@/static/Auth.json";
 
@@ -51,8 +51,6 @@ function index() {
   };
   const router = useRouter();
   const { email, password } = vals;
-  const currMonth = getMonthName(now);
-  const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
 
   const handleBlur =
     (

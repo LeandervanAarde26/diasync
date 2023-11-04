@@ -6,8 +6,12 @@ import { ReadingGroupType } from "@/types/ReadingGroupType";
 function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
   return (
     <>
-      <div className="cardscontainer flex flex-row justify-between px-5 mb-3 mt-3">
-        <h6 className="text-cswhite">{date}</h6>
+      <div className="cardscontainer flex flex-row justify-between px-5 mb-4 mt-3">
+        
+      <div className="flex flex-row items-center h-fill gap-x-2">
+          <div className="w-[3px] h-[20px] bg-cspurple"></div>
+          <h6 className="text-cswhite">{date}</h6>
+        </div>
 
         <div className="flex flex-row items-center h-fill gap-x-2">
           <div className="w-[3px] h-[20px] bg-cspurple"></div>

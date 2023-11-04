@@ -1,26 +1,29 @@
 import Image from "next/image";
-import notFoundImage from "../assets/floating_character.png";
+import notFoundImage from "@/assets/Diabet.png";
 import Button from "@/components/Common/Button";
+import data from "@/static/404.json";
 
 function NotFound() {
   return (
-    <div className="bg-gradient-to-br from-grad1  via-grad2  to-grad3 flex flex-col justify-center items-center  h-screen gap-y-8 w-screen">
-      <div className="flex items-center flex-col justify-center gap-y-2">
-        <Image src={notFoundImage} alt="Floating Character" />
+    <div className="bg-csblue flex flex-col md:flex-row justify-center items-center  h-screen gap-8 w-screen">
+      <div className="flex items-center flex-col md:flex-row  justify-center gap-y-2">
+        <Image src={notFoundImage} alt="Floating Character" height={600} />
 
-        <h1>404</h1>
+        <div className="flex flex-col justify-center items-center gap-y-3">
+          <h1 className="text-5xl text-center text-grad3">
+            <b>{data.Title}</b>
+          </h1>
 
-        <h3>Oops... something went wrong</h3>
-        <h5>Please return back to the home page</h5>
+          <h3 className="text-3xl text-center">{data.Subheading}</h3>
+          <h5 className="text-2xl text-center">{data.Content}</h5>
+          <Button
+            label="Take me Home"
+            disabled={true}
+            clickHandler={() => console.log("hey")}
+            type="tertiary"
+          />
+        </div>
       </div>
-
-      {/* /Insert the button here */}
-      <Button
-        label="Home"
-        disabled={true}
-        clickHandler={() => console.log("hey")}
-        type="primary"
-      />
     </div>
   );
 }

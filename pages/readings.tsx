@@ -5,8 +5,6 @@ import ReadingGroup from "@/components/Features/ReadingGroup";
 import { ReadingGroupType } from "@/types/ReadingGroupType";
 import Dropzone from "@/components/Features/Dropzone";
 import Button from "@/components/Common/Button";
-import ChartKey from "@/components/Common/ChartKey";
-import { timeToSecondsConversion } from "@/Reusables/Functions";
 import { getUserReadings, uploadNewData, verifyUserToken } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
@@ -59,7 +57,7 @@ function Readings() {
         .map((item) => ({
           id: item.id,
           date: item.date,
-          time: item.time,
+          time: item.time.split(':').slice(0, 2).join(':'),
           blood_sugar_level: item.blood_sugar_level,
         }))
         .sort((a, b) => a.time.localeCompare(b.time));
