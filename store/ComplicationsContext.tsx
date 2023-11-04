@@ -2,8 +2,8 @@ import { Provider, createContext, useContext, useState } from "react";
 
 type ComplicationType = {
   heading: string;
-  body: string;
-  url: string;
+  description: string;
+  link: string;
 }
 
 type DistrbutionType = {

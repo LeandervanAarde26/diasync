@@ -63,8 +63,6 @@ function RegisterStepTwo() {
     ) =>
     (e: React.FocusEvent<HTMLInputElement>) => {
       updateLabels(key, stateSetter, errorState, originalLabel, errorLabel);
-
-      console.log(stateSetter);
     };
 
   return (
@@ -137,14 +135,6 @@ function RegisterStepTwo() {
         />
       </div>
           <Dropzone onDrop={onDrop} accept="csv/*"/>
-      
-      {/* <div className="flex items-center justify-center">
-        <Button
-          label="Upload CSV Data"
-          type="secondary"
-          clickHandler={importData}
-        />
-      </div> */}
     </>
   );
 }

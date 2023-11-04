@@ -12,20 +12,25 @@ import { UserContext } from "@/store/userContext.Context";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import { useRouter } from "next/router";
+import Doughnuts from "@/components/Common/Doughnut";
 
 function Readings() {
   const { dat, setDat, clearDat } = useContext(ReadingsContext);
   const router = useRouter();
-  const {clearComplications} = useContext(ComplicationsContext)
-  const {clearValues} = useContext(UserContext);
-  const {clearAnalysis} = useContext(AnalysisContext);
-  const {values} = useContext(UserContext)
-  const [groupedReadings, setGroupedReadings] = useState< Record<string, ReadingGroupType>>({});
+  const { clearComplications } = useContext(ComplicationsContext);
+  const { clearValues } = useContext(UserContext);
+  const { clearAnalysis } = useContext(AnalysisContext);
+  const { values } = useContext(UserContext);
+  const [groupedReadings, setGroupedReadings] = useState<
+    Record<string, ReadingGroupType>
+  >({});
   const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
   const [csv, setCsv] = useState(undefined);
   const highBloodSugars = dat.filter((item) => +item.blood_sugar_level > 12);
   const lowBloodSugars = dat.filter((item) => +item.blood_sugar_level < 4);
-  const stableBloodSugars = dat.filter((item) => +item.blood_sugar_level >= 4 && +item.blood_sugar_level <= 12);
+  const stableBloodSugars = dat.filter(
+    (item) => +item.blood_sugar_level >= 4 && +item.blood_sugar_level <= 12
+  );
 
   const [chart, setChart] = useState({
     high:
@@ -36,21 +41,19 @@ function Readings() {
     low:
       Math.round((lowBloodSugars.length / dat.length) * 100).toString() + "%",
   });
-  
 
   const groupedData = () => {
-
-    dat.sort((a: any, b:any) => {
+    dat.sort((a: any, b: any) => {
       let keyA = new Date(a.date);
-      let keyB = new Date(b.date)
+      let keyB = new Date(b.date);
       if (keyA < keyB) return -1;
       if (keyA > keyB) return 1;
       return 0;
-    })
+    });
 
     const map2: any = dat.map((obj: any, i) => {
       console.log(obj.date);
-      
+
       const tests = dat
         .filter((item) => item.date === obj.date && item.blood_sugar_level)
         .map((item) => ({
@@ -59,7 +62,7 @@ function Readings() {
           time: item.time,
           blood_sugar_level: item.blood_sugar_level,
         }))
-        .sort((a,b) => a.time.localeCompare(b.time));
+        .sort((a, b) => a.time.localeCompare(b.time));
 
       const dailyAverage = tests.reduce((accumulator, curr) => {
         const bloodSugarLevel = parseInt(curr.blood_sugar_level);
@@ -97,9 +100,9 @@ function Readings() {
         reader.onload = (e: any) => {
           const dataUrl = e.target.result;
           setCsv(dataUrl);
-          console.log(dataUrl)
+          console.log(dataUrl);
         };
-      
+
         reader.readAsDataURL(file);
       }
     },
@@ -146,9 +149,6 @@ function Readings() {
     }
   }, []);
 
-
-
-
   const filterData = async (amount: number) => {
     setFilter(groupedReadings);
     const d = new Date();
@@ -167,23 +167,21 @@ function Readings() {
         updatedData[date] = data;
       });
 
-
-
-      console.log("HERE",updatedData)
+      console.log("HERE", updatedData);
       setFilter(updatedData);
     }
   };
-  
-  const onClickHandler = async () => {
-    console.log(csv)
-    const dataUpload = await uploadNewData(values.id, csv)
-    if(dataUpload !== null){
-      console.log("user data has been uploaded")
-      const newData = await getUserReadings(values.id);
-      const {status, data} = newData;
 
-      if(status == 200){
-        console.log('new data has been fetched. Applying..')
+  const onClickHandler = async () => {
+    console.log(csv);
+    const dataUpload = await uploadNewData(values.id, csv);
+    if (dataUpload !== null) {
+      console.log("user data has been uploaded");
+      const newData = await getUserReadings(values.id);
+      const { status, data } = newData;
+
+      if (status == 200) {
+        console.log("new data has been fetched. Applying..");
         const useableData = await data.map((i: any) => ({
           id: i.user.id,
           blood_sugar_level: i.blood_sugar_level,
@@ -195,7 +193,7 @@ function Readings() {
         console.log(dat, "\n", useableData);
       }
     }
-    }
+  };
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
@@ -228,7 +226,7 @@ function Readings() {
             />
           </div>
 
-          <div className="flex flex-col h-full w-[100%] overflow-scroll gap-y-4">
+          <div className="flex flex-col h-full w-[100%] overflow-scroll gap-y-4 ">
             {filter &&
               Object.entries(filter).map(([date, data]) => (
                 <ReadingGroup
@@ -242,47 +240,15 @@ function Readings() {
           </div>
         </div>
 
-        <div className="hidden md:flex flex-col w-[30%] h-full p-3  gap-y-4">
-          <div className="flex flex-col bg-csblack h-full w-full rounded-2xl justify-center items-center justify-between pt-10 pb-5">
-            <h5 className="text-lg">Based on your readings:</h5>
-            <div className="w-[80px] h-[80%] flex flex-col  bg-csblue rounded-2xl overflow-hidden">
-              <div className={`w-[100%] h-[${chart.high}] bg-csDanger`}></div>
-              <div className={`w-[100%] h-[${chart.stable}] bg-csgreen`}></div>
-              <div className={`w-[100%] h-[${chart.low}] bg-csyellow`}></div>
-            </div>
-
-            <div className="keyContainer flex flex-row w-[100%] gap-x-3 justify-center items-cente h-[40px] ">
-              <ChartKey
-                borderColor="cswhite"
-                paddingH="px-3"
-                paddingV=""
-                texColor="cswhite"
-                title={"High"}
-                color={"csDanger"}
-              />
-              <ChartKey
-                borderColor="cswhite"
-                paddingH="px-3"
-                paddingV=""
-                texColor="cswhite"
-                title={"Stable"}
-                color={"csgreen"}
-              />
-
-              <ChartKey
-                borderColor="cswhite"
-                paddingH="px-3"
-                paddingV=""
-                texColor="cswhite"
-                title={"Low"}
-                color={"csyellow"}
-              />
-            </div>
-          </div>
+        <div className="hidden md:flex flex-col w-[30%] h-full p-3  gap-y-4 justify-center items-center ">
+          
+      <div className="flex flex-col justify-center h-auto p-8 items-center w-[100%]">
+        <Doughnuts low={ Math.round((lowBloodSugars.length / dat.length) * 100)} stable={Math.round((stableBloodSugars.length / dat.length) * 100)} high={Math.round((highBloodSugars.length / dat.length) * 100)} />
+      </div>
           <Dropzone onDrop={onDrop} accept="csv/*" />
           <div className="w-full flex flex-col justify-center items-center">
             <Button
-              label="Upload and replace data"
+              label="Upload data"
               type="primary"
               clickHandler={onClickHandler}
             />

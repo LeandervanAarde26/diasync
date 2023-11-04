@@ -5,17 +5,18 @@ import {
   MdScale,
   MdChatBubbleOutline,
 } from "react-icons/md";
-import image from "../../assets/tester.png";
 import male from "../../assets/male.jpg";
 import woman from "../../assets/woman.png";
 import { UserContext } from "@/store/userContext.Context";
 import { useContext, useState } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
 import { useRouter } from "next/router";
+import ChatButton from "../Common/ChatButton";
+import RightBarInformation from "../Common/RightBarInformation";
 
 function RightContainer() {
   const { values } = useContext(UserContext);
-  const router =  useRouter();
+  const router = useRouter();
   const { dat } = useContext(ReadingsContext);
   const averageBloodSugar = dat.reduce((accumulator, curr) => {
     const bloodSugarLevel = parseInt(curr.blood_sugar_level);
@@ -29,9 +30,9 @@ function RightContainer() {
   const [focus, setFocus] = useState<boolean>(false);
 
   const onHover = () => {
-    setFocus(prev => !prev);
+    setFocus((prev) => !prev);
     console.log(focus);
-  }
+  };
 
   return (
     <div className=" hidden w-[18%] static  h-fill sm:flex flex-col items-center p-3 gap-y-5 bg-gradient-to-br from-grad2 to-grad3 flex flex-col justify-center">
@@ -66,73 +67,46 @@ function RightContainer() {
           About {values.name}
         </h5>
         <div className="w-full flex flex-col items-center gap-y-3">
-          <div className="h-[60px]">
-            <div className="flex flex-row items-center justify-center ">
+          <RightBarInformation
+            heading={"Height"}
+            icon={
               <MdFormatAlignRight
                 key="person-icon"
                 className="text-cspurple"
                 fontSize={20}
               />
-              <span className="text-csblack text-lg">Height</span>
-            </div>
-            <span className="text-csblue text-lg">
-              <b>{values.height}cm</b>
-            </span>
-          </div>
-
-          <div className="h-[60px]">
-            <div className="flex flex-row items-center justify-center ">
+            }
+            unit={"Cm"}
+            information={values.height}
+          />
+          <RightBarInformation
+            heading={"Weight"}
+            icon={
               <MdScale
                 key="person-icon"
                 className="text-cspurple"
                 fontSize={20}
               />
-              <span className="text-csblack text-lg">Weight</span>
-            </div>
-            <span className="text-csblue text-lg">
-              <b>{values.weight}Kg</b>
-            </span>
-          </div>
-
-          <div className="h-[60px]">
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-csblack text-lg">Predicted HBA1C</span>
-              <span className="text-csblue text-lg">
-                <b>{estimatedHBA1c() + "%"}</b>
-              </span>
-            </div>
-          </div>
-
-          <div className="h-[60px]">
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-csblack text-lg">Glucose tests </span>
-              <span className="text-csblue text-lg">
-                <b>{dat.length}</b>
-              </span>
-            </div>
-          </div>
-
-          <div className="h-[60px]">
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-csblack text-lg">Average Glucose</span>
-              <span className="text-csblue text-lg">
-                <b>{averageBloodSugar.toFixed(1)}</b>
-              </span>
-            </div>
-          </div>
-
-          <div className="w-[60px] h-[60px] hover:w-[160px] hover:justify-start p-4 gap-x-3 bg-csblue rounded-full flex flex-center justify-center items-center cursor-pointer " onMouseEnter={onHover} onMouseLeave={onHover} onClick={() => {router.push('/analyse')}}>
-
-            <MdChatBubbleOutline
-              key="person-icon"
-              className="text-cswhite"
-              fontSize={35}
-            />
-
-            <p className={`${focus ? 'flex' : 'hidden'} text-cswhite`}>Let's chat</p>
-
-          </div>
-
+            }
+            unit={"Kg"}
+            information={values.weight}
+          />
+          <RightBarInformation
+            heading={"Predicted HBA1C"}
+            unit={"%"}
+            information={estimatedHBA1c()}
+          />
+          <RightBarInformation
+            heading={"Glucose tests"}
+            unit={""}
+            information={dat.length}
+          />
+          <RightBarInformation
+            heading={"Average Glucose"}
+            unit={""}
+            information={averageBloodSugar.toFixed(1)}
+          />
+          <ChatButton />
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ interface RegisterContextType {
   height: number;
   type: DiabetesTypes;
   sex: Sex;
-  data?:  File | null ;
+  data?: File | null;
 }
 
 interface RegisterContext {
@@ -32,7 +32,7 @@ const defaults: RegisterContextType = {
   confirmPassword: "",
   weight: 0,
   height: 0,
-type: "Type 1",
+  type: "Type 1",
   sex: "Male",
   data: undefined,
 };
@@ -64,6 +64,5 @@ export const RegisterContextProvider = ({ children }: any) => {
     </RegisterContext.Provider>
   );
 };
-
 
 // L@v3nd3r

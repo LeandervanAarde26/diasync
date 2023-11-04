@@ -28,6 +28,7 @@ import { ReadingsContext } from "@/store/Readings.Context";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import Loader from "@/components/Common/Loader";
+import { now } from "@/Reusables/Variables";
 const defaultValues = {
   email: "",
   password: "",
@@ -37,24 +38,21 @@ function index() {
   const [emailErr, setEmailErr] = useState<boolean>(false);
   const [passwordErr, setPasswordErr] = useState<boolean>(false);
   const [vals, setVals] = useState(defaultValues);
-  const { email, password } = vals;
   const [emailLabel, setEmailLabel] = useState<string>("Email");
   const [passwordLabel, setPasswordLabel] = useState<string>("Password");
   const [unauth, setUnAuth] = useState(false);
-  const router = useRouter();
   const { values, setValues } = useContext(UserContext);
   const { setComplications } = useContext(ComplicationsContext);
   const { setAnalysis } = useContext(AnalysisContext);
   const { setDat } = useContext(ReadingsContext);
-  const [isDataReady, setDataReady] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const toggleInput = () => {
     togglePassword(setType);
   };
-
-  const now = new Date();
-const currMonth = getMonthName(now);
-const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
+  const router = useRouter();
+  const { email, password } = vals;
+  const currMonth = getMonthName(now);
+  const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
 
   const handleBlur =
     (
@@ -131,12 +129,6 @@ const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
       }
     }
   };
-
-  useEffect(() => {
-    if (isDataReady) {
-      router.push("/home");
-    }
-  }, [isDataReady, router]);
 
   const handleChange =
     (error: React.Dispatch<React.SetStateAction<boolean>>) =>
@@ -250,7 +242,6 @@ const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
         {/* Inner container for inputs */}
       </div>
       {/* Left container */}
-
       <AuthContainer />
     </div>
     // Outer div

@@ -16,8 +16,6 @@ interface ReadingsContext {
   ) => void;
 }
 
-
-
 export const ReadingsContext = createContext<ReadingsContext>({
   dat: [],
   setDat: () => {},

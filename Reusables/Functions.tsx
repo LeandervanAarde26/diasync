@@ -3,7 +3,6 @@ import {
   namePattern,
   passwordPattern,
 } from "@/Reusables/Variables";
-import { verifyUserToken } from "@/api/Calls";
 import { MonthName } from "@/types/MonthNames";
 
 export const togglePassword = (
@@ -90,10 +89,6 @@ export const updateLabels = (
   }
 };
 
-interface TokenData {
-  userId: string;
-}
-
 export const timeToSecondsConversion = (time: string) => {
   const [hours, minutes, seconds] = time.split(":");
   const totalSeconds = +hours * 60 * 60 + +minutes * 60 + +seconds;
@@ -110,11 +105,6 @@ export const getDataAndParseJson = async (get: () => Promise<any>) => {
   const jsonStart = data.Response.indexOf("{");
   const jsonEnd = data.Response.lastIndexOf("}");
   const jsonResponse = data.Response.substring(jsonStart, jsonEnd + 1);
-  console.log("====================================");
-  console.log(jsonResponse);
-  console.log(data.Response);
-  console.log("====================================");
   const parsedData = JSON.parse(jsonResponse);
-
   return parsedData;
 };

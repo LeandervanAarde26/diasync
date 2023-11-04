@@ -3,13 +3,8 @@ import ComplicationsCard from "@/components/Common/ComplicationsCard.component";
 import data from "../static/Dash.json";
 import HomeChart from "@/components/Features/HomeChart.component";
 import HomeDoughnutChart from "@/components/Features/HomeDoughnutChart.component";
-import LearnMore from "@/components/Common/LearnMore.component";
 import { useContext, useEffect, useState } from "react";
-import {
-  getComplications,
-  getUserInformation,
-  verifyUserToken,
-} from "@/api/Calls";
+import { getUserInformation, verifyUserToken } from "@/api/Calls";
 import { UserContext } from "@/store/userContext.Context";
 import { ReadingsContext } from "@/store/Readings.Context";
 import Loader from "@/components/Common/Loader";
@@ -21,18 +16,11 @@ type complication = {
   link: string;
 };
 
-type homePageDataType = {
-  blood_sugar_distribution: { low: number; stable: number; high: number };
-  blood_sugar_status: string;
-  complications: complication[];
-};
-
 export default function Home() {
   const router = useRouter();
   const { values, setValues, clearValues } = useContext(UserContext);
-  const { dat, clearDat } = useContext(ReadingsContext);
-  const { complications, clearComplications } =
-    useContext(ComplicationsContext);
+  const { clearDat } = useContext(ReadingsContext);
+  const { complications, clearComplications } = useContext(ComplicationsContext);
   const { clearAnalysis } = useContext(AnalysisContext);
 
   const validateToken = async (token: string) => {
@@ -96,7 +84,7 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[120vh] sm:h-screen w-[100%] sm:w-[80%] p-5">
       <HomeChart />
-      {complications.length > 0? (
+      {complications.length > 0 ? (
         <HomeDoughnutChart
           low={complications[0].blood_sugar_distribution?.low || 0}
           stable={complications[0].blood_sugar_distribution?.stable || 0}
@@ -106,7 +94,7 @@ export default function Home() {
       ) : null}
 
       <div className="flex flex-row gap-x-[30px] h-[38vh] pt-3">
-        {complications.length > 0?  (
+        {complications.length > 0 ? (
           <HomeDoughnutChart
             low={complications[0].blood_sugar_distribution?.low || 0}
             stable={complications[0].blood_sugar_distribution?.stable || 0}
@@ -119,18 +107,17 @@ export default function Home() {
           <h5 className="text-m">{data.unstableHeading}</h5>
 
           <div className="flex flex-col w-[100%]  gap-y-[10px] overflow-scroll justify-center">
-          {complications.length > 0 ? (
-            complications[0].complications.map((complication) => (
-              <ComplicationsCard {...complication} />
-            ))
-          ) : (
-            <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
-              <Loader msg={`Analysing ${values.name}'s data`} />
-            </div>
-          )}
+            {complications.length > 0 ? (
+              complications[0].complications.map((complication) => (
+                <ComplicationsCard {...complication} />
+              ))
+            ) : (
+              <div className="flex flex-col w-[100%] h-[100%] gap-y-[10px] items-center justify-center">
+                <Loader msg={`Analysing ${values.name}'s data`} />
+              </div>
+            )}
           </div>
         </div>
-        {/* <LearnMore /> */}
       </div>
     </div>
   );

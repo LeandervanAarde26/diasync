@@ -8,11 +8,12 @@ import {
 import Image from "next/image";
 import bloodDrop from "../../assets/blood_drop.png";
 import { bloodSugarEntryType } from "@/types/BloodSugarEntryType";
+import tester from '@/assets/glucoTester.png'
 
 function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryType) {
   return (
-    <div className="cardContainer flex flex-row w-[100%] bg-csblack h-[8vh] p-5 items-center rounded-3xl justify-between">
-      <Image src={bloodDrop} alt="Blood Drop" height={30} width={30} />
+    <div className="cardContainer flex flex-row w-[100%] bg-grad2 h-[8vh] p-5 items-center rounded-3xl justify-between">
+      <Image src={tester} alt="Blood Drop" height={30} width={30} />
       <div className="flex flex-row items-center gap-x-1 w-[25%]">
         <MdHistoryToggleOff
           key="password-icon"
@@ -26,24 +27,25 @@ function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryTyp
         {+blood_sugar_level < 4 ? (
           <MdKeyboardArrowDown
             key="password-icon"
-            className="text-csyellow"
+            className="text-cswhite"
             fontSize={22}
           />
         ) : +blood_sugar_level > 12 ? (
           <MdKeyboardArrowUp
             key="password-icon"
-            className="text-csDanger"
+            className="text-cswhite"
             fontSize={22}
           />
         ) : (
           <MdStarBorder
             key="password-icon"
-            className="text-csgreen"
+            className="text-cswhite"
             fontSize={22}
           />
         )}
 
-        <p className={`text-${+blood_sugar_level < 4 ? `csyellow` : +blood_sugar_level > 12? `csDanger` : `csgreen`}`}>{blood_sugar_level} mmol/L</p>
+        <p className={`text-csblack bg-${+blood_sugar_level < 4 ? `csyellow` : +blood_sugar_level > 12? `csDanger` : `csgreen`} rounded-2xl p-2 `}>
+          <b>{blood_sugar_level}</b> <span className="text-xs">mmol/L</span></p>
       </div>
 
       <div className="flex flex-row items-center gap-x-1 w-[25%]">
@@ -52,7 +54,7 @@ function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryTyp
           className="text-cswhite"
           fontSize={22}
         />
-        <p className='text-cswhite'> {target} mmol/L</p>
+        <p className='text-cswhite'> {target} <span className="text-xs">mmol/L</span></p>
       </div>
     </div>
   );

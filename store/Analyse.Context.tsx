@@ -2,10 +2,6 @@ import { getMonthName } from "@/Reusables/Functions";
 import { Provider, createContext, useContext, useState } from "react";
 import { ComplicationsContext } from "./ComplicationsContext";
 
-const now = new Date();
-const currMonth = getMonthName(now);
-const prevMonth = getMonthName(new Date(now.getFullYear(), now.getMonth() - 1));
-
 type AnalysisData = {
   stable: number;
   low: number;

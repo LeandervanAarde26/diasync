@@ -1,38 +1,29 @@
-import { ReadingGroupType } from "@/types/ReadingGroupType";
+
 import { useState, useEffect, useContext } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
 import { getMonthName } from "@/Reusables/Functions";
-import placeHolder from "../assets/tester.png";
 import SuggestionCard from "@/components/Common/SuggestionCard";
 import Chat from "@/components/Features/Chat";
 import MonthlyComparrison from "@/components/Features/MonthlyComparrison";
 import { UserContext } from "@/store/userContext.Context";
-import { getDataAnalysed, verifyUserToken } from "@/api/Calls";
+import { verifyUserToken } from "@/api/Calls";
 import Loader from "@/components/Common/Loader";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import { MonthName } from "@/types/MonthNames";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
 import { useRouter } from "next/router";
+import { currYear, now } from "@/Reusables/Variables";
 
 function Analyse() {
-  const [groupedReadings, setGroupedReadings] = useState<
-    Record<string, ReadingGroupType>
-  >({});
   const router = useRouter();
-  const [filter, setFilter] = useState<Record<string, ReadingGroupType>>({});
-  const [ready, setReady] = useState<boolean>(false);
-  const [data, setData] = useState<any>();
   const { analysis, clearAnalysis } = useContext(AnalysisContext);
-  const { dat, clearDat } = useContext(ReadingsContext);
+  const { clearDat } = useContext(ReadingsContext);
   const { values, clearValues } = useContext(UserContext);
   const { clearComplications } = useContext(ComplicationsContext);
-  const now = new Date();
   const currMonth = getMonthName(now);
   const prevMonth = getMonthName(
     new Date(now.getFullYear(), now.getMonth() - 1)
   );
-  const currYear = now.getFullYear();
-  console.log(currYear);
 
   const validateToken = async (token: string) => {
     try {
@@ -68,13 +59,6 @@ function Analyse() {
         router.push("/");
       }
     }
-  }, []);
-
-  useEffect(() => {
-    console.log("yea buddy");
-    console.log(analysis);
-    console.log(analysis.analysisData[currMonth]);
-    console.log(analysis.analysisData[prevMonth as MonthName])
   }, []);
 
   return (

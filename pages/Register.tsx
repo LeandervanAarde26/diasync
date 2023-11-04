@@ -9,8 +9,12 @@ import { useState, useContext } from "react";
 import RegisterStepTwo from "@/components/Features/RegisterStepTwo.component";
 import { RegisterContext } from "@/store/Register.Context";
 import { registerNewUser } from "@/api/Calls";
+import { useRouter } from "next/router";
 function Register() {
   const [moveOn, setMoveOn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const router = useRouter();
   const { values } = useContext(RegisterContext);
   const {
     firstname,
@@ -36,24 +40,27 @@ function Register() {
   const stepTwoMissingFields = weight == 0 || height == 0;
 
   const reigsterNewAccount = async () => {
-      try {
-        const parsedData = {
-          first_name: firstname,
-          last_name: lastName,
-          ...values,
-        };
-        const newUser = await registerNewUser(parsedData);
-        if (newUser) {
-          console.log(newUser);
-          console.log("---------------");
-          console.log("success!");
-        }
-      } catch (error) {
-          console.log("There was an error that occured", error)
+    try {
+      setLoading(prev => !prev);
+      const parsedData = {
+        first_name: firstname,
+        last_name: lastName,
+        ...values,
+      };
+      const newUser = await registerNewUser(parsedData);
+      if (newUser) {
+        console.log(newUser);
+        console.log("---------------");
+        console.log("success!");
+        setLoading(prev => !prev);
+        router.push('/'); 
       }
+    } catch (error) {
+      console.log("There was an error that occured", error);
+      setError(prev => !prev);
+    }
   };
 
-  // const isContinueDisabled =
   return (
     <div className="flex flex-1 h-screen bg-cswhite">
       <AuthContainer />
@@ -64,6 +71,9 @@ function Register() {
           {moveOn ? "" : registerData.register}
         </h3>
 
+        { error &&
+          <p className="text-csDanger">*There was an error, please try again later</p>
+        }
         <div className="flex flex-col gap-y-4 w-full sm:w-[60%] overflow-scroll">
           {moveOn ? <RegisterStepTwo /> : <RegisterStepOne />}
 
@@ -94,7 +104,7 @@ function Register() {
                 label="Login to my account"
                 type="outline"
                 clickHandler={() => {
-                  console.log("implement this function");
+                  console.log("Navigating to login");
                 }}
               />
             </Link>
