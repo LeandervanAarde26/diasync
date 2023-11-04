@@ -16,7 +16,7 @@
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="300" height="200">
+    <img src="./assets/Diasync_logo.png" alt="Logo" width="300" height="200">
   </a>
 
   <p align="center">
@@ -58,7 +58,7 @@
 <!--PROJECT DESCRIPTION-->
 ## About the Project
 <!-- header image of project -->
-![image1](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/headerMockup.jpg)
+![image1](https://github.com/LeandervanAarde/UniVerse/blob/Main/)
 
 ### Project Description
 
@@ -180,29 +180,36 @@ The `Conceptual Process` is the set of actions, activities and research that was
 ### Research
 In the process of problem identification, I initially conducted research to pinpoint a specific issue within my chosen field. Once I identified the problem, I proceeded to conduct additional research to ensure that I had accurately selected the primary problem and not merely an aspect of it. Lastly, researching an AI that would be suitable for multiple use cases such as data analysation and NLP capabilities. 
 
-![image6](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/Ideation.png)
+![image6](./assets/README/Research%20(1)-2.png)
+![image7](./assets/README/Research%20(1).png)
+![image8](./assets/README/Research%20(1)-1.png)
+![image9](./assets/README/Research%20(1)-2.png)
+![image10](./assets/README/OpenAI.png)
+![image11](./assets/README/Features%20and%20functions%20tree.png)
 
 <br />
 <br />
 
 ### Ideation
 
-![image6](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/Ideation.png)
+![image12](./assets/README/UI%20inspiration.png)
 
 <br />
 <br />
 
-![image7](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/dataRelationalDiagram.svg)
+![image13](./assets/README/Logo%20inspiration.png)
 
 <br />
 <br />
 
-![image8](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/userFlow.svg)
+![image14](./assets/README/User%20flow.png)
 
 
 ### Wireframes
 
-![image9](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/wireframes.png)
+![image15](./assets/README/Frame%20122.png)
+![image15](./assets/README/Frame%20120.png)
+![image15](./assets/README/Frame%20121.png)
 
 
 
