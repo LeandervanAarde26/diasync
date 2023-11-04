@@ -294,7 +294,7 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 * **Leander van Aarde** - [200211@virtualwindow.co.za](mailto:200211@virtualwindow.co.za) 
 
 * **Project Link** - https://github.com/LeandervanAarde/diasync
-* * **Project Link** - https://github.com/LeandervanAarde/diasyncserver
+* **Project Link** - https://github.com/LeandervanAarde/diasyncserver
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
