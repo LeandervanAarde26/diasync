@@ -44,7 +44,7 @@ function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryTyp
           />
         )}
 
-        <p className={`text-csblack bg-${+blood_sugar_level < 4 ? `csyellow` : +blood_sugar_level > 12? `csDanger` : `csgreen`} rounded-2xl p-2 `}>
+        <p className={`text-csblack ${+blood_sugar_level < 4 ? `bg-csyellow` : +blood_sugar_level > 12? `bg-csDanger` : `bg-csgreen`} rounded-2xl p-2 `}>
           <b>{blood_sugar_level}</b> <span className="text-xs">mmol/L</span></p>
       </div>
 
