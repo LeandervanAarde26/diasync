@@ -121,8 +121,6 @@ Here are a couple of ways to clone this repo:
 6.  Ensure that you have Postgres and PgAdmin installed on your machine.
 
 7.  Ensure that pip3 and python3 are installed on your local machine.
-8.  </br>
-
 9.  You can now run the front end using the:
     ```sh
     npm run dev
