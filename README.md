@@ -274,12 +274,20 @@ In the front-end development process:
 
 ### Mockups
 
-![image10](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup1.jpg)
+![image2](./assets/README/LoginRegMockup.png)
 <br>
 
-![image11](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup2.jpg)
+![image3](./assets/README/DashboardMockup.png)
+<br>
 
-See the [open issues](https://github.com/) for a list of proposed features (and known issues).
+![image4](./assets/README/ReadingsMockup.png)
+<br>
+
+![image5](./assets/README/AnalyseMockup.png)
+<br>
+
+<br>
+See the [open issues](https://github.com/LeandervanAarde/diasync/issues) for a list of proposed features (and known issues).
 
 <!-- AUTHORS -->
 ## Authors
