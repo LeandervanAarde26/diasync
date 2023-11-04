@@ -155,7 +155,7 @@ Explore a detailed breakdown of your blood glucose levels on the Readings page, 
 
 After registering, feel free to upload additional data at your convenience whenever you have new readings that need evaluation. You can trust that our system automatically manages your data, removing older values with the assistance of advanced tools like Pandas and Django. This ensures that your information remains up-to-date and relevant for analysis.
 
-![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/studentScreen.jpg)
+![image5](./assets/README/AnalyseMockup.png)
 
 ### Analayse View
 
@@ -164,12 +164,6 @@ Utilising your data, OpenAI conducts a comprehensive analysis of your blood suga
 #### Not enough? 
 
 Once your data has been thoroughly analyzed and you seek further information, feel free to ask OpenAI any questions you have in mind. OpenAI is well-versed in your blood sugar patterns and will provide personalized responses to address your specific needs.
-
-![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/studentOverview.jpg)
-
-
-
-![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/funds.jpg)
 
 <!-- CONCEPT PROCESS -->
 <!-- Briefly explain your concept ideation process -->
