@@ -16,7 +16,7 @@
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="./assets/Diasync_logo.png" alt="Logo" " height="200">
+    <img src="./assets/Diasync_logo.png" alt="Logo"  height="200">
   </a>
 
   <p align="center">
@@ -127,7 +127,7 @@ Run the following in the command-line to install all the required dependencies:
 ## Features and Functionality
 
 <!-- note how you can use your gitHub link. Just make a path to your assets folder -->
-![image2](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/featuresMockup.jpg)
+![image2](./assets/README/LoginRegMockup.png)
 
 ### Register new accounts
 
@@ -137,7 +137,8 @@ Create a new account on Diasync by sharing essential personal details and upload
 
 Access your account securely by logging in with your email and password. Rest assured, all passwords are encrypted to safeguard your privacy. Your login not only provides you with exclusive access to your blood glucose readings but also ensures that your data remains confidential and secure
 
-![image3](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/login.jpg)
+
+![image3](./assets/README/DashboardMockup.png)
 ### Dashboard View
 
 Diasync's Dashboard offers users a comprehensive overview of their blood sugar data. It includes intuitive data visualization tools and predictive insights into potential future complications, all powered by the OpenAI API. Stay informed and take control of your health with our user-friendly dashboard. 
@@ -145,7 +146,7 @@ Diasync's Dashboard offers users a comprehensive overview of their blood sugar d
 #### Right Bar with your information 
 Get a basic overview of how many tests you have on the platform and information such as an estimated HBA1C.
 
-![image4](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/dashboard.jpg)
+![image4](./assets/README/ReadingsMockup.png)
 ### Readings View 
 
 Explore a detailed breakdown of your blood glucose levels on the Readings page, also known as the Diary view. Easily identify the frequency of high, low, and stable blood sugar readings for a more comprehensive understanding of your health. You can also conveniently filter data for the current month, providing you with up-to-date insights into your blood sugar management."
