@@ -310,8 +310,7 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 ## Acknowledgements
 <!-- all resources that you used and Acknowledgements here -->
 * [illustrations](https://www.freepik.com/)
-* [.NET MAUI Documentation](https://learn.microsoft.com/en-us/dotnet/maui/data-cloud/rest)
-* [DjangoRest](https://www.django-rest-framework.org/)
+* [Next Documentation](https://nextjs.org/docs)
 * [ReactDropZone](https://react-dropzone.js.org/)
 * [LoaderAnimation](https://tailwindflex.com/freja-jensen/square-loding-spinner)
 * [ContextApiWithNext](https://dev.to/shareef/context-api-with-typescript-and-next-js-2m25)
