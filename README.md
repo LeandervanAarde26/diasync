@@ -16,7 +16,7 @@
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="./assets/Diasync_logo.png" alt="Logo" width="300" height="200">
+    <img src="./assets/Diasync_logo.png" alt="Logo" " height="200">
   </a>
 
   <p align="center">
