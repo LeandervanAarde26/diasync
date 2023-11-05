@@ -79,11 +79,12 @@ function Chat(props: { observation: string }) {
         id="your-message-container-id"
       >
         {/* HIERSO */}
-        {messages.map((i) =>
+        {messages.map((i, index) =>
           i.from == "BOT" ? (
-            <BotResponse response={i.response} />
+            <BotResponse key= {index} response={i.response} />
           ) : (
             <HumanMessage
+              key= {index} 
               response={i.response}
               gender={values.sex == "Male" ? true : false}
             />

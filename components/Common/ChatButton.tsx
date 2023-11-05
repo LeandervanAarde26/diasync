@@ -24,7 +24,7 @@ function ChatButton() {
         fontSize={35}
       />
 
-      <p className={`${focus ? "flex" : "hidden"} text-cswhite`}>Let's chat</p>
+      <p className={`${focus ? `flex` : `hidden`} text-cswhite`}>Let's chat</p>
     </div>
   );
 }

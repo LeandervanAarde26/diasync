@@ -24,8 +24,9 @@ function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
         </div>
       </div>
 
-      {tests.map((i) => (
+      {tests.map((i, index) => (
         <BloodsugarEntry
+          key={index}
           target={"7"}
           blood_sugar_level={i.blood_sugar_level}
           time={i.time}
