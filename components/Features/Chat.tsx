@@ -45,11 +45,10 @@ function Chat(props: { observation: string }) {
       messagesEndRef!.current!.scrollIntoView({ behavior: "smooth" });
       const getResponse = await getRobotResponse(userMessage!.response);
 
-      const test = JSON.parse(getResponse?.data);
-
-      console.log(test);
+      
       if (getResponse?.status == 200) {
         try {
+      
           const newMessage: ChatType = {
             from: "BOT",
             response: JSON.parse(getResponse?.data),

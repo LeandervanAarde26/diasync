@@ -33,7 +33,7 @@ const defaultValues = {
   email: "",
   password: "",
 };
-function index() {
+function Index() {
   const [type, setType] = useState<boolean>(true);
   const [emailErr, setEmailErr] = useState<boolean>(false);
   const [passwordErr, setPasswordErr] = useState<boolean>(false);
@@ -247,4 +247,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
