@@ -14,7 +14,7 @@ import { ComplicationsContext } from "@/store/ComplicationsContext";
 import { useRouter } from "next/router";
 import { currYear, now } from "@/Reusables/Variables";
 
-function Analyse() {
+export default function Analyse() {
   const router = useRouter();
   const { analysis, clearAnalysis } = useContext(AnalysisContext);
   const { clearDat } = useContext(ReadingsContext);
@@ -144,4 +144,4 @@ function Analyse() {
   );
 }
 
-export default Analyse;
+

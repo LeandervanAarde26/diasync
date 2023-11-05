@@ -12,7 +12,7 @@ import { AnalysisContext } from "@/store/Analyse.Context";
 import { useRouter } from "next/router";
 import Doughnuts from "@/components/Common/Doughnut";
 
-function Readings() {
+export default function Readings() {
   const { dat, setDat, clearDat } = useContext(ReadingsContext);
   const router = useRouter();
   const { clearComplications } = useContext(ComplicationsContext);
@@ -253,5 +253,3 @@ function Readings() {
     </div>
   );
 }
-
-export default Readings;

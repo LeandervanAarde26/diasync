@@ -10,7 +10,7 @@ import bloodDrop from "../../assets/blood_drop.png";
 import { bloodSugarEntryType } from "@/types/BloodSugarEntryType";
 import tester from '@/assets/glucoTester.png'
 
-function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryType) {
+export default function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryType) {
   return (
     <div className="cardContainer flex flex-row w-[100%] bg-grad2 h-[8vh] p-5 items-center rounded-3xl justify-between">
       <Image src={tester} alt="Blood Drop" height={30} width={30} />
@@ -60,4 +60,3 @@ function BloodsugarEntry({ blood_sugar_level, time, target }: bloodSugarEntryTyp
   );
 }
 
-export default BloodsugarEntry;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from '../../assets/icon.png'
-function BotResponse(response: {response: string}) {
+export default function BotResponse(response: {response: string}) {
     return (
         <div className="flex flex-row w-[100%] gap-x-5  items-center ">
         <div className="flex flex-col w-[30px]">
@@ -15,5 +15,3 @@ function BotResponse(response: {response: string}) {
       </div>
     );
 }
-
-export default BotResponse;

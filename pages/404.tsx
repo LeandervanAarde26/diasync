@@ -3,7 +3,7 @@ import notFoundImage from "@/assets/Diabet.png";
 import Button from "@/components/Common/Button";
 import data from "@/static/404.json";
 
-function NotFound() {
+export default function NotFound() {
   return (
     <div className="bg-csblue flex flex-col md:flex-row justify-center items-center  h-screen gap-8 w-screen">
       <div className="flex items-center flex-col md:flex-row  justify-center gap-y-2">
@@ -28,4 +28,3 @@ function NotFound() {
   );
 }
 
-export default NotFound;

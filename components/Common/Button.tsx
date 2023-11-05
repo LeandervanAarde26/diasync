@@ -1,6 +1,6 @@
 import { ButtonType } from "@/types/ButtonTypes";
 
-export default function ({
+export default function Button ({
   label,
   id,
   type,

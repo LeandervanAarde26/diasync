@@ -10,7 +10,7 @@ import RegisterStepTwo from "@/components/Features/RegisterStepTwo.component";
 import { RegisterContext } from "@/store/Register.Context";
 import { registerNewUser } from "@/api/Calls";
 import { useRouter } from "next/router";
-function Register() {
+export default function Register() {
   const [moveOn, setMoveOn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -115,4 +115,4 @@ function Register() {
     // Outer div
   );
 }
-export default Register;
+
