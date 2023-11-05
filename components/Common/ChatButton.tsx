@@ -10,22 +10,23 @@ function ChatButton() {
     console.log(focus);
   };
   return (
-    <div
-      className="w-[60px] h-[60px] hover:w-[160px] hover:justify-start p-4 gap-x-3 bg-csblue rounded-full flex flex-center justify-center items-center cursor-pointer transition ease-in-out delay-150 duration-300  hover:bg-csDarkBlue rounded-full"
-      onMouseEnter={onHover}
-      onMouseLeave={onHover}
-      onClick={() => {
-        router.push("/analyse");
-      }}
-    >
-      <MdChatBubbleOutline
-        key="person-icon"
-        className="text-cswhite"
-        fontSize={35}
-      />
+<div
+  className="w-[60px] h-[60px] hover:w-[160px] hover:justify-start p-4 gap-x-3 bg-csblue rounded-full flex flex-center justify-center items-center cursor-pointer transition ease-in-out delay-150 duration-300 hover:bg-csDarkBlue rounded-full"
+  onMouseEnter={onHover}
+  onMouseLeave={onHover}
+  onClick={() => {
+    router.push("/analyse");
+  }}
+>
+  <MdChatBubbleOutline
+    key="person-icon"
+    className="text-cswhite"
+    fontSize={35}
+  />
 
-      <p className={`${focus ? `flex` : `hidden`} text-cswhite`}>Let's chat</p>
-    </div>
+  <p className={`${focus ? `flex` : `hidden`} text-cswhite`}>Let&apos;s chat</p>
+</div>
+
   );
 }
 
