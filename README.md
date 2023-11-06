@@ -45,8 +45,9 @@
   - :syringe: [Implementation Process](#implementation-process)
     - :syringe: [Highlights](#highlights)
     - :syringe: [Challenges](#challenges)
-  - :syringe: [Future Implementation](#peer-reviews)
+  - :syringe: [Future Implementation](#future-implementation)
 - :hospital: [Final Outcome](#final-outcome)
+  - :syringe: [Video-Demo](#Video-demo)
   - :syringe: [Mockups](#mockups)
 - :hospital: [Conclusion](#conclusion)
 - :hospital: [License](#license)
@@ -284,6 +285,9 @@ In the front-end development process:
 <!-- MOCKUPS -->
 
 ## Final Outcome
+
+### Video Demo
+[![Alternate Text](./assets/README/Screenshot%202023-11-06%20145500.png)](./assets/README/Demo.mp4"Video Demonstration")
 
 ### Mockups
 
