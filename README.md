@@ -287,7 +287,7 @@ In the front-end development process:
 ## Final Outcome
 
 ### Video Demo
-[![Alternate Text](./assets/README/Screenshot%202023-11-06%20145500.png)](./assets/README/Demo.mp4"Video Demonstration")
+[![Alternate Text](./assets/README/Screenshot%202023-11-06%20145500.png)]({./assets/README/Demo.mp4}"Video Demonstration")
 
 ### Mockups
 
