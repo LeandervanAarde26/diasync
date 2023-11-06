@@ -287,7 +287,7 @@ In the front-end development process:
 ## Final Outcome
 
 ### Video Demo
-[![Alternate Text](./assets/README/Screenshot%202023-11-06%20145500.png)]({./assets/README/Demo.mp4}"Video Demonstration")
+<a href="./assets/README/Demo.mp4" title="Link Title"><img src="./assets/README/Screenshot 2023-11-06 145500.png" alt="Alternate Text" /></a>
 
 ### Mockups
 
