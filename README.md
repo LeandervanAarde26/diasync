@@ -287,7 +287,7 @@ In the front-end development process:
 ## Final Outcome
 
 ### Video Demo
-<a href="./assets/README/Demo.mp4" title="Link Title"><img src="./assets/README/Screenshot 2023-11-06 145500.png" alt="Alternate Text" /></a>
+<a href="./assets/README/Demo.mp4" title="Link Title"><img src="https://drive.google.com/file/d/1PYyFEQHgR56Prmb4AcE1DPE-OR3lDyRf/view?usp=sharing" alt="Alternate Text" /></a>
 
 ### Mockups
 
