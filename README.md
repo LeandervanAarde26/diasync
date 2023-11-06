@@ -282,6 +282,11 @@ In the front-end development process:
 - Performance updates for loading time decreases.
 - Building an AI specifically for this would be really cool.
 
+## User Testing
+User testing took place at the end of the project to ensure that the project was working as expected, if you would like to see a summary of the problem and research that lead to the project and the testing results, you can find the pdf 
+<a href="https://drive.google.com/file/d/1w3xlHKvpRSAjmVBzebSSJ83W3HA2jSDp/view?usp=sharing" title="Link Title">Here</a>
+
+
 <!-- MOCKUPS -->
 
 ## Final Outcome
