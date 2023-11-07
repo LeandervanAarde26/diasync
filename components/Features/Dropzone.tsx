@@ -1,4 +1,5 @@
-import { useDropzone, FileWithPath } from "React-dropzone";
+
+import { useDropzone } from "React-dropzone";
 
 import Button from "../Common/Button";
 
