@@ -22,6 +22,7 @@ export const obtainUserToken = async ({ username, password }: tokenFields) => {
 
 export const verifyUserToken = async (token: string) => {
   const loginReq = `${url}token/verify/`;
+  console.log(loginReq)
   const requestData = await axios.post(loginReq, { token });
 
   if (requestData.status === 200) {
@@ -56,6 +57,7 @@ export const loginUser = async ({ email, password }: authenticationFields) => {
 export const registerNewUser = async (reqData: RegisterType) => {
   try {
     let regReq = `${url}register/`;
+    console.log(regReq)
     const request = await axios.post(
       regReq,
       JSON.stringify({
