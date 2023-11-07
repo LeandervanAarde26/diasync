@@ -38,3 +38,5 @@ export default function App ({ Component, pageProps }: AppProps) {
     </ReadingsContextProvider>
   );
 }
+
+App.displayName = "Diasync";

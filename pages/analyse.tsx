@@ -130,8 +130,8 @@ export default function Analyse() {
                   Dietary adjustments based on your glucose
                 </h5>
                 <div className="w-[100%] h-[100%] flex flex-row gap-x-5 justify-end">
-                  {analysis.DietarySuggestions.map((i: any) => (
-                    <SuggestionCard {...i} />
+                  {analysis.DietarySuggestions.map((i: any, index) => (
+                           <SuggestionCard {...i} key={index} />
                   ))}
                 </div>
               </div>
