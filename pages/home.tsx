@@ -80,7 +80,7 @@ export default function Home() {
         router.push("/");
       }
     }
-  }, []);
+  }, [clearAnalysis, clearComplications, clearDat, clearValues, router, validateToken, fetchUserData]);
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[120vh] sm:h-screen w-[100%] sm:w-[80%] p-5">

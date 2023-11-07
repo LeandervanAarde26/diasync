@@ -59,7 +59,7 @@ export default function Analyse() {
         router.push("/");
       }
     }
-  }, []);
+  }, [clearAnalysis, clearComplications, clearDat, clearValues, router, validateToken]);
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%]  ">

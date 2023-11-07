@@ -10,7 +10,7 @@ import { ReadingsContextProvider } from "@/store/Readings.Context";
 import { ComplicationsProvider } from "@/store/ComplicationsContext";
 import { AnalysisProvider } from "@/store/Analyse.Context";
 
-export default function ({ Component, pageProps }: AppProps) {
+export default function App ({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const showItems =
     router.pathname === "/" ||
