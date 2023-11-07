@@ -79,6 +79,7 @@ Diasync is a new and AI-driven self-management web application created with NEXT
 - [PostgreSQL](https://www.postgresql.org/)
 - [pgAdmin](https://www.pgadmin.org/)
 - [Aiven](https://aiven.io/)
+- [Tailwind](https://tailwindcss.com/docs)
 
 <!-- GETTING STARTED -->
 <!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
