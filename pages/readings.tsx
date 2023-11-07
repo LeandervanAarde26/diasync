@@ -108,7 +108,7 @@ export default function Readings() {
 
   useEffect(() => {
     groupedData();
-  }, [groupedData]);
+  }, [dat]);
 
   const validateToken = async (token: string) => {
     try {
@@ -144,7 +144,7 @@ export default function Readings() {
         router.push("/");
       }
     }
-  }, [clearAnalysis, clearComplications, clearDat, clearValues, router, validateToken]);
+  }, []);
 
   const filterData = async (amount: number) => {
     setFilter(groupedReadings);

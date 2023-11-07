@@ -59,7 +59,7 @@ export default function Analyse() {
         router.push("/");
       }
     }
-  }, [clearAnalysis, clearComplications, clearDat, clearValues, router, validateToken]);
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-grad1 via-grad2 to-grad3 flex flex-col h-[110vh] sm:h-screen w-[100%] sm:w-[80%]  ">
@@ -130,8 +130,8 @@ export default function Analyse() {
                   Dietary adjustments based on your glucose
                 </h5>
                 <div className="w-[100%] h-[100%] flex flex-row gap-x-5 justify-end">
-                  {analysis.DietarySuggestions.map((i: any, index) => (
-                           <SuggestionCard {...i} key={index} />
+                  {analysis.DietarySuggestions.map((i: any) => (
+                    <SuggestionCard {...i} />
                   ))}
                 </div>
               </div>
