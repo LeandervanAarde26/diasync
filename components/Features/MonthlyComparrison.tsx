@@ -8,7 +8,7 @@ type MonthlyComparissonType = {
   high: number;
   unstable: number;
 };
-function MonthlyComparrison({
+export default  function MonthlyComparrison({
   month,
   year,
   low,
@@ -35,4 +35,3 @@ function MonthlyComparrison({
   );
 }
 
-export default MonthlyComparrison;

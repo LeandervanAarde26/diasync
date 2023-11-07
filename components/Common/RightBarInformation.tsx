@@ -5,7 +5,7 @@ type InformationType = {
   information: string | number;
 };
 
-function RightBarInformation({heading, icon, unit, information}: InformationType) {
+export default function RightBarInformation({heading, icon, unit, information}: InformationType) {
   return (
     <div className="h-[60px]">
       <div className="flex flex-row items-center justify-center ">
@@ -19,4 +19,3 @@ function RightBarInformation({heading, icon, unit, information}: InformationType
   );
 }
 
-export default RightBarInformation;

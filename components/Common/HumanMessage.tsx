@@ -3,7 +3,7 @@ import logo from "../../assets/icon.png";
 import male from "../../assets/male.jpg";
 import woman from "../../assets/woman.png";
 
-function HumanMessage(response: { response: string; gender: boolean }) {
+export default function HumanMessage(response: { response: string; gender: boolean }) {
   const profileImage = response.gender ? male : woman;
   return (
     <div className="flex flex-row w-[100%] gap-x-5 items-center justify-end ">
@@ -17,5 +17,3 @@ function HumanMessage(response: { response: string; gender: boolean }) {
     </div>
   );
 }
-
-export default HumanMessage;

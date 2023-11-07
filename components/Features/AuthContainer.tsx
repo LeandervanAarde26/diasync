@@ -1,9 +1,7 @@
 import Image from "next/image";
-import shapes from "../../assets/Login&registerShapes.png";
-import character from "../../assets/floating_character.png";
 import data from "../../static/Auth.json";
 import testImage from "../../assets/Diabet.png";
-function AuthContainer() {
+export default function AuthContainer() {
   return (
     <div className="hidden sm:flex md:h-screen w-[55%] gap-y-10 flex-col justify-center items-center bg-csblue">
 
@@ -17,4 +15,3 @@ function AuthContainer() {
   );
 }
 
-export default AuthContainer;

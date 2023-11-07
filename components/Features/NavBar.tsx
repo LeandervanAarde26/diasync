@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "@/store/userContext.Context";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
-function NavBar() {
+export default function NavBar() {
   const router = useRouter();
   const { clearDat } = useContext(ReadingsContext);
   const {clearValues} = useContext(UserContext);
@@ -87,5 +87,3 @@ function NavBar() {
     </div>
   );
 }
-
-export default NavBar;

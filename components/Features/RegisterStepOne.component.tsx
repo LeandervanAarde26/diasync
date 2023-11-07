@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { RegisterContext } from "@/store/Register.Context";
 import { captureValues, togglePassword, updateLabels } from "@/Reusables/Functions";
 
-function RegisterStepOne() {
+export default function RegisterStepOne() {
   const { values, setValues } = useContext(RegisterContext);
   const { firstname, lastName, email, password, confirmPassword } = values;
   const [type, setType] = useState<boolean>(true);
@@ -191,5 +191,3 @@ function RegisterStepOne() {
     </>
   );
 }
-
-export default RegisterStepOne;

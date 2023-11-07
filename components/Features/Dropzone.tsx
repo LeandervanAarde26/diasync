@@ -1,8 +1,8 @@
 import { useDropzone, FileWithPath } from "React-dropzone";
-import { FilePath } from "tailwindcss/types/config";
+
 import Button from "../Common/Button";
 
-function Dropzone({ onDrop, accept, open }: any) {
+export default function Dropzone({ onDrop, accept, open }: any) {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({
       accept,
@@ -49,4 +49,3 @@ function Dropzone({ onDrop, accept, open }: any) {
   );
 }
 
-export default Dropzone;

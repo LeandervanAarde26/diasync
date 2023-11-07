@@ -8,7 +8,7 @@ type SuggestionCardType = {
   heading: string;
 };
 
-function SuggestionCard({  link, description, heading }: SuggestionCardType) {
+export default function SuggestionCard({  link, description, heading }: SuggestionCardType) {
   return (
     <div className="w-[45%] h-[90%] bg-grad3 rounded-2xl p-4 flex flex-col justify-center gap-y-4">
       <div className="w-full h-[60px] flex flex-row items-center gap-x-4">
@@ -37,4 +37,4 @@ function SuggestionCard({  link, description, heading }: SuggestionCardType) {
   );
 }
 
-export default SuggestionCard;
+

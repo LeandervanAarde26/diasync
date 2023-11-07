@@ -7,7 +7,7 @@ type Values<T> = {
   onSelect: (selectedValue: T) => void;
 };
 
-function ToggleButton<T>({ value1, value2, label, onSelect }: Values<T>) {
+export default function ToggleButton<T>({ value1, value2, label, onSelect }: Values<T>) {
   const [selectedValue, setSelectedValue] = useState<T>(value1 as T);
 
   const toggleButton = () => {
@@ -49,5 +49,3 @@ function ToggleButton<T>({ value1, value2, label, onSelect }: Values<T>) {
     </div>
   );
 }
-
-export default ToggleButton;

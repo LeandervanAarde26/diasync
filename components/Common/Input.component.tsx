@@ -1,8 +1,6 @@
 import { InputType } from "@/types/Input.type";
-import Image from "next/image";
-import { useState } from "react";
 
-function Input({
+export default function Input({
   width,
   label,
   icon,
@@ -40,4 +38,4 @@ InputType) {
   );
 }
 
-export default Input;
+

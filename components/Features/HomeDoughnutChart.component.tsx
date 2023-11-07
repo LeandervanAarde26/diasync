@@ -8,7 +8,7 @@ type ChartProps = {
   high: number;
 };
 
-function HomeDoughnutChart({ show, low, stable, high }: ChartProps) {
+export default function HomeDoughnutChart({ show, low, stable, high }: ChartProps) {
   return (
     <div
       className={
@@ -33,4 +33,3 @@ function HomeDoughnutChart({ show, low, stable, high }: ChartProps) {
   );
 }
 
-export default HomeDoughnutChart;

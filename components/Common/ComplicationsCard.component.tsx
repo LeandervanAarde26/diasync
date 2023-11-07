@@ -1,7 +1,7 @@
 import { ComplicationsCardType } from "@/types/ComplicationsCardType";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 
-function ComplicationsCard({
+export default function ComplicationsCard({
   description,
   heading,
   link,
@@ -31,5 +31,3 @@ function ComplicationsCard({
     </div>
   );
 }
-
-export default ComplicationsCard;

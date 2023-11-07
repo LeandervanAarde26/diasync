@@ -5,10 +5,9 @@ import { ChatType } from "@/types/ChatType";
 import { MdSend, MdChatBubble } from "react-icons/md";
 import { useEffect, useState, useRef, useContext } from "react";
 import { getRobotResponse } from "@/api/Calls";
-import { getDataAndParseJson } from "@/Reusables/Functions";
 import { UserContext } from "@/store/userContext.Context";
 
-function Chat(props: { observation: string }) {
+export default function Chat(props: { observation: string }) {
   const randomNumber = Math.floor(Math.random() * 8);
   const [userMessage, setUserMessage] = useState<ChatType>();
   const { values } = useContext(UserContext);
@@ -123,4 +122,3 @@ function Chat(props: { observation: string }) {
   );
 }
 
-export default Chat;

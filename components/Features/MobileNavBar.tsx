@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "@/store/userContext.Context";
 import { AnalysisContext } from "@/store/Analyse.Context";
 import { ComplicationsContext } from "@/store/ComplicationsContext";
-function MobileNavBar() {
+export default function MobileNavBar() {
   const router = useRouter();
   const { clearDat } = useContext(ReadingsContext);
   const { clearValues } = useContext(UserContext);
@@ -89,4 +89,3 @@ function MobileNavBar() {
   );
 }
 
-export default MobileNavBar;

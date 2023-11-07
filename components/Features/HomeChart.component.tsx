@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { ReadingsContext } from "@/store/Readings.Context";
 import Loader from "../Common/Loader";
 
-function HomeChart() {
+export default function HomeChart() {
   const { dat } = useContext(ReadingsContext);
 
   return (
@@ -46,5 +46,3 @@ function HomeChart() {
     </div>
   );
 }
-
-export default HomeChart;

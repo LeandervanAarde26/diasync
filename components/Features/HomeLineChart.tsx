@@ -18,7 +18,7 @@ ChartJS.register(
     Tooltip
   );
 
-  const LineChart = (props: { data: BloodsugarType[] }) => {
+  export default function  LineChart(props: { data: BloodsugarType[] }) {
     const labels = props.data.map((item) => item.date);
     const data = props.data.map((item) => item.blood_sugar_level);
     return (
@@ -76,4 +76,3 @@ ChartJS.register(
       </div>
     );
   };
-  export default LineChart;

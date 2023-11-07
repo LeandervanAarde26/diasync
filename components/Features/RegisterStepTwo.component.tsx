@@ -7,15 +7,13 @@ import { captureValues, updateLabels } from "@/Reusables/Functions";
 import { useState, useContext, useCallback } from "react";
 import Dropzone from "./Dropzone";
 
-function RegisterStepTwo() {
+export default function RegisterStepTwo() {
   const { values, setValues } = useContext(RegisterContext);
   const { weight, height, type, sex, data } = values;
   const [weightError, setWeightError] = useState(false);
   const [weightLabel, setWeightLabel] = useState<string>("Weight (kg)");
   const [heightError, setHeightError] = useState(false);
   const [heightLabel, setHeightLabel] = useState<string>("Height (cm)");
-
-  const [files, setFiles] = useState<Array<any>>([]);
 
   const onChangeHandler =
     (error: React.Dispatch<React.SetStateAction<boolean>>) =>
@@ -137,10 +135,5 @@ function RegisterStepTwo() {
           <Dropzone onDrop={onDrop} accept="csv/*"/>
     </>
   );
-}
-
-export default RegisterStepTwo;
-function cuid(): never {
-  throw new Error("Function not implemented.");
 }
 

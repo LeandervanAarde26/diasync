@@ -6,7 +6,7 @@ export type BloodSugarDoughnutType = {
   stable: number,
   high: number
 }
-const Doughnuts = ({low, stable, high}: BloodSugarDoughnutType) => {
+export default function Doughnuts({low, stable, high}: BloodSugarDoughnutType) {
   return (
     <Doughnut
       data={{
@@ -22,4 +22,3 @@ const Doughnuts = ({low, stable, high}: BloodSugarDoughnutType) => {
     />
   );
 };
-export default Doughnuts;

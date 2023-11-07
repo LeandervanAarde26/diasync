@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import ChatButton from "../Common/ChatButton";
 import RightBarInformation from "../Common/RightBarInformation";
 
-function RightContainer() {
+export default function RightContainer() {
   const { values } = useContext(UserContext);
   const router = useRouter();
   const { dat } = useContext(ReadingsContext);
@@ -112,5 +112,3 @@ function RightContainer() {
     </div>
   );
 }
-
-export default RightContainer;

@@ -3,7 +3,7 @@ import BloodsugarEntry from "../Common/BloodsugarEntry";
 import { ReadingGroupType } from "@/types/ReadingGroupType";
 
 
-function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
+export default function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
   return (
     <>
       <div className="cardscontainer flex flex-row justify-between px-5 mb-4 mt-3">
@@ -35,5 +35,3 @@ function ReadingGroup({ date, average, testAmount, tests }: ReadingGroupType) {
     </>
   );
 }
-
-export default ReadingGroup;
