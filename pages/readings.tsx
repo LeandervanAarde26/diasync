@@ -108,7 +108,7 @@ export default function Readings() {
 
   useEffect(() => {
     groupedData();
-  }, [dat, setGroupedReadings, setFilter]);
+  }, [dat]);
 
   const validateToken = async (token: string) => {
     try {
