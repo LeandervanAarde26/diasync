@@ -115,7 +115,7 @@ export const getUserReadings = async (id: number) => {
 };
 
 export const getComplications = async (id: number) => {
-  let requestURL = `${url}complications/?userid=${id}/`;
+  let requestURL = `${url}complications/?userid=${id}`;
   let request: any = await axios
     .get(requestURL)
     .then((res) => {
@@ -131,7 +131,7 @@ export const getComplications = async (id: number) => {
 };
 
 export const getDataAnalysed = async (id: number) => {
-  let requestURL = `${url}analyse/?userid=${id}/`;
+  let requestURL = `${url}analyse/?userid=${id}`;
   let request = await axios
     .get(requestURL)
     .then((res) => {
