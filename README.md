@@ -42,6 +42,7 @@
   - :syringe: [Ideation](#ideation)
   - :syringe: [Wireframes](#wireframes)
 - :hospital: [Development Process](#development-process)
+- :hospital: [Deployment](#deployment)
   - :syringe: [Implementation Process](#implementation-process)
     - :syringe: [Highlights](#highlights)
     - :syringe: [Challenges](#challenges)
@@ -282,6 +283,9 @@ In the front-end development process:
 - Data upload refinement
 - Performance updates for loading time decreases.
 - Building an AI specifically for this would be really cool.
+
+## Deployment 
+ Diasync's front end was deployed using Vercel, considering that Next is made and maintained by Vercel. This process is made extremely easy through their "one-click import" system, linking your GitHub account to the platform and deployment is done. 
 
 ## User Testing
 User testing took place at the end of the project to ensure that the project was working as expected, if you would like to see a summary of the problem and research that lead to the project and the testing results, you can find the pdf 
