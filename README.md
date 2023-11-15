@@ -60,9 +60,6 @@
 ## About the Project
 
 <!-- header image of project -->
-
-![image1](https://github.com/LeandervanAarde/UniVerse/blob/Main/)
-
 ### Project Description
 
 Diasync is a new and AI-driven self-management web application created with NEXT.JS and Django frameworks to create an exciting and cutting-edge application. This aims at educating and catering a diverse group of Diabetics in order to simplify and ease their management in order to live a long and healthy life
